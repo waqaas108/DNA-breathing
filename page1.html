@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>page1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="page1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="page1_files/libs/quarto-html/quarto.js"></script>
+<script src="page1_files/libs/quarto-html/popper.min.js"></script>
+<script src="page1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="page1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="page1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="page1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="page1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="page1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="page1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="overview-on-computational-methods-to-assess-the-impact-of-dna-biophysical-features-on-the-binding-affinity-of-transcriptional-factors" class="level1">
+<h1>Overview on computational methods to assess the impact of DNA biophysical features on the binding affinity of Transcriptional factors</h1>
+<p>This is a project homepage detailing the work done at Dr.&nbsp;Xinhe’s lab of computational biology at the department of human genetics, University of Chicago.</p>
+<section id="premise" class="level2">
+<h2 class="anchored" data-anchor-id="premise">Premise</h2>
+<p>This project is investigating the role played by DNA biophysical features in the regulation of Transcription Factor (TF) binding. It endeavors to shed light on how specific DNA biophysical characteristics, such as bubble features and DNA flipping, contribute to the affinity and selectivity of TF binding interactions.</p>
+<p>By employing advanced computational methods, including Convolutional Neural Networks (CNNs) as one downstream analysis tool among others, the findings hold the potential to provide a deeper understanding of gene regulation and facilitate insights into the broader landscape of cellular processes.</p>
+<section id="position-weight-matrices-pwms-in-genetics" class="level3">
+<h3 class="anchored" data-anchor-id="position-weight-matrices-pwms-in-genetics">Position Weight Matrices (PWMs) in Genetics:</h3>
+<p>Position Weight Matrices (PWMs) are essential tools in computational biology for modeling and understanding sequence-specific binding preferences of DNA-binding proteins, including Transcription Factors (TFs). A PWM is a matrix that quantifies the likelihood of observing each nucleotide at every position within a binding site motif. Each row of the matrix corresponds to a nucleotide (A, C, G, T), and each column corresponds to a position in the motif. PWMs are constructed based on empirical data derived from known binding sites, which allows them to capture the frequency of nucleotide occurrences at each position. By scoring potential binding sites against a PWM, researchers can predict the binding affinity of a TF for a given DNA sequence. PWMs serve as valuable tools for motif discovery, regulatory element prediction, and understanding the intricate interplay between TFs and their target DNA sequences.</p>
+</section>
+<section id="binding-site-motifs" class="level3">
+<h3 class="anchored" data-anchor-id="binding-site-motifs">Binding Site Motifs:</h3>
+<p>Binding site motifs are recurring sequence patterns within DNA that hold significance in molecular biology, particularly in gene regulation. These motifs represent the specific DNA sequences recognized by Transcription Factors (TFs) and other DNA-binding proteins. Binding site motifs are characterized by their conserved arrangement of nucleotides, often exhibiting variations that allow recognition of similar sequences by different TFs. These motifs play a pivotal role in gene expression regulation, as TFs bind to these sites to control transcription and other cellular processes. Identifying and understanding binding site motifs are crucial for deciphering gene regulatory networks, predicting TF-DNA interactions, and elucidating the intricate mechanisms that underlie genetic programming.</p>
+</section>
+<section id="dna-biophysical-features" class="level3">
+<h3 class="anchored" data-anchor-id="dna-biophysical-features">DNA Biophysical Features:</h3>
+<p>DNA biophysical features encompass a range of physical and structural properties intrinsic to the DNA molecule, which influence its behavior and interactions within cellular processes. These features include characteristics such as DNA breathing, flexibility, stability, and local structural variations like DNA bubbles and flipping of nucleotide bases. Each of these features contributes to the overall dynamics and functionality of DNA, impacting processes like replication, transcription, and binding interactions with proteins, including Transcription Factors (TFs).</p>
+</section>
+<section id="features-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="features-of-interest">Features of Interest</h3>
+<section id="dna-breathing" class="level4">
+<h4 class="anchored" data-anchor-id="dna-breathing">DNA Breathing:</h4>
+<p>DNA breathing, also known as DNA fluctuations or thermal breathing, refers to the dynamic and transient opening and closing of base pairs in a DNA double helix. This phenomenon occurs due to the inherent flexibility of the DNA molecule and is driven by thermal fluctuations. As the temperature changes, the hydrogen bonds that hold the base pairs together weaken, causing the helix to locally unwind. These transient openings, or “breathing” events, can expose bases for potential interactions with other molecules, such as proteins like Transcription Factors (TFs). DNA breathing plays a crucial role in various biological processes, including DNA replication, transcription, and binding of regulatory proteins.</p>
+</section>
+<section id="dna-bubble-features" class="level4">
+<h4 class="anchored" data-anchor-id="dna-bubble-features">DNA Bubble Features:</h4>
+<p>A DNA bubble, in the context of molecular biology, is a region within a DNA double helix where the two strands temporarily separate, forming a single-stranded DNA loop flanked by double-stranded regions. These bubbles are created due to the thermal fluctuations that cause the hydrogen bonds between base pairs to momentarily break. DNA bubble features encompass the size, stability, and dynamics of these transient openings in the DNA structure. Understanding DNA bubble features is of paramount importance as they influence processes like DNA unwinding during replication and transcription initiation. By characterizing bubble features, researchers can gain insights into the mechanical properties of DNA and its interactions with various cellular components.</p>
+</section>
+<section id="dna-flipping" class="level4">
+<h4 class="anchored" data-anchor-id="dna-flipping">DNA Flipping:</h4>
+<p>DNA flipping, also known as base flipping, is a structural alteration in DNA where a specific nucleotide base is rotated or flipped out of its usual position in the double helix. This alteration exposes the base in a way that makes it more accessible for interactions with other molecules. DNA flipping often occurs when certain enzymes, such as DNA methyltransferases, need to chemically modify the exposed base. The transient opening and flipping of bases are facilitated by specific protein complexes that temporarily disrupt the hydrogen bonding between the base pairs. DNA flipping is crucial for epigenetic modifications, repair processes, and DNA-protein interactions, making it a significant mechanism in gene regulation and genome maintenance.</p>
+</section>
+</section>
+<section id="computational-methods" class="level3">
+<h3 class="anchored" data-anchor-id="computational-methods">Computational methods</h3>
+<section id="convolutional-neural-networks" class="level4">
+<h4 class="anchored" data-anchor-id="convolutional-neural-networks">Convolutional Neural Networks</h4>
+<p>Convolutional Neural Networks (CNNs) are a class of deep learning models designed specifically for processing structured grid-like data, such as images and sequences. CNNs are inspired by the visual cortex’s organization in animals, where neurons respond to specific localized regions of the visual field. Similarly, CNNs operate by convolving learnable filters (kernels) over input data, allowing them to capture local patterns and features. The network’s architecture includes layers for convolution, pooling, and fully connected operations, enabling hierarchical feature extraction. In the context of this project, CNNs are employed to analyze DNA sequences and biophysical features, facilitating the identification of intricate patterns related to Transcription Factor (TF) binding. By learning meaningful representations from raw data, CNNs offer a powerful tool to uncover hidden correlations and contribute to the comprehension of complex biological interactions.</p>
+</section>
+</section>
+</section>
+<section id="phase-1" class="level2">
+<h2 class="anchored" data-anchor-id="phase-1"><a href="/phase1page.qmd">Phase 1</a></h2>
+<section id="initial-model-building" class="level3">
+<h3 class="anchored" data-anchor-id="initial-model-building">Initial model building</h3>
+<p>In the project’s initial phase, Ben led the investigation into whether CNNs can learn features in DNA sequences that influence Transcription Factor (TF) binding. The study also explored the possible role of DNA biophysical features in this binding. Using Chip-seq data, which provided DNA sequences of about 500 base pairs from 130 cell lines and involving 64 TFs, the team introduced three biophysical feature channels derived from DNA flipping data. The models designed included:</p>
+<ul>
+<li>A simple CNN architecture, data: DNA sequences only</li>
+<li>A simple CNN architecture, data: DNA sequences and biophysical features</li>
+<li>A multimodal CNN architecture, data: DNA sequences and biophysical features fed separately to two different networks, then recombined before classification</li>
+<li>A hybrid CNN-LSTM network, data: DNA sequences and biophysical features</li>
+</ul>
+<p><small>Each model had a kernel size of 5, pooling size of 3, and 3 layers. The LSTM network component had x hidden layers.</small></p>
+<p>The 4th modality had the best performance as measured with ROC and PRC curves/scores.</p>
+<p>The first conclusion derived was that YY1 (a TF) relied strongly (stronger than other TFs) on biophysical features to moderate binding affinity, and so the first investigation performed was to evaluate YY1.</p>
+</section>
+</section>
+<section id="phase-2" class="level2">
+<h2 class="anchored" data-anchor-id="phase-2"><a href="/phase2page.qmd">Phase 2</a></h2>
+<section id="sequence-and-classifier-analysis-for-yy1" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-and-classifier-analysis-for-yy1">Sequence and classifier analysis for YY1</h3>
+<p>The second stage of this analysis was to compare the top ten sequences in YY1 and see if these overlapped with other TFs and cell lines and their top ten sequences.</p>
+<p>To do this, I had to check all 6 of the YY1 cell lines in our dataset, evaluate their sequences with our model, and compare the performance with biophysical features and without. We were doing this using zero-nullification at inference, which means that in the test-set of the model, the evaluation with biophysical features would be subtracted by an evaluation with the biophysical features being forcibly replaced with a zero-array.</p>
+<figure class="image figure">
+<img src="figs/phase2/yy1/yy1_roc.png" alt="ROC curve for YY1" style="width:100%" class="figure-img">
+<figcaption class="figure-caption">
+ROC curve for YY1
+</figcaption>
+<p>The sequences with the highest difference were sorted, and then the overlap between different cell lines within YY1 was evaluated. This gave us two analyses. One was simply a list of the sequences with overlap, and the other was a clustermap with the overlap of sequences being displayed as heat. This methodology was extended to all cell lines and TFs in the dataset.</p>
+<p>The same process was repeated with different model parameters and nullification methods.</p>
+</figure></section>
+<section id="auc-and-prc-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="auc-and-prc-comparisons">AUC and PRC comparisons</h3>
+<p>lorem ipsum</p>
+</section>
+</section>
+<section id="phase-3" class="level2">
+<h2 class="anchored" data-anchor-id="phase-3"><a href="/phase3page.qmd">Phase 3</a></h2>
+<section id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="level3">
+<h3 class="anchored" data-anchor-id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features">Acquisition and processing of gcPBM sequences and bubble features</h3>
+<p>We acquired gcPBM sequences and corresponding DNA bubble simulation data from Alexandrov Boian’s lab. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.</p>
+<p>The bubble data, when acquired, was in the form of matrices with 130 rows and 36 columns. The individual columns represented base-pair positions, and rows represented time in picoseconds. The values in the matrix represented the distance between complementary base pairs at that position and time.</p>
+<figure class="image figure">
+<img src="figs/phase3/bubble_raw/image.png" alt="Bubble data" style="width:100%" class="figure-img">
+<figcaption class="figure-caption">
+Bubble data
+</figcaption>
+<img src="figs/phase3/bubble_raw/image1.png" alt="Bubble data" style="width:100%" class="figure-img">
+<figcaption class="figure-caption">
+Bubble data
+</figcaption>
+<img src="figs/phase3/bubble_raw/image2.png" alt="Bubble data" style="width:100%" class="figure-img">
+<figcaption class="figure-caption">
+Bubble data
+</figcaption>
+<p>We used the first measurement (t=0) and considered all positions with a value &gt; 0.03 as being a bubble.</p>
+<p>We had two investigations running in parallel, with one machine learning approach and one statistical.</p>
+</figure></section>
+<section id="machine-learning-approach" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning-approach">Machine learning approach</h3>
+<p>The machine learning approach was to use the gcPBM sequences as a training set and see if adding bubble data to the input of the model would improve performance. The CNN architecture we used was a simple CNN followed by a linear regressor. We first ran a grid search on the sequences alone to see which parameters worked best in the CNN, and settled for a kernel size of 7, 64 filters in the first layer, 3 layers, and no pooling.</p>
+<p>The results overwhelmingly showed that bubble features did not improve the performance of the model.</p>
+</section>
+<section id="statistical-approach" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-approach">Statistical approach</h3>
+<p>We used fischer’s exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

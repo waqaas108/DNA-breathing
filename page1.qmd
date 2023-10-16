@@ -1,0 +1,101 @@
+# Overview on computational methods to assess the impact of DNA biophysical features on the binding affinity of Transcriptional factors
+
+This is a project homepage detailing the work done at Dr. Xinhe's lab of computational biology at the department of human genetics, University of Chicago.
+
+## Premise
+
+This project is investigating the role played by DNA biophysical features in the regulation of Transcription Factor (TF) binding. It endeavors to shed light on how specific DNA biophysical characteristics, such as bubble features and DNA flipping, contribute to the affinity and selectivity of TF binding interactions.
+
+By employing advanced computational methods, including Convolutional Neural Networks (CNNs) as one downstream analysis tool among others, the findings hold the potential to provide a deeper understanding of gene regulation and facilitate insights into the broader landscape of cellular processes.
+
+### Position Weight Matrices (PWMs) in Genetics:
+Position Weight Matrices (PWMs) are essential tools in computational biology for modeling and understanding sequence-specific binding preferences of DNA-binding proteins, including Transcription Factors (TFs). A PWM is a matrix that quantifies the likelihood of observing each nucleotide at every position within a binding site motif. Each row of the matrix corresponds to a nucleotide (A, C, G, T), and each column corresponds to a position in the motif. PWMs are constructed based on empirical data derived from known binding sites, which allows them to capture the frequency of nucleotide occurrences at each position. By scoring potential binding sites against a PWM, researchers can predict the binding affinity of a TF for a given DNA sequence. PWMs serve as valuable tools for motif discovery, regulatory element prediction, and understanding the intricate interplay between TFs and their target DNA sequences.
+
+### Binding Site Motifs:
+Binding site motifs are recurring sequence patterns within DNA that hold significance in molecular biology, particularly in gene regulation. These motifs represent the specific DNA sequences recognized by Transcription Factors (TFs) and other DNA-binding proteins. Binding site motifs are characterized by their conserved arrangement of nucleotides, often exhibiting variations that allow recognition of similar sequences by different TFs. These motifs play a pivotal role in gene expression regulation, as TFs bind to these sites to control transcription and other cellular processes. Identifying and understanding binding site motifs are crucial for deciphering gene regulatory networks, predicting TF-DNA interactions, and elucidating the intricate mechanisms that underlie genetic programming.
+
+### DNA Biophysical Features:
+DNA biophysical features encompass a range of physical and structural properties intrinsic to the DNA molecule, which influence its behavior and interactions within cellular processes. These features include characteristics such as DNA breathing, flexibility, stability, and local structural variations like DNA bubbles and flipping of nucleotide bases. Each of these features contributes to the overall dynamics and functionality of DNA, impacting processes like replication, transcription, and binding interactions with proteins, including Transcription Factors (TFs).
+
+### Features of Interest
+
+#### DNA Breathing:
+DNA breathing, also known as DNA fluctuations or thermal breathing, refers to the dynamic and transient opening and closing of base pairs in a DNA double helix. This phenomenon occurs due to the inherent flexibility of the DNA molecule and is driven by thermal fluctuations. As the temperature changes, the hydrogen bonds that hold the base pairs together weaken, causing the helix to locally unwind. These transient openings, or "breathing" events, can expose bases for potential interactions with other molecules, such as proteins like Transcription Factors (TFs). DNA breathing plays a crucial role in various biological processes, including DNA replication, transcription, and binding of regulatory proteins.
+
+#### DNA Bubble Features:
+A DNA bubble, in the context of molecular biology, is a region within a DNA double helix where the two strands temporarily separate, forming a single-stranded DNA loop flanked by double-stranded regions. These bubbles are created due to the thermal fluctuations that cause the hydrogen bonds between base pairs to momentarily break. DNA bubble features encompass the size, stability, and dynamics of these transient openings in the DNA structure. Understanding DNA bubble features is of paramount importance as they influence processes like DNA unwinding during replication and transcription initiation. By characterizing bubble features, researchers can gain insights into the mechanical properties of DNA and its interactions with various cellular components.
+
+#### DNA Flipping:
+DNA flipping, also known as base flipping, is a structural alteration in DNA where a specific nucleotide base is rotated or flipped out of its usual position in the double helix. This alteration exposes the base in a way that makes it more accessible for interactions with other molecules. DNA flipping often occurs when certain enzymes, such as DNA methyltransferases, need to chemically modify the exposed base. The transient opening and flipping of bases are facilitated by specific protein complexes that temporarily disrupt the hydrogen bonding between the base pairs. DNA flipping is crucial for epigenetic modifications, repair processes, and DNA-protein interactions, making it a significant mechanism in gene regulation and genome maintenance.
+
+### Computational methods
+
+#### Convolutional Neural Networks
+Convolutional Neural Networks (CNNs) are a class of deep learning models designed specifically for processing structured grid-like data, such as images and sequences. CNNs are inspired by the visual cortex's organization in animals, where neurons respond to specific localized regions of the visual field. Similarly, CNNs operate by convolving learnable filters (kernels) over input data, allowing them to capture local patterns and features. The network's architecture includes layers for convolution, pooling, and fully connected operations, enabling hierarchical feature extraction. In the context of this project, CNNs are employed to analyze DNA sequences and biophysical features, facilitating the identification of intricate patterns related to Transcription Factor (TF) binding. By learning meaningful representations from raw data, CNNs offer a powerful tool to uncover hidden correlations and contribute to the comprehension of complex biological interactions.
+
+## [Phase 1](/phase1page.qmd)
+
+### Initial model building
+
+In the project's initial phase, Ben led the investigation into whether CNNs can learn features in DNA sequences that influence Transcription Factor (TF) binding. The study also explored the possible role of DNA biophysical features in this binding. Using Chip-seq data, which provided DNA sequences of about 500 base pairs from 130 cell lines and involving 64 TFs, the team introduced three biophysical feature channels derived from DNA flipping data. The models designed included:
+
+- A simple CNN architecture, data: DNA sequences only
+- A simple CNN architecture, data: DNA sequences and biophysical features
+- A multimodal CNN architecture, data: DNA sequences and biophysical features fed separately to two different networks, then recombined before classification
+- A hybrid CNN-LSTM network, data: DNA sequences and biophysical features
+
+<small>Each model had a kernel size of 5, pooling size of 3, and 3 layers. The LSTM network component had x hidden layers.</small>
+
+The 4th modality had the best performance as measured with ROC and PRC curves/scores.
+
+The first conclusion derived was that YY1 (a TF) relied strongly (stronger than other TFs) on biophysical features to moderate binding affinity, and so the first investigation performed was to evaluate YY1.
+
+## [Phase 2](/phase2page.qmd)
+
+### Sequence and classifier analysis for YY1
+
+The second stage of this analysis was to compare the top ten sequences in YY1 and see if these overlapped with other TFs and cell lines and their top ten sequences.
+
+To do this, I had to check all 6 of the YY1 cell lines in our dataset, evaluate their sequences with our model, and compare the performance with biophysical features and without. We were doing this using zero-nullification at inference, which means that in the test-set of the model, the evaluation with biophysical features would be subtracted by an evaluation with the biophysical features being forcibly replaced with a zero-array.
+
+<figure class="image">
+  <img src="figs/phase2/yy1/yy1_roc.png" alt="ROC curve for YY1" style="width:100%">
+  <figcaption>ROC curve for YY1</figcaption>
+
+The sequences with the highest difference were sorted, and then the overlap between different cell lines within YY1 was evaluated. This gave us two analyses. One was simply a list of the sequences with overlap, and the other was a clustermap with the overlap of sequences being displayed as heat. This methodology was extended to all cell lines and TFs in the dataset.
+
+The same process was repeated with different model parameters and nullification methods.
+
+### AUC and PRC comparisons
+
+lorem ipsum
+
+## [Phase 3](/phase3page.qmd)
+
+### Acquisition and processing of gcPBM sequences and bubble features
+
+We acquired gcPBM sequences and corresponding DNA bubble simulation data from Alexandrov Boian's lab. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.
+
+The bubble data, when acquired, was in the form of matrices with 130 rows and 36 columns. The individual columns represented base-pair positions, and rows represented time in picoseconds. The values in the matrix represented the distance between complementary base pairs at that position and time.
+
+<figure class="image">
+  <img src="figs/phase3/bubble_raw/image.png" alt="Bubble data" style="width:100%">
+  <figcaption>Bubble data</figcaption>
+  <img src="figs/phase3/bubble_raw/image1.png" alt="Bubble data" style="width:100%">
+  <figcaption>Bubble data</figcaption>
+  <img src="figs/phase3/bubble_raw/image2.png" alt="Bubble data" style="width:100%">
+  <figcaption>Bubble data</figcaption>
+
+We used the first measurement (t=0) and considered all positions with a value > 0.03 as being a bubble.
+
+We had two investigations running in parallel, with one machine learning approach and one statistical.
+
+### Machine learning approach
+
+The machine learning approach was to use the gcPBM sequences as a training set and see if adding bubble data to the input of the model would improve performance. The CNN architecture we used was a simple CNN followed by a linear regressor. We first ran a grid search on the sequences alone to see which parameters worked best in the CNN, and settled for a kernel size of 7, 64 filters in the first layer, 3 layers, and no pooling.
+
+The results overwhelmingly showed that bubble features did not improve the performance of the model.
+
+### Statistical approach
+
+We used fischer's exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity. 

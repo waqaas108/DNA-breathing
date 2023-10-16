@@ -1,0 +1,69 @@
+check check mike check
+
+```{python}
+print("hello world")
+```
+
+Hoi! This project is trying to figure out if CNNs can learn the features in a DNA sequence that encourage Transcription Factor (TF) binding. As a sidequest, we also want to see if DNA biophysical features play a role in this binding.
+
+First, there was Ben. Ben was great. Ben did some preliminary research to figure out the best architecture for the models.
+
+(The data being used was Chip-seq, which meant our sequences were about 500 base pairs long. We had data from 130 different cell lines, and about 64 different TFs. We also had access to 3 bio physical feature sequences, which were 3 different components of DNA flipping. Flipping is when a base pair spontaneously pops out of its ribonucleotide backbone. Anyways, the three features were dubbed 'coord', 'coord_sq', and 'flip'. Also, at this point, none of the features were normalized.)
+
+To that end, a simple CNN was devised. I believe the parameters used were kernel = 5, pool = 3, layers = 3. Comparisons were made with:
+1. just a simple CNN on the sequence data,
+2. a simple CNN on sequence and breathing feature data, with the data being stacked before being fed in,
+3. a multimodal CNN with seq data going into one sequential network, and breathing feature data into another, with the filters later being stacked, 
+4. a CNN LSTM hybrid model.
+
+The 4th modality had the best performance as measured with ROC and PRC curves/scores.
+
+Each TF had a different performance in the model, and it was possible to check how each TF performed, although at first when I inherited the project, I only saw analyses divided by cell lines.
+
+POST BEN
+Ben is dead! Long live the Ben!
+
+Ben and the team were operating on the assumption that YY1 (a TF) relied strongly (stronger than other TFs) on biophysical features to moderate(?) binding affinity, and so my first ask was to evaluate YY1. To do this, I had to check all 6 of the YY1 cell lines in our dataset, evaluate their sequences with our model, and compare the performance with biophysical features and without. We were doing this using zero-nullification at inference, which means that in the test-set of the model, the evaluation with biophysical features would be subtracted by an evaluation with the biophysical features being forcibly replaced with a zero-array.
+
+The sequences with the highest difference were sorted, and then the overlap between different cell lines within YY1 was evaluated. This gave us two analyses. One was simply a list of the sequences with overlap, and the other was a clustermap with the overlap of sequences being displayed as heat.
+
+The second stage of this analysis was to compare the top ten sequences in YY1 and see if these overlapped with other TFs and cell lines and their top ten sequences. A giant clustermap was made to this end.
+
+NORMALIZING
+I don't know quite what the cause was, but Ben and Xin decided that our feature data should be normalized. To that end, the mean and std of all training data was determined, and then used to normalize all data by subtraction by mean and division by std, as one does.
+
+Actually, I think the cause was that Ben tried to determine the saliency of the top ten sequences we analyzed, and failed? He did not involve me into that part of the analysis.
+
+After this followed an ask for plotting the AUC and PRC of all cell lines, and then of all TFs, as determined by the model.
+
+A fair few comparisons were made between different kinds of nullification. These are the headers for the comparisons I posted on the slack group:
+
+1. (no feature normalisation, nullification by zero-values at inference)
+2. (comparison between two models, one trained with normalised features, one trained on gaussian noise)
+3. (feature normalisation, nullification by gaussian noise at inference)
+4. (feature normalisation, nullification by zero values at inference)
+5. (comparison between two models, one trained with normalised features, one trained on DNA sequences only)
+
+Then Xin noticed that STAT5A and FOSL1 were performing much better than YY1 when compared this way. So the next ask was:
+"The differences are quite small, so it is not clear if they are real or not. Can you create more Gaussian noise datasets for these two TFs? Say, create 10 datasets, and run the sequence + Gaussian noise model on each dataset. You can compute PRCs of the two TFs in the 10 datasets. We can then say, how does the PRC from real data compare with the PRCs from the simulated Gaussian noise data."
+
+This was done, although I did it incorrectly first and then managed to figure it out.
+
+The ask after that was to increase the number of filters in the first layer of our CNN. We were using 64 initially, but Xin wanted to try 128. He also wanted to try different kernel size combinations. Here started a disastrous journey of figuring out how conv2d worked and how the model could be adopted to different hyperparameters. I compared kernel = 9 and filters = 128 vs kernel = 5 and filters = 64. I later compared kernel = 5 vs kernel = 7. Comparisons were made again, and the headers for my analysis were:
+
+1. Normalised vs Zero Nullified
+2. Normalised vs Gaussian Noise
+3. Normalised vs Sequence only
+4. kernel = 5 vs kernel = 7
+
+After this we made a presentation for some hardass collaborator which he inevitably shat on. Terrible experience. Some more diagrams and analysis were created for it though, I'm gonna try to find the prezzy, sec.
+
+The prezzy reveals that earlier, long time ago, Ben had to make a similar presentation, and his presentation includes a model architecture section, comparison of some TFs, and saliency curves superimposed onto the feature curves. The saliency curves revealed how YY1 was actually using the breathing features as useful information, while some other TFs were not.
+
+Our prezzy went over a recap of model architectures with new diagrams by yours truly, roc/prc graphs of our hyperparameter search across filters and kernel sizes, an explanation of our null models and how we were using those to determine if breathing features were important, and then scatterplot/bar-graphs of PRC showing how YY1 sucked and FOSL1 and STAT5A rocked when using zero-null and gaussian-null models for comparison. We showed our comparison of true features with 5 gaussian noise models which showed a significant difference, and then we concluded by showing some heatmaps which could simulate motif diagrams as a next step.
+
+The next step as we saw it was to train models individually for each TF, still using our chip-seq data, and see how it compared. I think we did this in anticipation of the other kinds of data that we would get. We also used this retraining chance to do some hyperparameter search. Since the models were using data for one TF now, I had to generate a positive and negative set for the data. If the label was 0 for all cell lines associated with a particular TF, I included it in the negative set, and if the label was 1 for any of the cell lines, I put it in the positive set. Turns out the models had problems converging, and Ben asked me to see if the old model PRC AUCs were better or worse. Turns out the old models were better? I say some PRCs outperforming the old models in the new ones, but I guess results were not conclusive enough.
+
+I then moved onto gcPBM data, and I am still there. I have done some hyperparameter searching, and found that 7 kernel, 64 filters, no pooling and 3 layers works best for a simple CNN. Labels and features need to be normalised for the models to work. After determining the parameters on a sequence only dataset, I am also incorporating bubble data, which is something new we got from Manish. I tried the bubble data as is, with 4 different modes of processing, and it didn't seem to improve results. I'm trying again with normalized bubble data.
+
+And normalized bubble data doesn't improve results either.
