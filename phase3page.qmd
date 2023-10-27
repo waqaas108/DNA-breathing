@@ -304,7 +304,7 @@ We then investigated the effect of the distance between bubbles and motifs on bi
 
 ![](figs/phase3/binding_posvneg_distance/myc_posvneg.png){group="bubble_motif_distance"}
 
-Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences.
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 25% of sequences by binding affinity = positive).
 :::
 
 | Threshold | Max Odds Ratio (P-value) | Myc Odds Ratio (P-value) |
@@ -315,9 +315,29 @@ Histograms showing the distribution of distances between bubbles and motifs for 
 | ≤ 4       | 1.939929 (0.658042)       | 0.888585 (0.474167)       |
 | ≤ 5       | 1.413462 (0.658332)       | 0.834876 (0.306648)       |
 
-: Summary of the results of the Fischer's Exact Test at different thresholds. {#tbl-letters}
+: Summary of the results of the Fischer's Exact Test at different distance thresholds. {#tbl-letters}
 
-The results were significant for MYC at the 1 and 2 thresholds at the 0.05 significance level.
+The results were significant for MYC at the 1 and 2 thresholds at the 0.05 significance level. The lack of negative values were thought to contribute to the lack of significance for MAX, so the threshold for positive sequences was lowered to the top 10% of sequences and the analysis was repeated.
+
+::: {#fig-Fischer layout="[60,-5,60]"}
+![](figs/phase3/binding_posvneg_distance/max_posvneg_10.png){group="bubble_motif_distance2"}
+
+![](figs/phase3/binding_posvneg_distance/myc_posvneg_10.png){group="bubble_motif_distance2"}
+
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 10% of sequences by binding affinity = positive).
+:::
+
+|  Threshold  | Max Odds Ratio (P-value) | Myc Odds Ratio (P-value) |
+| ----------- | ------------------------ | ------------------------ |
+|     ≤ 1     |   1.335677 (0.108784)   |   1.184628 (0.341806)   |
+|     ≤ 2     |   1.375877 (0.053442)   |   0.970310 (0.872669)   |
+|     ≤ 3     |   1.139963 (0.433580)   |   0.779458 (0.133276)   |
+|     ≤ 4     |   1.034811 (0.874747)   |   0.680505 (0.021350)   |
+|     ≤ 5     |   0.870851 (0.450992)   |   0.624400 (0.006396)   |
+
+: Summary of the results of the Fischer's Exact Test at different distance thresholds. {#tbl-letters}
+
+The results were significant for MYC at the 4 and 5 threshold at the 0.05 significance level. Results for MAX are still not significant.
 
 ## Linear Regressions
 
@@ -400,7 +420,7 @@ We then calculated correlations for each individual base pair position in the mo
 ::: {#fig-Correlation_bar layout-ncol=3}
 ![](figs/phase3/flip_correlation/flip_max.png){group="correlation_bar"}
 
-![](figs/phase3/flip_correlation/coord_max.png.png){group="correlation_bar"}
+![](figs/phase3/flip_correlation/coord_max.png){group="correlation_bar"}
 
 ![](figs/phase3/flip_correlation/coordsq_max.png){group="correlation_bar"}
 
