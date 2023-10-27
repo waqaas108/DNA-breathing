@@ -154,17 +154,17 @@ Model: bubble_linear_1_10_64_3, MSE: 0.02804403379559517, r2: 0.9723189799559782
 ```
 
 ::: {#fig-Model_Scatterplots layout="[1,1,1],[1,1,1]"}
-![](figs/phase3/scatterplots_6810/mad_seq_only_1_6_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_seq_only_1_6_64_3.png){group="scatterplot1"}
 
-![](figs/phase3/scatterplots_6810/mad_seq_only_1_8_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_seq_only_1_8_64_3.png){group="scatterplot1"}
 
-![](figs/phase3/scatterplots_6810/mad_seq_only_1_10_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_seq_only_1_10_64_3.png){group="scatterplot1"}
 
-![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_6_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_6_64_3.png){group="scatterplot1"}
 
-![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_8_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_8_64_3.png){group="scatterplot1"}
 
-![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_10_64_3.png){group="scatterplot"}
+![](figs/phase3/scatterplots_6810/mad_bubble_linear_1_10_64_3.png){group="scatterplot1"}
 
 Model comparison using Scatterplots across MAD
 :::
@@ -368,3 +368,47 @@ Linear Regression of all sequences with Bubble Feature only.
 :::
 
 The results of the linear regressions showed that the presence of a bubble and motif significantly affected binding affinity, and that the interaction feature did not significantly affect binding affinity. The regressions performed with bubble data showed the extent to which bubbles alone explain binding.
+
+## Correlations of Motif positions and Flipping features
+
+Another hypothesis of ours was that flipping features inside or near motifs may determine binding affinity. To test this, we extracted all DNA sequences with motifs. Then we computed the average flipping feature across all positions in the motifs, and found the correlation between this average flipping feature and the binding affinity of the sequence for every sequence.
+
+```{code}
+TF = max
+Pearson Correlation with Motif Flip Feature: Correlation = 0.21, p-value = 6.98e-21
+Pearson Correlation with Motif Coord Feature: Correlation = 0.19, p-value = 1.32e-18
+Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 1.02e-16
+```
+
+```{code}
+TF = myc
+Pearson Correlation with Motif Flip Feature: Correlation = 0.10, p-value = 5.81e-07
+Pearson Correlation with Motif Coord Feature: Correlation = 0.17, p-value = 4.37e-17
+Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.12, p-value = 6.81e-09
+```
+
+::: {#fig-Correlation layout-ncol=1}
+![TF = max](figs/phase3/flip_correlation/max.png){group="correlation"}
+
+![TF = myc](figs/phase3/flip_correlation/myc.png){group="correlation"}
+
+Scatterplots showing the average flipping feature of motifs against binding affinity.
+:::
+
+We then calculated correlations for each individual base pair position in the motif.
+
+::: {#fig-Correlation_bar layout-ncol=3}
+![](figs/phase3/flip_correlation/flip_max.png){group="correlation_bar"}
+
+![](figs/phase3/flip_correlation/coord_max.png.png){group="correlation_bar"}
+
+![](figs/phase3/flip_correlation/coordsq_max.png){group="correlation_bar"}
+
+![](figs/phase3/flip_correlation/flip_myc.png){group="correlation_bar"}
+
+![](figs/phase3/flip_correlation/coord_myc.png){group="correlation_bar"}
+
+![](figs/phase3/flip_correlation/coordsq_myc.png){group="correlation_bar"}
+
+Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for each base pair position in the motif.
+:::
