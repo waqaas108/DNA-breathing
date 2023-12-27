@@ -98,4 +98,10 @@ The results overwhelmingly showed that bubble features did not improve the perfo
 
 ### Statistical approach
 
-We used fischer's exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity. 
+We used fischer's exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
+
+## [Phase 4](/phase4page.qmd)
+
+### Acquisition and processing of ChIP-seq sequences and bubble features
+
+We used the ChIP-seq sequences available to us previously for phase 2 and then used pyDNA-EPBD to generate bubble data for these sequences. We then ran similar statistical tests to phase 3 to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
