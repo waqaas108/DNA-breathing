@@ -71,3 +71,67 @@ Our hypothesis is that flipping features inside or near motifs may determine bin
 | ('PBX3', 'MA1114.1')    |                |             -0.000716736 |         0.842046     |                0.00721382 |          0.0448875    |                       -0.00204474 |                  0.569692     |
 
 : Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (\*\*\*: p-value < 5e-200, \*\*: p-value < 5e-100, \*: p-value < 5e-10). {#tbl-letters}
+
+::: {#fig-Correlation_bar layout-ncol=3}
+![](figs/phase4/top_sig_feat/avg_1.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_2.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_3.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_4.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_5.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_6.png){group="correlation_bar"}
+
+![](figs/phase4/top_sig_feat/avg_7.png){group="correlation_bar"}
+
+Barplots showing the correlation (and associated p-value) between flipping features and binding affinity averaged across the motif.
+:::
+
+::: {#fig-Correlation_position layout-ncol=3}
+![](figs/phase4/top_sig_feat/E2F6_MA0471.2_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/E2F6_MA0471.2_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/E2F6_MA0471.2_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/USF1_MA0093.3_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/USF1_MA0093.3_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/USF1_MA0093.3_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/EBF1_MA0154.4_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/EBF1_MA0154.4_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/EBF1_MA0154.4_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/BATF_MA1634.1_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/BATF_MA1634.1_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/BATF_MA1634.1_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ELF1_MA0473.3_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ELF1_MA0473.3_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ELF1_MA0473.3_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/SP1_MA0079.5_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/SP1_MA0079.5_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/SP1_MA0079.5_motif_coord_squared.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ZBTB7A_MA0750.2_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ZBTB7A_MA0750.2_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4/top_sig_feat/ZBTB7A_MA0750.2_motif_coord_squared.png){group="correlation_position"}
+
+Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for motifs, for each position in the motif.
+:::
