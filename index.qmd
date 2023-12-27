@@ -33,7 +33,7 @@ DNA flipping, also known as base flipping, is a structural alteration in DNA whe
 #### Convolutional Neural Networks
 Convolutional Neural Networks (CNNs) are a class of deep learning models designed specifically for processing structured grid-like data, such as images and sequences. CNNs are inspired by the visual cortex's organization in animals, where neurons respond to specific localized regions of the visual field. Similarly, CNNs operate by convolving learnable filters (kernels) over input data, allowing them to capture local patterns and features. The network's architecture includes layers for convolution, pooling, and fully connected operations, enabling hierarchical feature extraction. In the context of this project, CNNs are employed to analyze DNA sequences and biophysical features, facilitating the identification of intricate patterns related to Transcription Factor (TF) binding. By learning meaningful representations from raw data, CNNs offer a powerful tool to uncover hidden correlations and contribute to the comprehension of complex biological interactions.
 
-## [Phase 1]
+## [Phase 1]()
 
 ### Initial model building
 

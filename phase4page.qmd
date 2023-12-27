@@ -1,5 +1,5 @@
 ---
-title: Analysis of gcPBM data
+title: Analysis of ChIP-seq data
 filters:
    - lightbox
 lightbox: auto
@@ -70,4 +70,4 @@ Our hypothesis is that flipping features inside or near motifs may determine bin
 | ('REST', 'MA0138.2')    |                |              0.00714257  |         0.0404227    |                0.0113349  |          0.00114453   |                        0.00637103 |                  0.0675462    |
 | ('PBX3', 'MA1114.1')    |                |             -0.000716736 |         0.842046     |                0.00721382 |          0.0448875    |                       -0.00204474 |                  0.569692     |
 
-: Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (***: p-value < 5e-200, **: p-value < 5e-100, *: p-value < 5e-10). {#tbl-letters}
+: Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (\*\*\*: p-value < 5e-200, \*\*: p-value < 5e-100, \*: p-value < 5e-10). {#tbl-letters}
