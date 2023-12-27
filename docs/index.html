@@ -130,6 +130,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#machine-learning-approach" id="toc-machine-learning-approach" class="nav-link" data-scroll-target="#machine-learning-approach">Machine learning approach</a></li>
   <li><a href="#statistical-approach" id="toc-statistical-approach" class="nav-link" data-scroll-target="#statistical-approach">Statistical approach</a></li>
   </ul></li>
+  <li><a href="#phase-4" id="toc-phase-4" class="nav-link" data-scroll-target="#phase-4">Phase 4</a>
+  <ul class="collapse">
+  <li><a href="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -245,7 +249,14 @@ Bubble data
 </section>
 <section id="statistical-approach" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-approach">Statistical approach</h3>
-<p>We used fischer’s exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity.</p>
+<p>We used fischer’s exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
+</section>
+</section>
+<section id="phase-4" class="level2">
+<h2 class="anchored" data-anchor-id="phase-4"><a href="./phase4page.html">Phase 4</a></h2>
+<section id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="level3">
+<h3 class="anchored" data-anchor-id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</h3>
+<p>We used the ChIP-seq sequences available to us previously for phase 2 and then used pyDNA-EPBD to generate bubble data for these sequences. We then ran similar statistical tests to phase 3 to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
 
 
 </section>
