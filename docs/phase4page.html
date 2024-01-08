@@ -141,6 +141,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="correlations-of-motif-positions-and-flipping-features" class="level2">
 <h2 class="anchored" data-anchor-id="correlations-of-motif-positions-and-flipping-features">Correlations of Motif positions and Flipping features</h2>
 <p>Our hypothesis is that flipping features inside or near motifs may determine binding affinity. To test this, we extracted all DNA sequences with motifs. Then we computed the average flipping feature across all positions in the motifs, and found the correlation between this average flipping feature and the binding affinity of the sequence for every sequence.</p>
+<p>The ChIP-seq data used to create these results was a dataset of 886625 sequences, with each sequence having a length of 500 basepairs. To reduce the size of each sequence, 150 basepairs of flanking sequences were removed from either side of the sequence.</p>
+<p>A total of 137 different cell lines and 64 TFs were represented in the Chip-seq peaks. For each sequence, the presence of binding in each cell line was represented as a binary value. The binding affinity of the sequence to a particular TF was computed as the average of the binary values across all cell lines.</p>
 <div id="tbl-letters" class="anchored">
 <table class="table">
 <caption>Table&nbsp;1: Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (***: p-value &lt; 5e-200, **: p-value &lt; 5e-100, *: p-value &lt; 5e-10).</caption>
@@ -840,6 +842,7 @@ ul.task-list li input[type="checkbox"] {
 <p></p><figcaption class="figure-caption">Figure&nbsp;2: Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for motifs, for each position in the motif (top 7 significant motifs).</figcaption><p></p>
 </figure>
 </div>
+<p>Our findings echo the gcPBM results, with different TF motifs having different correlations between flipping features and binding affinity, and different positions across the motif having different correlations.</p>
 
 
 </section>
@@ -1079,7 +1082,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":true});</script>
 
 
 

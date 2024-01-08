@@ -463,48 +463,48 @@ Model: bubble_linear_1_10_64_3, MSE: 0.06115123629570007, r2: 0.9403300450380424
 <h2 class="anchored" data-anchor-id="statistical-investigation">Statistical Investigation</h2>
 <p>We conducted statistical investigations into the relationship between bubbles, motifs, and binding affinity. Our first investigation was a t-test to see if the presence of a bubble significantly affected binding affinity.</p>
 <pre class="{code}"><code>MAD
-Ttest_indResult(statistic=8.00742826839087, pvalue=1.3472019719993843e-15)
+Ttest_indResult(statistic=8.007428268390886, pvalue=1.3472019719992042e-15)
 
 MAX
-Ttest_indResult(statistic=12.270239455302075, pvalue=2.5385730406292183e-34)
+Ttest_indResult(statistic=12.270239455302246, pvalue=2.5385730406239527e-34)
 
 MYC
-Ttest_indResult(statistic=5.339201658963607, pvalue=9.632386462326223e-08)</code></pre>
+Ttest_indResult(statistic=5.339201658963574, pvalue=9.632386462328061e-08)</code></pre>
 <div id="fig-box_and_histograms" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/mad_bp.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/mad_bp.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3/bubble_threshold_ttest/mad_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/mad_box.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/mad_hg.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/mad_hg.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
-<figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/max_bp.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/max_bp.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
-<figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/max_hg.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/max_hg.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3/bubble_threshold_ttest/mad_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/mad_hist.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/myc_bp.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/myc_bp.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3/bubble_threshold_ttest/max_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/max_box.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3/bubble_threshold_ttest/myc_hg.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/myc_hg.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3/bubble_threshold_ttest/max_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/max_hist.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3/bubble_threshold_ttest/myc_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/myc_box.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3/bubble_threshold_ttest/myc_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3/bubble_threshold_ttest/myc_hist.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1215,7 +1215,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
 
 
 
