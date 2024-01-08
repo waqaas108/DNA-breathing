@@ -17,6 +17,10 @@ tbl-cap-location: bottom
 
 Our hypothesis is that flipping features inside or near motifs may determine binding affinity. To test this, we extracted all DNA sequences with motifs. Then we computed the average flipping feature across all positions in the motifs, and found the correlation between this average flipping feature and the binding affinity of the sequence for every sequence.
 
+The ChIP-seq data used to create these results was a dataset of 886625 sequences, with each sequence having a length of 500 basepairs. To reduce the size of each sequence, 150 basepairs of flanking sequences were removed from either side of the sequence.
+
+A total of 137 different cell lines and 64 TFs were represented in the Chip-seq peaks. For each sequence, the presence of binding in each cell line was represented as a binary value. The binding affinity of the sequence to a particular TF was computed as the average of the binary values across all cell lines.
+
 |   TF, Motif ID          | Significance   |   Motif Flip Correlation |   Motif Flip P-value |   Motif Coord Correlation |   Motif Coord P-value |   Motif Coord Squared Correlation |   Motif Coord Squared P-value |
 |:------------------------|:---------------|-------------------------:|---------------------:|--------------------------:|----------------------:|----------------------------------:|------------------------------:|
 | ('E2F6', 'MA0471.2')    | ***            |             -0.20049     |         0            |               -0.191      |          0            |                       -0.203085   |                  0            |
@@ -135,3 +139,5 @@ Barplots showing the correlation (and associated p-value) between flipping featu
 
 Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for motifs, for each position in the motif (top 7 significant motifs).
 :::
+
+Our findings echo the gcPBM results, with different TF motifs having different correlations between flipping features and binding affinity, and different positions across the motif having different correlations.

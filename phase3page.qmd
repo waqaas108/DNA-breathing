@@ -233,27 +233,27 @@ We conducted statistical investigations into the relationship between bubbles, m
 
 ```{code}
 MAD
-Ttest_indResult(statistic=8.00742826839087, pvalue=1.3472019719993843e-15)
+Ttest_indResult(statistic=8.007428268390886, pvalue=1.3472019719992042e-15)
 
 MAX
-Ttest_indResult(statistic=12.270239455302075, pvalue=2.5385730406292183e-34)
+Ttest_indResult(statistic=12.270239455302246, pvalue=2.5385730406239527e-34)
 
 MYC
-Ttest_indResult(statistic=5.339201658963607, pvalue=9.632386462326223e-08)
+Ttest_indResult(statistic=5.339201658963574, pvalue=9.632386462328061e-08)
 ```
 
 ::: {#fig-box_and_histograms layout-ncol=2}
-![](figs/phase3/bubble_threshold_ttest/mad_bp.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/mad_box.png){group="boxplot_histogram"}
 
-![](figs/phase3/bubble_threshold_ttest/mad_hg.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/mad_hist.png){group="boxplot_histogram"}
 
-![](figs/phase3/bubble_threshold_ttest/max_bp.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/max_box.png){group="boxplot_histogram"}
 
-![](figs/phase3/bubble_threshold_ttest/max_hg.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/max_hist.png){group="boxplot_histogram"}
 
-![](figs/phase3/bubble_threshold_ttest/myc_bp.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/myc_box.png){group="boxplot_histogram"}
 
-![](figs/phase3/bubble_threshold_ttest/myc_hg.png){group="boxplot_histogram"}
+![](figs/phase3/bubble_threshold_ttest/myc_hist.png){group="boxplot_histogram"}
 
 Boxplots and histograms of binding affinity for sequences with and without bubbles.
 :::
