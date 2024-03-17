@@ -1,0 +1,323 @@
+---
+title: Analysis of gcPBM data
+filters:
+   - lightbox
+lightbox: auto
+tbl-cap-location: bottom
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+## Overview on the Dataset and Data Processing
+
+### Bubbles
+
+We acquired gcPBM datasets for three TFs (MAX: 8568 sequences, MAD: 7534 sequences, MYC: 6926 sequences) from Alexandrov Boian's lab. We simulated corresponding feature data for flipping and bubbles using pyDNA, a package developed by the same lab which uses MCMC simulation to derive feature values from sequences.
+
+The bubble data, once generated, was in the form of 3 dimensional tensors, with the x-axis corresponding to the base-pair positions of the sequences, the y-axis corresponding to the length of bubbles horizontally across the sequence, and the z-axis corresponding to the amplitude of the bubbles measured in Armstrongs. The values in each tensor reflected the probability of finding the bubble across a certain time duration.
+
+::: {#fig-Bubble_Graphs layout-ncol=3}
+![](figs/phase3_new/bubble_raw/image.png){group="raw_bubble"}
+
+![](figs/phase3_new/bubble_raw/image1.png){group="raw_bubble"}
+
+![](figs/phase3_new/bubble_raw/image3.png){group="raw_bubble"}
+
+3d surface plots of some sequences across different amplitude thresholds
+:::
+
+We decided to use an Armstrong threshold of 3.5 and a bubble length threshold of 10 for the rest of our analyses as these are the thresholds used in literature published by the lab that developed the package.
+
+### Motifs
+
+We tried to acquire motifs for the TFs from the JASPAR database, but we were unable to find motifs for MAD. We then used the motifs for MAX and MYC to scan for motif presence in the sequences of the gcPBM data. We used the FIMO tool from the MEME suite to scan for motif presence. We used the following parameters:
+
+p-value ≤ 1 x 10^-4 (strong motif match)
+p-value > 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)
+
+The consensus sequences for the motifs were:
+
+MAX: 5'-ACCACGTGCC-3'
+MYC: 5'-GGCCACGTGCCC-3'
+
+### Processed Data
+
+Once we had the motifs and bubbles identified and tied to base pair locations, we did some basic exploration of the sequences and how motifs and bubbles presented themselves. The lists below show the relative positions of motifs and bubbles in the sequences, with the strand of the motif also indicated.
+
+Top 5 sequences per TF in terms of binding affinity that also have bubble features:
+
+
+TF = max
+```{code}
+1.	DNA_sequence    = TGTGGCTTATCAAACCACGTGGTTTATCAAAATAAT
+1.	Bubble_sequence = ---------+--------------------------
+1.	Motif_positive  = -------------++++++++++-------------
+1.	Motif_negative  = ------------------------------------
+1.	Motif_sequence  = -------------++++++++++-------------
+2.	DNA_sequence    = TTACGCTCTTTCTACCACGTGGTGCTAATTGAAGGG
+2.	Bubble_sequence = -----------+------------------------
+2.	Motif_positive  = -------------++++++++++-------------
+2.	Motif_negative  = ------------------------------------
+2.	Motif_sequence  = -------------++++++++++-------------
+3.	DNA_sequence    = AAGAAAAAGAAGTACCACGTGGTAAACAGAATACCT
+3.	Bubble_sequence = ----------------------+-------------
+3.	Motif_positive  = -------------++++++++++-------------
+3.	Motif_negative  = ------------------------------------
+3.	Motif_sequence  = -------------++++++++++-------------
+4.	DNA_sequence    = GCCACACTATCTTACCACGTGGTACAGCTTCTACGG
+4.	Bubble_sequence = ---+--------------------------------
+4.	Motif_positive  = -------------++++++++++-------------
+4.	Motif_negative  = ------------------------------------
+4.	Motif_sequence  = -------------++++++++++-------------
+5.	DNA_sequence    = GTGTCATTGCTGTACCACGTGGTGTTGGTGTCGTTG
+5.	Bubble_sequence = -----------------+------------------
+5.	Motif_positive  = -------------++++++++++-------------
+5.	Motif_negative  = ------------------------------------
+5.	Motif_sequence  = -------------++++++++++-------------
+```
+
+TF = myc
+```{code}
+1.	DNA_sequence    = TGTGGCTTATCAAACCACGTGGTTTATCAAAATAAT
+1.	Bubble_sequence = -----------+------------------------
+1.	Motif_positive  = ------------++++++++++++------------
+1.	Motif_negative  = ------------------------------------
+1.	Motif_sequence  = ------------++++++++++++------------
+2.	DNA_sequence    = CTAGAACCTTTGTACCACGTGGCATTTTTTTAAACT
+2.	Bubble_sequence = ---------------+--------------------
+2.	Motif_positive  = ------------------------------------
+2.	Motif_negative  = ------------++++++++++++------------
+2.	Motif_sequence  = ------------++++++++++++------------
+3.	DNA_sequence    = GGGCTTATGAGAGACCACGTGGTCTTGTGCTTTAGT
+3.	Bubble_sequence = ----------------+-------------------
+3.	Motif_positive  = ------------++++++++++++------------
+3.	Motif_negative  = ------------------------------------
+3.	Motif_sequence  = ------------++++++++++++------------
+4.	DNA_sequence    = ATTGATTTTTACTGCCACGTGGTTTCCCATTCTATT
+4.	Bubble_sequence = -+----------------------------------
+4.	Motif_positive  = ------------++++++++++++------------
+4.	Motif_negative  = ------------------------------------
+4.	Motif_sequence  = ------------++++++++++++------------
+5.	DNA_sequence    = TAGTTGTGCCACAACCACGTGGTCCTGGAAACTGCC
+5.	Bubble_sequence = ---------+--------------------------
+5.	Motif_positive  = ------------++++++++++++------------
+5.	Motif_negative  = ------------------------------------
+5.	Motif_sequence  = ------------++++++++++++------------
+```
+
+
+## Statistical Investigation
+
+We conducted statistical investigations into the relationship between bubbles, motifs, and binding affinity. Our first investigation was a t-test to see if the presence of a bubble significantly affected binding affinity.
+
+```{code}
+MAD
+T-statistic: 3.0415
+P-value: 0.0023625157500119496
+
+MAX
+T-statistic: 4.5823
+P-value: 4.663198015900617e-06
+
+MYC
+T-statistic: 1.5249
+P-value: 0.1273411464685596
+```
+
+The test results for myc showed that there was no significant correlation between bubble presence and binding affinity. Since the distribution of binding affinity was not normal, we also conducted a Mann-Whitney U test.
+
+```{code}
+MAD
+U Statistic: 4410794.5
+P-Value: 3.430484717720097e-10
+
+MAX
+U Statistic: 5564323.5
+P-Value: 3.129469915381394e-15
+
+MYC
+U Statistic: 3577091.0
+P-Value: 0.005709047733220515
+```
+
+All TFs showed a significant relationship between bubble presence and binding affinity when using the Mann-Whitney U test.
+
+```{code}
+
+::: {#fig-box_and_histograms layout-ncol=2}
+![](figs/phase3_new/bubble_threshold_ttest/mad_box.png){group="boxplot_histogram"}
+
+![](figs/phase3_new/bubble_threshold_ttest/mad_hist.png){group="boxplot_histogram"}
+
+![](figs/phase3_new/bubble_threshold_ttest/max_box.png){group="boxplot_histogram"}
+
+![](figs/phase3_new/bubble_threshold_ttest/max_hist.png){group="boxplot_histogram"}
+
+![](figs/phase3_new/bubble_threshold_ttest/myc_box.png){group="boxplot_histogram"}
+
+![](figs/phase3_new/bubble_threshold_ttest/myc_hist.png){group="boxplot_histogram"}
+
+Boxplots and histograms of binding affinity for sequences with and without bubbles.
+:::
+
+Since we were unable to find a motif for MAD from JASPAR, the statistical analyses investigating motifs were conducted with the data for MAX and MYC only.
+
+### Fischer's Exact Test
+
+We conducted a Fischer's Exact Test to see if the presence of a bubble and motif together significantly affected binding affinity. We counted the base pair positions across our entire dataset that had a bubble, motif, or both, and used these counts to construct a contingency table for the Fischer's Exact Test.
+
+::: {#fig-Fischer}
+```{code}
+{'max': {'L': 308448, 'B': 1361, 'M': 18770, 'x': 46},
+ 'myc': {'L': 249336, 'B': 1186, 'M': 31632, 'x': 85}}
+```
+
+```{code}
+TF: max
+Contingency Table:
+         | Bubble+ | Bubble-
+Motif+   |   46   |   18724
+Motif-   |   1315   |   288363
+Odds Ratio: 0.5387322587955679
+P-value: 8.510400968969282e-06
+
+TF: myc
+Contingency Table:
+         | Bubble+ | Bubble-
+Motif+   |   85   |   31547
+Motif-   |   1101   |   216603
+Odds Ratio: 0.5300758377124949
+P-value: 1.0090991397916577e-09
+```
+
+Fisher’s Exact test using all sequences: L = total length of sequences, B = coordinates with a bubble, M = coordinates with a motif, x = coordinates with both a motif and bubble.
+:::
+
+The results of the Fischer's Exact Test showed that the presence of a bubble and motif together significantly affected binding affinity.
+
+### The effect of the distance between bubbles and motifs
+
+We then investigated the effect of the distance between bubbles and motifs on binding affinity. To this end, we categorized the top 10% of sequences by binding affinity to be positive sequences. We then defined close distances between motifs and bubbles using a maximum threshold, and then performed a fischer's exact test at different thresholds.
+
+::: {#fig-Fischer layout="[60,-5,60]"}
+![](figs/phase3_new/binding_posvneg_distance/max_posvneg_10.png){group="bubble_motif_distance2"}
+
+![](figs/phase3_new/binding_posvneg_distance/myc_posvneg_10.png){group="bubble_motif_distance2"}
+
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 10% of sequences by binding affinity = positive).
+:::
+
+|  Threshold  | Max Odds Ratio (P-value) | Myc Odds Ratio (P-value) |
+| ----------- | ------------------------ | ------------------------ |
+|     ≤ 1     |   1.553086 (0.182921)   |   1.119199 (0.702150)   |
+|     ≤ 2     |   1.784314 (0.052449)   |   1.186207 (0.543130)   |
+|     ≤ 3     |   1.604651 (0.106206)   |   1.223536 (0.407174)   |
+|     ≤ 4     |   1.655518 (0.081682)   |   0.996443 (1.000000)   |
+|     ≤ 5     |   1.539542 (0.140837)   |   1.173838 (0.545392)   |
+
+: Summary of the results of the Fischer's Exact Test at different distance thresholds. {#tbl-letters}
+
+The results were not significant for either TF. This suggests that the distance between bubbles and motifs does not significantly affect binding affinity, but might also be a result of a stringent threshold for bubble positivity.
+
+## Linear Regressions
+
+We then conducted linear regressions to see the degree to which the presence of a bubble, motif, and an interaction feature significantly affected binding affinity.
+
+::: {#tbl-panel layout-ncol=1}
+|                          |    coef   |  std err  |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|--------------------------|-----------|-----------|-----------|---------|-----------|------------|
+| const                    |   3.9901  |   0.002   | 2329.676  |  0.000  |   3.987   |   3.993    |
+| motif_binary             |   0.4215  |   0.004   |  117.860  |  0.000  |   0.414   |   0.429    |
+| bubble_binary            |   0.0635  |   0.004   |  15.279   |  0.000  |   0.055   |   0.072    |
+| motif_and_bubble_binary |  -0.0437  |   0.010   |  -4.369   |  0.000  |  -0.063   |  -0.024    |
+
+
+
+: Linear regression results for MAX (R-squared = 0.645, F-statistic = 5197). {#tbl-panel1}
+
+|                         |    coef   |  std err  |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|-------------------------|-----------|-----------|-----------|---------|-----------|------------|
+| const                   |   8.2609  |   0.011   | 754.318   |  0.000  |   8.239   |   8.282    |
+| motif_binary            |   0.9479  |   0.017   |  54.802   |  0.000  |   0.914   |   0.982    |
+| bubble_binary           |   0.1273  |   0.025   |   5.176   |  0.000  |   0.079   |   0.175    |
+| motif_and_bubble_binary|   0.0833  |   0.045   |   1.855   |  0.064  |  -0.005   |   0.171    |
+
+
+
+: Linear regression results for MYC (R-squared = 0.344, F-statistic = 1209). {#tbl-panel2}
+
+Linear Regression of all sequences with Motif, Bubble, and Interaction Features.
+:::
+
+
+
+::: {#tbl-panel layout-ncol=1}
+|               |    coef   |  std err  |     t      |  P>|t|  |   [0.025  |  0.975]   |
+|---------------|-----------|-----------|------------|---------|-----------|------------|
+| const         |   3.9901  |   0.002   | 2256.927   |  0.000  |   3.987   |   3.994    |
+| bubble_binary |   0.0635  |   0.004   |   14.802   |  0.000  |   0.055   |   0.072    |
+
+
+: Linear regression results for MAX (R-squared = 0.032, F-statistic = 219.1). {#tbl-panel1}
+
+|               |   coef   |  std err |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|---------------|----------|----------|-----------|---------|-----------|------------|
+| const         |  8.2609  |   0.008  |  989.555  |  0.000  |   8.244   |   8.277    |
+| bubble_binary |  0.1273  |   0.019  |   6.790   |  0.000  |   0.091   |   0.164    |
+
+
+: Linear regression results for MYC (R-squared = 0.011, F-statistic = 46.10). {#tbl-panel2}
+
+Linear Regression of all sequences with Bubble Feature only.
+:::
+
+The results of the linear regressions showed that the presence of a bubble and motif significantly affected binding affinity, and that the interaction feature did not significantly affect binding affinity. The regressions performed with bubble data showed the extent to which bubbles alone explain binding.
+
+## Correlations of Motif positions and Flipping features
+
+Another hypothesis of ours was that flipping features inside or near motifs may determine binding affinity. To test this, we extracted all DNA sequences with motifs. Then we computed the average flipping feature across all positions in the motifs, and found the correlation between this average flipping feature and the binding affinity of the sequence for every sequence.
+
+```{code}
+TF = max
+Pearson Correlation with Motif Flip Feature: Correlation = 0.26, p-value = 1.13e-29
+Pearson Correlation with Motif Coord Feature: Correlation = 0.20, p-value = 1.89e-18
+Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.06, p-value = 5.42e-3
+```
+
+```{code}
+TF = myc
+Pearson Correlation with Motif Flip Feature: Correlation = 0.33, p-value = 1.77e-68
+Pearson Correlation with Motif Coord Feature: Correlation = 0.32, p-value = 5.42e-64
+Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 3.42e-20
+```
+
+::: {#fig-Correlation layout-ncol=1}
+![TF = max](figs/phase3_new/flip_correlation/max.png){group="correlation"}
+
+![TF = myc](figs/phase3_new/flip_correlation/myc.png){group="correlation"}
+
+Scatterplots showing the average flipping feature of motifs against binding affinity.
+:::
+
+We then calculated correlations for each individual base pair position in the motif.
+
+::: {#fig-Correlation_bar layout-ncol=3}
+![](figs/phase3_new/flip_correlation/flip_max.png){group="correlation_bar"}
+
+![](figs/phase3_new/flip_correlation/coord_max.png){group="correlation_bar"}
+
+![](figs/phase3_new/flip_correlation/coordsq_max.png){group="correlation_bar"}
+
+![](figs/phase3_new/flip_correlation/flip_myc.png){group="correlation_bar"}
+
+![](figs/phase3_new/flip_correlation/coord_myc.png){group="correlation_bar"}
+
+![](figs/phase3_new/flip_correlation/coordsq_myc.png){group="correlation_bar"}
+
+Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for each base pair position in the motif.
+:::

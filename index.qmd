@@ -72,6 +72,8 @@ lorem ipsum
 
 ## [Phase 3](/phase3page.qmd)
 
+## [Phase 3 redone with simulated data](/phase3page_new.qmd)
+
 ### Acquisition and processing of gcPBM sequences and bubble features
 
 We acquired gcPBM sequences and corresponding DNA bubble simulation data from Alexandrov Boian's lab. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.
