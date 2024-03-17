@@ -116,6 +116,7 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#statistical-investigation" id="toc-statistical-investigation" class="nav-link" data-scroll-target="#statistical-investigation">Statistical Investigation</a>
   <ul class="collapse">
+  <li><a href="#fischers-exact-test" id="toc-fischers-exact-test" class="nav-link" data-scroll-target="#fischers-exact-test">Fischer’s Exact Test</a></li>
   <li><a href="#the-effect-of-the-distance-between-bubbles-and-motifs" id="toc-the-effect-of-the-distance-between-bubbles-and-motifs" class="nav-link" data-scroll-target="#the-effect-of-the-distance-between-bubbles-and-motifs">The effect of the distance between bubbles and motifs</a></li>
   </ul></li>
   <li><a href="#linear-regressions" id="toc-linear-regressions" class="nav-link" data-scroll-target="#linear-regressions">Linear Regressions</a></li>
@@ -165,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3_new/bubble_raw/image1.png" class="lightbox" data-gallery="raw_bubble"><img src="figs/phase3_new/bubble_raw/image1.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3_new/bubble_raw/image2.png" class="lightbox" data-gallery="raw_bubble"><img src="figs/phase3_new/bubble_raw/image2.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
@@ -271,32 +272,54 @@ MYC
 U Statistic: 3577091.0
 P-Value: 0.005709047733220515</code></pre>
 <p>All TFs showed a significant relationship between bubble presence and binding affinity when using the Mann-Whitney U test.</p>
-<pre class="{code}"><code>
-::: {#fig-box_and_histograms layout-ncol=2}
-![](figs/phase3_new/bubble_threshold_ttest/mad_box.png){group="boxplot_histogram"}
-
-![](figs/phase3_new/bubble_threshold_ttest/mad_hist.png){group="boxplot_histogram"}
-
-![](figs/phase3_new/bubble_threshold_ttest/max_box.png){group="boxplot_histogram"}
-
-![](figs/phase3_new/bubble_threshold_ttest/max_hist.png){group="boxplot_histogram"}
-
-![](figs/phase3_new/bubble_threshold_ttest/myc_box.png){group="boxplot_histogram"}
-
-![](figs/phase3_new/bubble_threshold_ttest/myc_hist.png){group="boxplot_histogram"}
-
-Boxplots and histograms of binding affinity for sequences with and without bubbles.
-:::
-
-Since we were unable to find a motif for MAD from JASPAR, the statistical analyses investigating motifs were conducted with the data for MAX and MYC only.
-
-### Fischer's Exact Test
-
-We conducted a Fischer's Exact Test to see if the presence of a bubble and motif together significantly affected binding affinity. We counted the base pair positions across our entire dataset that had a bubble, motif, or both, and used these counts to construct a contingency table for the Fischer's Exact Test.
-
-::: {#fig-Fischer}
-```{code}
-{'max': {'L': 308448, 'B': 1361, 'M': 18770, 'x': 46},
+<div id="fig-box_and_histograms" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/mad_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/mad_box.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/mad_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/mad_hist.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/max_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/max_box.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/max_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/max_hist.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/myc_box.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/myc_box.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase3_new/bubble_threshold_ttest/myc_hist.png" class="lightbox" data-gallery="boxplot_histogram"><img src="figs/phase3_new/bubble_threshold_ttest/myc_hist.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Boxplots and histograms of binding affinity for sequences with and without bubbles.</figcaption><p></p>
+</figure>
+</div>
+<p>Since we were unable to find a motif for MAD from JASPAR, the statistical analyses investigating motifs were conducted with the data for MAX and MYC only.</p>
+<section id="fischers-exact-test" class="level3">
+<h3 class="anchored" data-anchor-id="fischers-exact-test">Fischer’s Exact Test</h3>
+<p>We conducted a Fischer’s Exact Test to see if the presence of a bubble and motif together significantly affected binding affinity. We counted the base pair positions across our entire dataset that had a bubble, motif, or both, and used these counts to construct a contingency table for the Fischer’s Exact Test.</p>
+<div id="fig-Fischer" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<pre class="{code}"><code>{'max': {'L': 308448, 'B': 1361, 'M': 18770, 'x': 46},
  'myc': {'L': 249336, 'B': 1186, 'M': 31632, 'x': 85}}</code></pre>
 <pre class="{code}"><code>TF: max
 Contingency Table:
@@ -313,8 +336,11 @@ Motif+   |   85   |   31547
 Motif-   |   1101   |   216603
 Odds Ratio: 0.5300758377124949
 P-value: 1.0090991397916577e-09</code></pre>
-<p>Fisher’s Exact test using all sequences: L = total length of sequences, B = coordinates with a bubble, M = coordinates with a motif, x = coordinates with both a motif and bubble. :::</p>
+<figcaption class="figure-caption">Figure&nbsp;3: Fisher’s Exact test using all sequences: L = total length of sequences, B = coordinates with a bubble, M = coordinates with a motif, x = coordinates with both a motif and bubble.</figcaption>
+</figure>
+</div>
 <p>The results of the Fischer’s Exact Test showed that the presence of a bubble and motif together significantly affected binding affinity.</p>
+</section>
 <section id="the-effect-of-the-distance-between-bubbles-and-motifs" class="level3">
 <h3 class="anchored" data-anchor-id="the-effect-of-the-distance-between-bubbles-and-motifs">The effect of the distance between bubbles and motifs</h3>
 <p>We then investigated the effect of the distance between bubbles and motifs on binding affinity. To this end, we categorized the top 10% of sequences by binding affinity to be positive sequences. We then defined close distances between motifs and bubbles using a maximum threshold, and then performed a fischer’s exact test at different thresholds.</p>
@@ -335,7 +361,7 @@ P-value: 1.0090991397916577e-09</code></pre>
 </figure>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 10% of sequences by binding affinity = positive).</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 10% of sequences by binding affinity = positive).</figcaption><p></p>
 </figure>
 </div>
 <div id="tbl-letters" class="anchored">
@@ -403,9 +429,9 @@ P-value: 1.0090991397916577e-09</code></pre>
 <th style="text-align: left;">coef</th>
 <th style="text-align: left;">std err</th>
 <th style="text-align: left;">t</th>
-<th style="text-align: left;">P&gt;</th>
-<th style="text-align: left;">t</th>
-<th style="text-align: left;"></th>
+<th style="text-align: left;">P&gt; abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
 </tr>
 </thead>
 <tbody>
@@ -468,9 +494,9 @@ P-value: 1.0090991397916577e-09</code></pre>
 <th style="text-align: left;">coef</th>
 <th style="text-align: left;">std err</th>
 <th style="text-align: left;">t</th>
-<th style="text-align: left;">P&gt;</th>
-<th style="text-align: left;">t</th>
-<th style="text-align: left;"></th>
+<th style="text-align: left;">P&gt; abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
 </tr>
 </thead>
 <tbody>
@@ -648,7 +674,7 @@ Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 3.
 </figure>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Scatterplots showing the average flipping feature of motifs against binding affinity.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Scatterplots showing the average flipping feature of motifs against binding affinity.</figcaption><p></p>
 </figure>
 </div>
 <p>We then calculated correlations for each individual base pair position in the motif.</p>
@@ -688,7 +714,7 @@ Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 3.
 </figure>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for each base pair position in the motif.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for each base pair position in the motif.</figcaption><p></p>
 </figure>
 </div>
 
@@ -930,7 +956,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});</script>
 
 
 

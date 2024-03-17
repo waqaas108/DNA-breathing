@@ -24,7 +24,7 @@ The bubble data, once generated, was in the form of 3 dimensional tensors, with 
 ::: {#fig-Bubble_Graphs layout-ncol=3}
 ![](figs/phase3_new/bubble_raw/image.png){group="raw_bubble"}
 
-![](figs/phase3_new/bubble_raw/image1.png){group="raw_bubble"}
+![](figs/phase3_new/bubble_raw/image2.png){group="raw_bubble"}
 
 ![](figs/phase3_new/bubble_raw/image3.png){group="raw_bubble"}
 
@@ -147,8 +147,6 @@ P-Value: 0.005709047733220515
 
 All TFs showed a significant relationship between bubble presence and binding affinity when using the Mann-Whitney U test.
 
-```{code}
-
 ::: {#fig-box_and_histograms layout-ncol=2}
 ![](figs/phase3_new/bubble_threshold_ttest/mad_box.png){group="boxplot_histogram"}
 
@@ -229,7 +227,7 @@ The results were not significant for either TF. This suggests that the distance 
 We then conducted linear regressions to see the degree to which the presence of a bubble, motif, and an interaction feature significantly affected binding affinity.
 
 ::: {#tbl-panel layout-ncol=1}
-|                          |    coef   |  std err  |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|                          |    coef   |  std err  |     t     |  P> abs(t)  |   0.025  |  0.975   |
 |--------------------------|-----------|-----------|-----------|---------|-----------|------------|
 | const                    |   3.9901  |   0.002   | 2329.676  |  0.000  |   3.987   |   3.993    |
 | motif_binary             |   0.4215  |   0.004   |  117.860  |  0.000  |   0.414   |   0.429    |
@@ -240,7 +238,7 @@ We then conducted linear regressions to see the degree to which the presence of 
 
 : Linear regression results for MAX (R-squared = 0.645, F-statistic = 5197). {#tbl-panel1}
 
-|                         |    coef   |  std err  |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|                         |    coef   |  std err  |     t     |  P> abs(t)  |   0.025  |  0.975   |
 |-------------------------|-----------|-----------|-----------|---------|-----------|------------|
 | const                   |   8.2609  |   0.011   | 754.318   |  0.000  |   8.239   |   8.282    |
 | motif_binary            |   0.9479  |   0.017   |  54.802   |  0.000  |   0.914   |   0.982    |
