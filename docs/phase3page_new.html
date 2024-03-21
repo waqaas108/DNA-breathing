@@ -183,9 +183,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="motifs" class="level3">
 <h3 class="anchored" data-anchor-id="motifs">Motifs</h3>
 <p>We tried to acquire motifs for the TFs from the JASPAR database, but we were unable to find motifs for MAD. We then used the motifs for MAX and MYC to scan for motif presence in the sequences of the gcPBM data. We used the FIMO tool from the MEME suite to scan for motif presence. We used the following parameters:</p>
-<p>p-value ≤ 1 x 10^-4 (strong motif match) p-value &gt; 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)</p>
+<p>p-value ≤ 1 x 10^-4 (strong motif match)</p>
+<p>p-value &gt; 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)</p>
 <p>The consensus sequences for the motifs were:</p>
-<p>MAX: 5’-ACCACGTGCC-3’ MYC: 5’-GGCCACGTGCCC-3’</p>
+<p>MAX: 5’-ACCACGTGCC-3’</p>
+<p>MYC: 5’-GGCCACGTGCCC-3’</p>
 </section>
 <section id="processed-data" class="level3">
 <h3 class="anchored" data-anchor-id="processed-data">Processed Data</h3>
@@ -544,6 +546,106 @@ P-value: 1.0090991397916577e-09</code></pre>
 <p>Table&nbsp;2: Linear Regression of all sequences with Motif, Bubble, and Interaction Features.</p>
 </div>
 </div>
+<p>We also conducted linear regressions of bubble presence against binding affinity by limiting the sequences in the regression based on motif strength. We conducted regressions for all sequences, sequences without strong motifs (weak motif matches and no motif matches), and sequences with only weak motif matches.</p>
+<div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-panel1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
+<table class="table">
+<caption>(a) Linear regression results for MAX (R-squared = 0.000, F-statistic = 2.325).</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">std err</th>
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">const</td>
+<td style="text-align: left;">4.0867</td>
+<td style="text-align: left;">0.003</td>
+<td style="text-align: left;">1620.669</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">4.082</td>
+<td style="text-align: left;">4.092</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bubble_binary</td>
+<td style="text-align: left;">0.0290</td>
+<td style="text-align: left;">0.006</td>
+<td style="text-align: left;">4.582</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.017</td>
+<td style="text-align: left;">0.041</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-panel2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
+<table class="table">
+<caption>(b) Linear regression results for MYC (R-squared = 0.002, F-statistic = 21.00).</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">std err</th>
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">const</td>
+<td style="text-align: left;">8.6408</td>
+<td style="text-align: left;">0.010</td>
+<td style="text-align: left;">826.004</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">8.620</td>
+<td style="text-align: left;">8.661</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bubble_binary</td>
+<td style="text-align: left;">0.0385</td>
+<td style="text-align: left;">0.025</td>
+<td style="text-align: left;">1.525</td>
+<td style="text-align: left;">0.127</td>
+<td style="text-align: left;">-0.011</td>
+<td style="text-align: left;">0.088</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="panel-caption table-caption">
+<p>Table&nbsp;3: Linear Regression of all sequences with Bubble Features.</p>
+</div>
+</div>
 <div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-panel1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
@@ -564,9 +666,9 @@ P-value: 1.0090991397916577e-09</code></pre>
 <th style="text-align: left;">coef</th>
 <th style="text-align: left;">std err</th>
 <th style="text-align: left;">t</th>
-<th style="text-align: left;">P&gt;</th>
-<th style="text-align: left;">t</th>
-<th style="text-align: left;"></th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
 </tr>
 </thead>
 <tbody>
@@ -611,9 +713,9 @@ P-value: 1.0090991397916577e-09</code></pre>
 <th style="text-align: left;">coef</th>
 <th style="text-align: left;">std err</th>
 <th style="text-align: left;">t</th>
-<th style="text-align: left;">P&gt;</th>
-<th style="text-align: left;">t</th>
-<th style="text-align: left;"></th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
 </tr>
 </thead>
 <tbody>
@@ -640,7 +742,106 @@ P-value: 1.0090991397916577e-09</code></pre>
 </div>
 </div>
 <div class="panel-caption table-caption">
-<p>Table&nbsp;3: Linear Regression of all sequences with Bubble Feature only.</p>
+<p>Table&nbsp;4: Linear Regression of sequences without any strong motif matches with Bubble Features.</p>
+</div>
+</div>
+<div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-panel1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
+<table class="table">
+<caption>(a) Linear regression results for MAX (R-squared = 0.035, F-statistic = 195.5).</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">std err</th>
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">const</td>
+<td style="text-align: left;">4.0051</td>
+<td style="text-align: left;">0.002</td>
+<td style="text-align: left;">1938.858</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">4.001</td>
+<td style="text-align: left;">4.009</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bubble_binary</td>
+<td style="text-align: left;">0.0699</td>
+<td style="text-align: left;">0.005</td>
+<td style="text-align: left;">13.981</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.060</td>
+<td style="text-align: left;">0.080</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-panel2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
+<table class="table">
+<caption>(b) Linear regression results for MYC (R-squared = 0.009, F-statistic = 29.13).</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">std err</th>
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">P&gt;abs(t)</th>
+<th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">const</td>
+<td style="text-align: left;">8.3878</td>
+<td style="text-align: left;">0.009</td>
+<td style="text-align: left;">916.256</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">8.370</td>
+<td style="text-align: left;">8.406</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bubble_binary</td>
+<td style="text-align: left;">0.1095</td>
+<td style="text-align: left;">0.020</td>
+<td style="text-align: left;">5.397</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.070</td>
+<td style="text-align: left;">0.149</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="panel-caption table-caption">
+<p>Table&nbsp;5: Linear Regression of sequences with weak motif matches with Bubble Features.</p>
 </div>
 </div>
 <p>The results of the linear regressions showed that the presence of a bubble and motif significantly affected binding affinity, and that the interaction feature did not significantly affect binding affinity. The regressions performed with bubble data showed the extent to which bubbles alone explain binding.</p>
@@ -661,7 +862,7 @@ Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 3.
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 100.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3_new/flip_correlation/max.png" class="lightbox" title="TF = max" data-gallery="correlation"><img src="figs/phase3_new/flip_correlation/max.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3_new/flip_correlation/max.png" class="lightbox" data-gallery="correlation" title="TF = max"><img src="figs/phase3_new/flip_correlation/max.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">TF = max</figcaption>
 </figure>
 </div>
@@ -669,7 +870,7 @@ Pearson Correlation with Motif Coord^2 Feature: Correlation = 0.18, p-value = 3.
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 100.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/phase3_new/flip_correlation/myc.png" class="lightbox" title="TF = myc" data-gallery="correlation"><img src="figs/phase3_new/flip_correlation/myc.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/phase3_new/flip_correlation/myc.png" class="lightbox" data-gallery="correlation" title="TF = myc"><img src="figs/phase3_new/flip_correlation/myc.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">TF = myc</figcaption>
 </figure>
 </div>
@@ -956,7 +1157,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
 
 
 

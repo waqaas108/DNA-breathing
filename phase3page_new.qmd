@@ -38,11 +38,13 @@ We decided to use an Armstrong threshold of 3.5 and a bubble length threshold of
 We tried to acquire motifs for the TFs from the JASPAR database, but we were unable to find motifs for MAD. We then used the motifs for MAX and MYC to scan for motif presence in the sequences of the gcPBM data. We used the FIMO tool from the MEME suite to scan for motif presence. We used the following parameters:
 
 p-value ≤ 1 x 10^-4 (strong motif match)
+
 p-value > 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)
 
 The consensus sequences for the motifs were:
 
 MAX: 5'-ACCACGTGCC-3'
+
 MYC: 5'-GGCCACGTGCCC-3'
 
 ### Processed Data
@@ -253,25 +255,76 @@ Linear Regression of all sequences with Motif, Bubble, and Interaction Features.
 :::
 
 
+We also conducted linear regressions of bubble presence against binding affinity by limiting the sequences in the regression based on motif strength. We conducted regressions for all sequences, sequences without strong motifs (weak motif matches and no motif matches), and sequences with only weak motif matches.
 
 ::: {#tbl-panel layout-ncol=1}
-|               |    coef   |  std err  |     t      |  P>|t|  |   [0.025  |  0.975]   |
+|               |   coef   |  std err |     t      |  P>abs(t)  |   0.025  |  0.975   |
+|---------------|----------|----------|------------|---------|-----------|------------|
+| const         |  4.0867  |   0.003  | 1620.669   |  0.000  |   4.082   |   4.092    |
+| bubble_binary |  0.0290  |   0.006  |   4.582    |  0.000  |   0.017   |   0.041    |
+
+
+
+: Linear regression results for MAX (R-squared = 0.000, F-statistic = 2.325). {#tbl-panel1}
+
+|               |   coef   |  std err |     t      |  P>abs(t)  |   0.025  |  0.975   |
+|---------------|----------|----------|------------|---------|-----------|------------|
+| const         |  8.6408  |   0.010  |  826.004   |  0.000  |   8.620   |   8.661    |
+| bubble_binary |  0.0385  |   0.025  |   1.525    |  0.127  |  -0.011   |   0.088    |
+
+
+
+: Linear regression results for MYC (R-squared = 0.002, F-statistic = 21.00). {#tbl-panel2}
+
+Linear Regression of all sequences with Bubble Features.
+:::
+
+
+
+::: {#tbl-panel layout-ncol=1}
+|               |    coef   |  std err  |     t      |  P>abs(t)  |   0.025  |  0.975   |
 |---------------|-----------|-----------|------------|---------|-----------|------------|
 | const         |   3.9901  |   0.002   | 2256.927   |  0.000  |   3.987   |   3.994    |
 | bubble_binary |   0.0635  |   0.004   |   14.802   |  0.000  |   0.055   |   0.072    |
 
 
+
 : Linear regression results for MAX (R-squared = 0.032, F-statistic = 219.1). {#tbl-panel1}
 
-|               |   coef   |  std err |     t     |  P>|t|  |   [0.025  |  0.975]   |
+|               |   coef   |  std err |     t     |  P>abs(t)  |   0.025  |  0.975   |
 |---------------|----------|----------|-----------|---------|-----------|------------|
 | const         |  8.2609  |   0.008  |  989.555  |  0.000  |   8.244   |   8.277    |
 | bubble_binary |  0.1273  |   0.019  |   6.790   |  0.000  |   0.091   |   0.164    |
 
 
+
 : Linear regression results for MYC (R-squared = 0.011, F-statistic = 46.10). {#tbl-panel2}
 
-Linear Regression of all sequences with Bubble Feature only.
+Linear Regression of sequences without any strong motif matches with Bubble Features.
+:::
+
+
+
+::: {#tbl-panel layout-ncol=1}
+|               |   coef   |  std err |     t      |  P>abs(t)  |   0.025  |  0.975   |
+|---------------|----------|----------|------------|---------|-----------|------------|
+| const         |  4.0051  |   0.002  | 1938.858   |  0.000  |   4.001   |   4.009    |
+| bubble_binary |  0.0699  |   0.005  |  13.981    |  0.000  |   0.060   |   0.080    |
+
+
+
+: Linear regression results for MAX (R-squared = 0.035, F-statistic = 195.5). {#tbl-panel1}
+
+|               |   coef   |  std err |     t      |  P>abs(t)  |   0.025  |  0.975   |
+|---------------|----------|----------|------------|---------|-----------|------------|
+| const         |  8.3878  |   0.009  |  916.256   |  0.000  |   8.370   |   8.406    |
+| bubble_binary |  0.1095  |   0.020  |   5.397    |  0.000  |   0.070   |   0.149    |
+
+
+
+: Linear regression results for MYC (R-squared = 0.009, F-statistic = 29.13). {#tbl-panel2}
+
+Linear Regression of sequences with weak motif matches with Bubble Features.
 :::
 
 The results of the linear regressions showed that the presence of a bubble and motif significantly affected binding affinity, and that the interaction feature did not significantly affect binding affinity. The regressions performed with bubble data showed the extent to which bubbles alone explain binding.

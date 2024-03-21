@@ -70,37 +70,13 @@ The same process was repeated with different model parameters and nullification 
 
 lorem ipsum
 
-## [Phase 3](/phase3page.qmd)
+## [Phase 3](/phase3page_new.qmd)
 
-## [Phase 3 redone with simulated data](/phase3page_new.qmd)
+## [Phase 3 (obsolete data)](/phase3page.qmd)
 
 ### Acquisition and processing of gcPBM sequences and bubble features
 
 We acquired gcPBM sequences and corresponding DNA bubble simulation data from Alexandrov Boian's lab. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.
-
-The bubble data, when acquired, was in the form of matrices with 130 rows and 36 columns. The individual columns represented base-pair positions, and rows represented time in picoseconds. The values in the matrix represented the distance between complementary base pairs at that position and time.
-
-<figure class="image">
-  <img src="figs/phase3/bubble_raw/image.png" alt="Bubble data" style="width:100%">
-  <figcaption>Bubble data</figcaption>
-  <img src="figs/phase3/bubble_raw/image1.png" alt="Bubble data" style="width:100%">
-  <figcaption>Bubble data</figcaption>
-  <img src="figs/phase3/bubble_raw/image2.png" alt="Bubble data" style="width:100%">
-  <figcaption>Bubble data</figcaption>
-
-We used the first measurement (t=0) and considered all positions with a value > 0.03 as being a bubble.
-
-We had two investigations running in parallel, with one machine learning approach and one statistical.
-
-### Machine learning approach
-
-The machine learning approach was to use the gcPBM sequences as a training set and see if adding bubble data to the input of the model would improve performance. The CNN architecture we used was a simple CNN followed by a linear regressor. We first ran a grid search on the sequences alone to see which parameters worked best in the CNN, and settled for a kernel size of 7, 64 filters in the first layer, 3 layers, and no pooling.
-
-The results overwhelmingly showed that bubble features did not improve the performance of the model.
-
-### Statistical approach
-
-We used fischer's exact test and linear regressions to compare the effect of a bubble to the effect of a motif in determining binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
 
 ## [Phase 4](/phase4page.qmd)
 
