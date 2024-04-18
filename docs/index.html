@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DNA-alpha</title>
+<title>DNA Breathing in ChIP-seq and gcPBM Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">DNA-alpha</span>
+    <span class="navbar-title">DNA Breathing in ChIP-seq and gcPBM Data</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -129,7 +129,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features">Acquisition and processing of gcPBM sequences and bubble features</a></li>
   </ul></li>
-  <li><a href="#phase-4" id="toc-phase-4" class="nav-link" data-scroll-target="#phase-4">Phase 4</a>
+  <li><a href="#phase-4" id="toc-phase-4" class="nav-link" data-scroll-target="#phase-4">Phase 4</a></li>
+  <li><a href="#phase-4-obsolete-data" id="toc-phase-4-obsolete-data" class="nav-link" data-scroll-target="#phase-4-obsolete-data">Phase 4 (obsolete data)</a>
   <ul class="collapse">
   <li><a href="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</a></li>
   </ul></li>
@@ -148,14 +149,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="premise" class="level2">
 <h2 class="anchored" data-anchor-id="premise">Premise</h2>
 <p>This project is investigating the role played by DNA biophysical features in the regulation of Transcription Factor (TF) binding. It endeavors to shed light on how specific DNA biophysical characteristics, such as bubble features and DNA flipping, contribute to the affinity and selectivity of TF binding interactions.</p>
-<p>By employing advanced computational methods, including Convolutional Neural Networks (CNNs) as one downstream analysis tool among others, the findings hold the potential to provide a deeper understanding of gene regulation and facilitate insights into the broader landscape of cellular processes.</p>
 <section id="position-weight-matrices-pwms-in-genetics" class="level3">
 <h3 class="anchored" data-anchor-id="position-weight-matrices-pwms-in-genetics">Position Weight Matrices (PWMs) in Genetics:</h3>
-<p>Position Weight Matrices (PWMs) are essential tools in computational biology for modeling and understanding sequence-specific binding preferences of DNA-binding proteins, including Transcription Factors (TFs). A PWM is a matrix that quantifies the likelihood of observing each nucleotide at every position within a binding site motif. Each row of the matrix corresponds to a nucleotide (A, C, G, T), and each column corresponds to a position in the motif. PWMs are constructed based on empirical data derived from known binding sites, which allows them to capture the frequency of nucleotide occurrences at each position. By scoring potential binding sites against a PWM, researchers can predict the binding affinity of a TF for a given DNA sequence. PWMs serve as valuable tools for motif discovery, regulatory element prediction, and understanding the intricate interplay between TFs and their target DNA sequences.</p>
+<p>Position Weight Matrices (PWMs) are essential tools in computational biology for modeling and understanding sequence-specific binding preferences of DNA-binding proteins, including Transcription Factors (TFs). A PWM is a matrix that quantifies the likelihood of observing each nucleotide at every position within a binding site motif. Each row of the matrix corresponds to a nucleotide (A, C, G, T), and each column corresponds to a position in the motif. PWMs are constructed based on empirical data derived from known binding sites, which allows them to capture the frequency of nucleotide occurrences at each position.</p>
 </section>
 <section id="binding-site-motifs" class="level3">
 <h3 class="anchored" data-anchor-id="binding-site-motifs">Binding Site Motifs:</h3>
-<p>Binding site motifs are recurring sequence patterns within DNA that hold significance in molecular biology, particularly in gene regulation. These motifs represent the specific DNA sequences recognized by Transcription Factors (TFs) and other DNA-binding proteins. Binding site motifs are characterized by their conserved arrangement of nucleotides, often exhibiting variations that allow recognition of similar sequences by different TFs. These motifs play a pivotal role in gene expression regulation, as TFs bind to these sites to control transcription and other cellular processes. Identifying and understanding binding site motifs are crucial for deciphering gene regulatory networks, predicting TF-DNA interactions, and elucidating the intricate mechanisms that underlie genetic programming.</p>
+<p>Binding site motifs are recurring sequence patterns within DNA that hold significance in molecular biology, particularly in gene regulation. These motifs represent the specific DNA sequences recognized by Transcription Factors (TFs) and other DNA-binding proteins. Binding site motifs are characterized by their conserved arrangement of nucleotides, often exhibiting variations that allow recognition of similar sequences by different TFs. These motifs play a pivotal role in gene expression regulation, as TFs bind to these sites to control transcription and other cellular processes.</p>
 </section>
 <section id="dna-biophysical-features" class="level3">
 <h3 class="anchored" data-anchor-id="dna-biophysical-features">DNA Biophysical Features:</h3>
@@ -169,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="dna-bubble-features" class="level4">
 <h4 class="anchored" data-anchor-id="dna-bubble-features">DNA Bubble Features:</h4>
-<p>A DNA bubble, in the context of molecular biology, is a region within a DNA double helix where the two strands temporarily separate, forming a single-stranded DNA loop flanked by double-stranded regions. These bubbles are created due to the thermal fluctuations that cause the hydrogen bonds between base pairs to momentarily break. DNA bubble features encompass the size, stability, and dynamics of these transient openings in the DNA structure. Understanding DNA bubble features is of paramount importance as they influence processes like DNA unwinding during replication and transcription initiation. By characterizing bubble features, researchers can gain insights into the mechanical properties of DNA and its interactions with various cellular components.</p>
+<p>A DNA bubble, in the context of molecular biology, is a region within a DNA double helix where the two strands temporarily separate, forming a single-stranded DNA loop flanked by double-stranded regions. These bubbles are created due to the thermal fluctuations that cause the hydrogen bonds between base pairs to momentarily break. DNA bubble features encompass the size, stability, and dynamics of these transient openings in the DNA structure. Understanding DNA bubble features is of paramount importance as they influence processes like DNA unwinding during replication and transcription initiation.</p>
 </section>
 <section id="dna-flipping" class="level4">
 <h4 class="anchored" data-anchor-id="dna-flipping">DNA Flipping:</h4>
@@ -180,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="computational-methods">Computational methods</h3>
 <section id="convolutional-neural-networks" class="level4">
 <h4 class="anchored" data-anchor-id="convolutional-neural-networks">Convolutional Neural Networks</h4>
-<p>Convolutional Neural Networks (CNNs) are a class of deep learning models designed specifically for processing structured grid-like data, such as images and sequences. CNNs are inspired by the visual cortex’s organization in animals, where neurons respond to specific localized regions of the visual field. Similarly, CNNs operate by convolving learnable filters (kernels) over input data, allowing them to capture local patterns and features. The network’s architecture includes layers for convolution, pooling, and fully connected operations, enabling hierarchical feature extraction. In the context of this project, CNNs are employed to analyze DNA sequences and biophysical features, facilitating the identification of intricate patterns related to Transcription Factor (TF) binding. By learning meaningful representations from raw data, CNNs offer a powerful tool to uncover hidden correlations and contribute to the comprehension of complex biological interactions.</p>
+<p>Convolutional Neural Networks (CNNs) are a class of deep learning models designed specifically for processing structured grid-like data, such as images and sequences. CNNs are inspired by the visual cortex’s organization in animals, where neurons respond to specific localized regions of the visual field. Similarly, CNNs operate by convolving learnable filters (kernels) over input data, allowing them to capture local patterns and features. The network’s architecture includes layers for convolution, pooling, and fully connected operations, enabling hierarchical feature extraction. In the context of this project, CNNs are employed to analyze DNA sequences and biophysical features, facilitating the identification of intricate patterns related to Transcription Factor (TF) binding.</p>
 </section>
 </section>
 </section>
@@ -188,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="phase-1"><a href="">Phase 1</a></h2>
 <section id="initial-model-building" class="level3">
 <h3 class="anchored" data-anchor-id="initial-model-building">Initial model building</h3>
-<p>In the project’s initial phase, Ben led the investigation into whether CNNs can learn features in DNA sequences that influence Transcription Factor (TF) binding. The study also explored the possible role of DNA biophysical features in this binding. Using Chip-seq data, which provided DNA sequences of about 500 base pairs from 130 cell lines and involving 64 TFs, the team introduced three biophysical feature channels derived from DNA flipping data. The models designed included:</p>
+<p>In the project’s initial phase, Ben led the investigation into whether CNNs can learn features in DNA sequences that influence Transcription Factor (TF) binding. The study also explored the possible role of DNA biophysical features in this binding. Using ChIP-seq data, which provided 886625 DNA sequences of about 500 base pairs length from 130 cell lines and involving 64 TFs, the team introduced three biophysical feature channels derived from DNA flipping data. The models designed included:</p>
 <ul>
 <li>A simple CNN architecture, data: DNA sequences only</li>
 <li>A simple CNN architecture, data: DNA sequences and biophysical features</li>
@@ -205,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="sequence-and-classifier-analysis-for-yy1" class="level3">
 <h3 class="anchored" data-anchor-id="sequence-and-classifier-analysis-for-yy1">Sequence and classifier analysis for YY1</h3>
 <p>The second stage of this analysis was to compare the top ten sequences in YY1 and see if these overlapped with other TFs and cell lines and their top ten sequences.</p>
-<p>To do this, I had to check all 6 of the YY1 cell lines in our dataset, evaluate their sequences with our model, and compare the performance with biophysical features and without. We were doing this using zero-nullification at inference, which means that in the test-set of the model, the evaluation with biophysical features would be subtracted by an evaluation with the biophysical features being forcibly replaced with a zero-array.</p>
+<p>To do this, we checked all 6 of the YY1 cell lines in our dataset, evaluated their sequences with our model, and compared the performance with biophysical features and without. We were doing this using zero-nullification at inference, which means that in the test-set of the model, the evaluation with biophysical features would be subtracted by an evaluation with the biophysical features being forcibly replaced with a zero-array.</p>
 <figure class="image figure">
 <img src="figs/phase2/yy1/yy1_roc.png" alt="ROC curve for YY1" style="width:100%" class="figure-img">
 <figcaption class="figure-caption">
@@ -226,14 +226,18 @@ ROC curve for YY1
 <h2 class="anchored" data-anchor-id="phase-3-obsolete-data"><a href="./phase3page.html">Phase 3 (obsolete data)</a></h2>
 <section id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="level3">
 <h3 class="anchored" data-anchor-id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features">Acquisition and processing of gcPBM sequences and bubble features</h3>
-<p>We acquired gcPBM sequences and corresponding DNA bubble simulation data from Alexandrov Boian’s lab. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.</p>
+<p>We acquired gcPBM sequences from Alexandrov Boian’s lab, and then used their pyDNA-EPBD simulation package to generate bubble probabilities for the sequences. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.</p>
 </section>
 </section>
 <section id="phase-4" class="level2">
-<h2 class="anchored" data-anchor-id="phase-4"><a href="./phase4page.html">Phase 4</a></h2>
+<h2 class="anchored" data-anchor-id="phase-4"><a href="./phase4page_new.html">Phase 4</a></h2>
+</section>
+<section id="phase-4-obsolete-data" class="level2">
+<h2 class="anchored" data-anchor-id="phase-4-obsolete-data"><a href="./phase4page.html">Phase 4 (obsolete data)</a></h2>
 <section id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="level3">
 <h3 class="anchored" data-anchor-id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</h3>
-<p>We used the ChIP-seq sequences available to us previously for phase 2 and then used pyDNA-EPBD to generate bubble data for these sequences. We then ran similar statistical tests to phase 3 to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
+<p>We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for these sequences. We then ran similar statistical tests to phase 3 to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
+<p>Using the results obtained, we used the 5 topmost correlated TFs as well as PAX5 and EBF1 and repeated our gcPBM analysis with ChIP-seq data.</p>
 
 
 </section>

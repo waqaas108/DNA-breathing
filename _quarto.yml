@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "DNA-alpha"
+  title: "DNA Breathing in ChIP-seq and gcPBM Data"
   navbar:
     left:
       - href: index.qmd
