@@ -211,7 +211,7 @@ We conducted a Fischer's Exact Test to see if the presence of a bubble and motif
 | EBF1   | 5278200 | 10359 |  74948 |  38 |     0.255232 | 7.36697e-27  |
 | PAX5   | 5278200 | 10359 |  33704 |   8 |     0.120054 | 3.47322e-19  |
 
-: Contingency table for Fischer's Exact Test. L is the total number of base pairs, B is the number of base pairs with a bubble, M is the number of base pairs with a motif, and x is the number of base pairs with both a bubble and a motif. {#tbl-letters}
+: L is the total number of base pairs, B is the number of base pairs with a bubble, M is the number of base pairs with a motif, and x is the number of base pairs with both a bubble and a motif. {#tbl-letters}
 
 
 The results were significant for all TFs except JUND.
@@ -235,7 +235,7 @@ We then investigated the effect of the distance between bubbles and motifs on bi
 
 ![](figs/phase4_new/binding_posvneg_distance/PAX5_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
 
-Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences (top 10% of sequences by binding affinity = positive).
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences.
 :::
 
 | Distance Threshold   | POU2F2           | CTCF            | ETS1            | JUND             | MAFK             | EBF1            | PAX5            |
@@ -249,7 +249,7 @@ Histograms showing the distribution of distances between bubbles and motifs for 
 | ≤40 | 0.82 (0.214992)  | 1.10 (0.512942) | 1.06 (0.804506) | 0.77 (0.022737*) | 1.49 (0.000160*) | 1.03 (0.849568) | 0.85 (0.461214) |
 | ≤80 | 0.74 (0.104869)  | 1.21 (0.173716) | 0.97 (0.895327) | 0.78 (0.028524*) | 1.19 (0.108479)  | 0.95 (0.754092) | 1.07 (0.757445) |
 
-: Summary of the results of the Fischer's Exact Test at different distance thresholds. * represents significance at the 0.05 threshold. {#tbl-letters}
+: Summary of the results of the Fischer's Exact Test at different distance thresholds. (Odds Ratio (p-value), * represents significance at the 0.05 threshold.) {#tbl-letters}
 
 JUND has significant results at various thresholds. MAFK and POU2F2 have significant results at threshold of 10 or more. The other TFs have no significant results.
 
