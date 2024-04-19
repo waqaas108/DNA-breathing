@@ -87,7 +87,7 @@ A total of 137 different cell lines and 64 TFs were represented in the Chip-seq 
 | EBF1   | 0.17 (0.000000*)  | 0.15 (0.000000*)  | 0.17 (0.000000*)  |
 | PAX5   | 0.09 (0.000256*)  | 0.09 (0.000246*)  | 0.09 (0.000260*)  |
 
-: Barplots showing the correlation (and associated p-value) between flipping features and binding affinity averaged across all motifs in a sequence (top 5 significant motifs + PAX5 and EBF1). {#tbl-letters}
+: Correlation (and associated p-value) between flipping features and binding affinity averaged across all motifs in a sequence (top 5 significant motifs + PAX5 and EBF1). * shows significance at the 0.05 threshold. {#tbl-letters}
 
 ::: {#fig-Correlation_position layout-ncol=3}
 ![](figs/phase4_new/top_sig_feat/POU2F2_MA0507.2_motif_flip.png){group="correlation_position"}
