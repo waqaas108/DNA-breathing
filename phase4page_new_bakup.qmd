@@ -79,13 +79,13 @@ A total of 137 different cell lines and 64 TFs were represented in the Chip-seq 
 
 |        | Motif Flip        | Motif Coord       | Motif Coord^2     |
 |:-------|:------------------|:------------------|:------------------|
-| POU2F2 | -0.33 (0.000000*) | -0.32 (0.000000*) | -0.34 (0.000000*) |
-| CTCF   | -0.04 (0.004075*) | -0.04 (0.005045*) | -0.04 (0.004115*) |
-| ETS1   | -0.31 (0.000000*) | -0.31 (0.000000*) | -0.32 (0.000000*) |
-| JUND   | -0.17 (0.000000*) | -0.17 (0.000000*) | -0.18 (0.000000*) |
-| MAFK   | 0.21 (0.000000*)  | 0.22 (0.000000*)  | 0.21 (0.000000*)  |
-| EBF1   | 0.20 (0.000000*)  | 0.19 (0.000000*)  | 0.21 (0.000000*)  |
-| PAX5   | 0.01 (0.718219)   | 0.02 (0.384439)   | 0.01 (0.773541)   |
+| POU2F2 | -0.09 (0.003178*) | -0.08 (0.016966*) | -0.11 (0.000798*) |
+| CTCF   | 0.07 (0.000000*)  | 0.07 (0.000000*)  | 0.07 (0.000000*)  |
+| ETS1   | 0.13 (0.000000*)  | 0.14 (0.000000*)  | 0.12 (0.000000*)  |
+| JUND   | -0.00 (0.934979)  | 0.01 (0.534941)   | -0.01 (0.607897)  |
+| MAFK   | 0.13 (0.000000*)  | 0.12 (0.000000*)  | 0.13 (0.000000*)  |
+| EBF1   | 0.17 (0.000000*)  | 0.15 (0.000000*)  | 0.17 (0.000000*)  |
+| PAX5   | 0.09 (0.000256*)  | 0.09 (0.000246*)  | 0.09 (0.000260*)  |
 
 : Correlation (and associated p-value) between flipping features and binding affinity averaged across all motifs in a sequence (top 5 significant motifs + PAX5 and EBF1). * shows significance at the 0.05 threshold. {#tbl-letters}
 
@@ -157,7 +157,7 @@ The original ChIP-seq dataset used to create these results was a dataset of 8866
 
 ### Bubble data
 
-As in the gcPBM analysis, we used a bubble length threshold of 10 and an amplitude of 3.5 Armstrong. We used a probability threshold at the 95th percentile to decide if a position was positive for a bubble or not. With this threshold, 10359 out of 26391 (39.25%) of the sequences had a bubble present.
+As in the gcPBM analysis, we used a bubble length threshold of 10 and an amplitude of 3.5 Armstrong. We used a probability threshold at the 95th percentile to decide if a position was positive for a bubble or not. With this threshold, 39.25% of the sequences had a bubble present.
 
 ### Motifs
 
@@ -167,17 +167,17 @@ p-value ≤ 1 x 10^-4 (strong motif match)
 
 p-value > 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)
 
-The overall number of sequences with strong and weak motif matches per TF is shown below, along with label and bubble distributions:
+If a sequence had even a single strong motif match, it was classified as such with priority. The overall number of sequences with strong and weak motif matches per TF is shown below:
 
-|        |   Positive Labels |   Negative Labels |   Sequences with Bubbles |   Sequences with Strong Motifs |   Sequences with Weak Motifs |   Sequences with Strong and Weak Motifs |
-|:-------|------------------:|------------------:|-------------------------:|-------------------------------:|-----------------------------:|----------------------------------------:|
-| POU2F2 |              7561 |             18830 |                    10359 |                           1115 |                         4397 |                                     385 |
-| CTCF   |              9613 |             16778 |                    10359 |                           5954 |                         2901 |                                    1227 |
-| ETS1   |              5070 |             21321 |                    10359 |                           2390 |                        10259 |                                    1088 |
-| JUND   |              4728 |             21663 |                    10359 |                           2947 |                         3322 |                                    1475 |
-| MAFK   |              3500 |             22891 |                    10359 |                           3445 |                         5633 |                                    1419 |
-| EBF1   |              7461 |             18930 |                    10359 |                           4201 |                         3053 |                                    1487 |
-| PAX5   |              8860 |             17531 |                    10359 |                           1952 |                        11271 |                                    1138 |
+|   TF   | Sequences with Strong Motifs | Sequences with Weak Motifs |
+|:-------|----------------------:|--------------------:|
+| POU2F2 |                  1003 |                4124 |
+| CTCF   |                  5725 |                1903 |
+| ETS1   |                  2032 |                9529 |
+| JUND   |                  2894 |                1900 |
+| MAFK   |                  3332 |                4327 |
+| EBF1   |                  4091 |                1676 |
+| PAX5   |                  1603 |               10482 |
 
 ## Statistical Investigations
 
@@ -199,9 +199,26 @@ The results were significant for all TFs.
 
 ### Fisher's exact test
 
-#### The effect of the distance between bubbles and motifs for each sequence with both a bubble and a motif
+We conducted a Fischer's Exact Test to see if the presence of a bubble and motif together significantly affected binding affinity. We counted the base pair positions across our entire dataset that had a bubble, motif, or both, and used these counts to construct a contingency table for the Fischer's Exact Test.
 
-We then investigated the effect of the distance between bubbles and motifs on binding affinity. To this end, we categorized the sequences using the label to be positive (label = 1) or negative (label = 0) sequences. We calculated the minimum distance between a motif and a bubble per sequence. We then defined close distances between motifs and bubbles using a maximum threshold, and then performed a fischer's exact test at different thresholds.
+|   TF   |       L |     B |      M |   x |   Odds Ratio |      P-value |
+|:-------|--------:|------:|-------:|----:|-------------:|-------------:|
+| POU2F2 | 5278200 | 10359 |  19051 |  80 |     2.15335  | 1.09949e-09  |
+| CTCF   | 5278200 | 10359 | 258250 |  56 |     0.105459 | 2.23462e-148 |
+| ETS1   | 5278200 | 10359 |  31435 |  27 |     0.435687 | 1.02401e-06  |
+| JUND   | 5278200 | 10359 |  43305 |  86 |     1.012    | 0.9131       |
+| MAFK   | 5278200 | 10359 |  66048 |  93 |     0.714488 | 0.000887726  |
+| EBF1   | 5278200 | 10359 |  74948 |  38 |     0.255232 | 7.36697e-27  |
+| PAX5   | 5278200 | 10359 |  33704 |   8 |     0.120054 | 3.47322e-19  |
+
+: L is the total number of base pairs, B is the number of base pairs with a bubble, M is the number of base pairs with a motif, and x is the number of base pairs with both a bubble and a motif. {#tbl-letters}
+
+
+The results were significant for all TFs except JUND.
+
+### The effect of the distance between bubbles and motifs
+
+We then investigated the effect of the distance between bubbles and motifs on binding affinity. To this end, we categorized the sequences using the label to be positive (label = 1) or negative (label = 0) sequences. We then defined close distances between motifs and bubbles using a maximum threshold, and then performed a fischer's exact test at different thresholds.
 
 ::: {#fig-Fischer layout-ncol=3}
 ![](figs/phase4_new/binding_posvneg_distance/POU2F2_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
@@ -221,141 +238,109 @@ We then investigated the effect of the distance between bubbles and motifs on bi
 Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences.
 :::
 
-| Distance Threshold | POU2F2           | CTCF            | ETS1             | JUND             | MAFK             | EBF1             | PAX5            |
-|---:|:-----------------|:----------------|:-----------------|:-----------------|:-----------------|:-----------------|:----------------|
-|  ≤2 | 0.41 (0.000000*) | 1.04 (0.845010) | 0.77 (0.519669)  | 0.62 (0.000626*) | 1.96 (0.000000*) | 1.74 (0.012613*) | 0.97 (1.000000) |
-|  ≤3 | 0.40 (0.000000*) | 1.12 (0.568836) | 0.71 (0.428270)  | 0.62 (0.000361*) | 2.03 (0.000000*) | 1.90 (0.002689*) | 0.97 (1.000000) |
-|  ≤4 | 0.39 (0.000000*) | 1.05 (0.853470) | 0.72 (0.360480)  | 0.60 (0.000110*) | 2.10 (0.000000*) | 1.69 (0.010367*) | 0.90 (0.848836) |
-|  ≤5 | 0.39 (0.000000*) | 1.02 (0.928810) | 0.65 (0.233441)  | 0.60 (0.000092*) | 2.11 (0.000000*) | 1.59 (0.017313*) | 0.91 (0.853218) |
-| ≤10 | 0.39 (0.000000*) | 1.25 (0.172221) | 0.63 (0.140613)  | 0.59 (0.000015*) | 1.97 (0.000000*) | 1.38 (0.056996)  | 1.19 (0.566375) |
-| ≤20 | 0.43 (0.000000*) | 1.07 (0.629522) | 0.81 (0.406987)  | 0.56 (0.000000*) | 2.02 (0.000000*) | 1.32 (0.042985*) | 1.21 (0.391389) |
-| ≤40 | 0.41 (0.000000*) | 0.96 (0.755098) | 0.64 (0.068583)  | 0.55 (0.000000*) | 2.20 (0.000000*) | 1.07 (0.587852)  | 0.99 (1.000000) |
-| ≤80 | 0.37 (0.000395*) | 1.27 (0.142508) | 0.58 (0.037852*) | 0.56 (0.000015*) | 1.94 (0.000000*) | 0.96 (0.785287)  | 0.97 (0.913028) |
+| Distance Threshold   | POU2F2           | CTCF            | ETS1            | JUND             | MAFK             | EBF1            | PAX5            |
+|---:|:-----------------|:----------------|:----------------|:-----------------|:-----------------|:----------------|:----------------|
+|  ≤2 | 0.83 (0.429263)  | 1.06 (0.897818) | 0.85 (1.000000) | 0.82 (0.450774)  | 1.33 (0.159860)  | 1.45 (0.278820) | 2.76 (0.138955) |
+|  ≤3 | 0.88 (0.593783)  | 1.07 (0.803177) | 0.78 (0.802019) | 0.78 (0.264130)  | 1.27 (0.223525)  | 1.43 (0.255451) | 2.06 (0.257716) |
+|  ≤4 | 0.75 (0.158929)  | 1.01 (1.000000) | 0.65 (0.633425) | 0.67 (0.057428)  | 1.25 (0.221875)  | 1.28 (0.432858) | 1.28 (0.638600) |
+|  ≤5 | 0.75 (0.168782)  | 0.96 (0.908557) | 0.59 (0.490620) | 0.68 (0.047771*) | 1.18 (0.349199)  | 1.21 (0.538531) | 1.41 (0.491242) |
+| ≤10 | 0.62 (0.008008*) | 1.17 (0.484090) | 0.84 (0.718709) | 0.77 (0.097863)  | 1.17 (0.314757)  | 1.10 (0.690973) | 1.83 (0.090118) |
+| ≤20 | 0.69 (0.023954*) | 1.21 (0.256655) | 1.18 (0.561142) | 0.70 (0.008095*) | 1.18 (0.185907)  | 1.17 (0.338769) | 1.55 (0.111103) |
+| ≤40 | 0.82 (0.214992)  | 1.10 (0.512942) | 1.06 (0.804506) | 0.77 (0.022737*) | 1.49 (0.000160*) | 1.03 (0.849568) | 0.85 (0.461214) |
+| ≤80 | 0.74 (0.104869)  | 1.21 (0.173716) | 0.97 (0.895327) | 0.78 (0.028524*) | 1.19 (0.108479)  | 0.95 (0.754092) | 1.07 (0.757445) |
 
 : Summary of the results of the Fischer's Exact Test at different distance thresholds. (Odds Ratio (p-value), * represents significance at the 0.05 threshold.) {#tbl-letters}
 
-POU2F2, JUND, and MAFK had significant results at all distance thresholds, EBF1 had significant results at close thresholds, while ETS1 had significant results at the threshold of ≤80.
-
-#### Sorting out strongest motifs using p-value and testing for the effect of the distance between bubbles and motifs
-
-We then sorted out the strongest motifs using the p-value and calculated the distance between these motifs and the nearest bubble. If no bubble was present in the sequence, we used the length of the sequence as the distance (200). We generated histograms of the distributions of these distances for positive and negative sequences and performed a Fischer's exact test with a threshold of <200. This threshold equates to either the motif and bubble co-occurred, or the motif and a bubble were not present on the sequence together.
-
-::: {#fig-Fischer_motif layout-ncol=3}
-![](figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png)){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/CTCF_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/ETS1_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/JUND_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/MAFK_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/EBF1_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-![](figs/phase4_new/strong_motif_distances/PAX5_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
-
-Histograms showing the distribution of distances between the strongest motifs and their nearest bubbles for positive and negative sequences.
-:::
-
-| Threshold: <200 |   Odds Ratio |     P-value |
-|:-------|-------------:|------------:|
-| POU2F2 |    0.397727  | 1.1197e-09*  |
-| CTCF   |    0.723292  | 0.555995    |
-| ETS1   |    0.0620915 | 0.00020281*  |
-| JUND   |    0.353421  | 1.26816e-07* |
-| MAFK   |    2.77972   | 0.000104605* |
-| EBF1   |    6.66002   | 0.0361246*   |
-| PAX5   |    0.599593  | 0.514877    |
-
-: Summary of the results of the Fischer's Exact Test at a distance threshold of <200 (* represents significance at the 0.05 threshold). {#tbl-letters}
+JUND has significant results at various thresholds. MAFK and POU2F2 have significant results at threshold of 10 or more. The other TFs have no significant results.
 
 ## Logistic Regressions
 
-We then conducted logistic regressions to see the degree to which the presence of a bubble significantly affected binding affinity. To filter out the effect of motif presence, we used sequences with only weak motif matches, and then sequences with no motif matches, and correlated the number of bubbles with the binding affinity.
+We then conducted logistic regressions to see the degree to which the presence of a bubble, motif (strong match), and the interaction of the two (bubble and motif simultaneously present in the sequence) significantly affected binding affinity.
 
 ::: {#tbl-panel layout-ncol=1}
-| TF = POU2F2 | coef | std err | z | P-value | 0.025  | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|--------------|---------|----------|---------|---------|---------|
-| bubble_count (weak_motifs) | -0.5462 | 0.022   | -24.425 | 0.000   | -0.590  | -0.502 | inf | -inf | nan |
-| bubble_count (no_motifs)| -0.6125 | 0.017    | -35.861 | 0.000   | -0.646  | -0.579 | inf | -inf | nan |
+| TF = POU2F2 | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | 0.8602 | 0.120 | 7.175 | 0.000 | 0.625 | 1.095 |
+| bubble_binary | -1.1739 | 0.024 | -49.077 | 0.000 | -1.221 | -1.127 |
+| motif_and_bubble_binary | 0.3854 | 0.145 | 2.664 | 0.008 | 0.102 | 0.669 |
 
 
 
-: Logistic regression results for POU2F2. {#tbl-panel1}
+: Logistic regression results for POU2F2 (Pseudo R-squared = inf, Log-Likelihood = -2.2300e+06, LLR p-value = 1.000). {#tbl-panel1}
 
 
 
-|  TF = CTCF  | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -0.3537 | 0.070    | -5.071  | 0.000   | -0.490  | -0.217 | inf              | -31713          | nan         |
-| bubble_count (no_motifs)   | -0.6253 | 0.014    | -43.938 | 0.000   | -0.653  | -0.597 | inf              | -inf            | nan         |
+| TF = CTCF | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | 0.0964 | 0.029 | 3.298 | 0.001 | 0.039 | 0.154 |
+| bubble_binary | -1.1920 | 0.024 | -48.657 | 0.000 | -1.240 | -1.144 |
+| motif_and_bubble_binary | 0.8012 | 0.074 | 10.891 | 0.000 | 0.657 | 0.945 |
 
 
 
-
-: Logistic regression results for CTCF. {#tbl-panel1}
-
-
-
-| TF = ETS1 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -1.7547 | 0.055    | -31.622 | 0.000   | -1.863  | -1.646 | inf              | -inf            | nan         |
-| bubble_count (no_motifs)   | -1.6693 | 0.037    | -45.144 | 0.000   | -1.742  | -1.597 | inf              | -inf            | nan         |
+: Logistic regression results for CTCF (Pseudo R-squared = inf, Log-Likelihood = -2.2320e+06, LLR p-value = 1.000). {#tbl-panel1}
 
 
 
-
-: Logistic regression results for ETS1. {#tbl-panel1}
-
-
-
-| TF = JUND | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -1.0830 | 0.062    | -17.474 | 0.000   | -1.204  | -0.961 | inf              | -inf            | nan         |
-| bubble_count (no_motifs)   | -1.1588 | 0.024    | -48.290 | 0.000   | -1.206  | -1.112 | inf              | -inf            | nan         |
+| TF = ETS1 | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | -0.2322 | 0.051 | -4.526 | 0.000 | -0.333 | -0.132 |
+| bubble_binary | -2.5987 | 0.040 | -65.523 | 0.000 | -2.676 | -2.521 |
+| motif_and_bubble_binary | 1.1919 | 0.138 | 8.617 | 0.000 | 0.921 | 1.463 |
 
 
 
-
-: Logistic regression results for JUND. {#tbl-panel1}
-
-
-
-| TF = MAFK | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -0.4877 | 0.014    | -34.003 | 0.000   | -0.516  | -0.460 | inf              | -inf            | nan         |
-| bubble_count (no_motifs)   | -0.3240 | 0.027    | -11.980 | 0.000   | -0.377  | -0.271 | inf              | -1.6704e+05     | nan         |
+: Logistic regression results for ETS1 (Pseudo R-squared = inf, Log-Likelihood = -6.3216e+06, LLR p-value = 1.000). {#tbl-panel1}
 
 
 
-
-: Logistic regression results for MAFK. {#tbl-panel1}
-
-
-
-| TF = EBF1 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -0.4619 | 0.012    | -37.162 | 0.000   | -0.486  | -0.438 | inf              | -inf            | nan         |
-| bubble_count (no_motifs)   | -0.1451 | 0.057    | -2.568  | 0.010   | -0.256  | -0.034 | inf              | -14192          | nan         |
+| TF = JUND | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | -0.1550 | 0.054 | -2.888 | 0.004 | -0.260 | -0.050 |
+| bubble_binary | -2.0824 | 0.034 | -61.533 | 0.000 | -2.149 | -2.016 |
+| motif_and_bubble_binary | 1.5761 | 0.084 | 18.837 | 0.000 | 1.412 | 1.740 |
 
 
 
-: Logistic regression results for EBF1. {#tbl-panel1}
+: Logistic regression results for JUND (Pseudo R-squared = inf, Log-Likelihood = -4.3935e+06, LLR p-value = 1.000). {#tbl-panel1}
 
 
 
-| TF = PAX5 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
-| bubble_count (weak_motifs) | -0.6289 | 0.016    | -40.571 | 0.000   | -0.659  | -0.599 | inf              | -inf            | nan         |
-| bubble_count (no_motifs)   | -0.3664 | 0.025    | -14.720 | 0.000   | -0.415  | -0.318 | inf              | -2.5989e+05     | nan         |
+| TF = MAFK | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | -1.1707 | 0.056 | -20.937 | 0.000 | -1.280 | -1.061 |
+| bubble_binary | -1.4562 | 0.027 | -53.479 | 0.000 | -1.510 | -1.403 |
+| motif_and_bubble_binary | 2.4524 | 0.080 | 30.539 | 0.000 | 2.295 | 2.610 |
 
 
 
+: Logistic regression results for MAFK (Pseudo R-squared = inf, Log-Likelihood = -3.1041e+06, LLR p-value = 1.000). {#tbl-panel1}
 
-: Logistic regression results for PAX5. {#tbl-panel1}
 
-Linear Regression of all sequences with Number of Bubbles for sequences with weak motifs only, and sequences with no motifs.
+
+| TF = EBF1 | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | -0.1168 | 0.037 | -3.166 | 0.002 | -0.189 | -0.045 |
+| bubble_binary | -0.9849 | 0.023 | -42.070 | 0.000 | -1.031 | -0.939 |
+| motif_and_bubble_binary | 1.5372 | 0.075 | 20.583 | 0.000 | 1.391 | 1.684 |
+
+
+
+: Logistic regression results for EBF1 (Pseudo R-squared = inf, Log-Likelihood = -1.7454e+06, LLR p-value = 1.000). {#tbl-panel1}
+
+
+
+| TF = PAX5 | coef | std err | z | P-value | 0.025 | 0.975 |
+|---------|------|---------|---|---------|-------|-------|
+| motif_binary | 0.0948 | 0.058 | 1.643 | 0.100 | -0.018 | 0.208 |
+| bubble_binary | -1.0819 | 0.023 | -46.947 | 0.000 | -1.127 | -1.037 |
+| motif_and_bubble_binary | 0.9771 | 0.118 | 8.299 | 0.000 | 0.746 | 1.208 |
+
+
+
+: Logistic regression results for PAX5 (Pseudo R-squared = inf, Log-Likelihood = -2.0669e+06, LLR p-value = 1.000). {#tbl-panel1}
+
+Linear Regression of all sequences with Motif, Bubble, and Interaction Features.
 :::
 
-We notice the overall trend of the number of bubbles being negatively correlated with binding affinity.
+The dependent and independent variables for the regression were all binary variables. The pseudo R-squared values were infinite, indicating that the model was overfitting with some perfect predictors. The LLR (Log-Likelihood Ratio) p-value was 1.000 for most of the TFs, which indicates that the model does not provide a better fit than the null model. The regressions might need retooling.
