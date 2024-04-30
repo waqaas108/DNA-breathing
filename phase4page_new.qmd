@@ -241,7 +241,7 @@ POU2F2, JUND, and MAFK had significant results at all distance thresholds, EBF1 
 We then sorted out the strongest motifs using the p-value and calculated the distance between these motifs and the nearest bubble. If no bubble was present in the sequence, we used the length of the sequence as the distance (200). We generated histograms of the distributions of these distances for positive and negative sequences and performed a Fischer's exact test with a threshold of <200. This threshold equates to either the motif and bubble co-occurred, or the motif and a bubble were not present on the sequence together.
 
 ::: {#fig-Fischer_motif layout-ncol=3}
-![](figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png)){group="bubble_motif_distance"}
+![](figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
 
 ![](figs/phase4_new/strong_motif_distances/CTCF_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
 
@@ -275,8 +275,8 @@ Histograms showing the distribution of distances between the strongest motifs an
 We then conducted logistic regressions to see the degree to which the presence of a bubble significantly affected binding affinity. To filter out the effect of motif presence, we used sequences with only weak motif matches, and then sequences with no motif matches, and correlated the number of bubbles with the binding affinity.
 
 ::: {#tbl-panel layout-ncol=1}
-| TF = POU2F2 | coef | std err | z | P-value | 0.025  | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
-|--------------|---------|----------|---------|---------|---------|
+| TF = POU2F2 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
 | bubble_count (weak_motifs) | -0.5462 | 0.022   | -24.425 | 0.000   | -0.590  | -0.502 | inf | -inf | nan |
 | bubble_count (no_motifs)| -0.6125 | 0.017    | -35.861 | 0.000   | -0.646  | -0.579 | inf | -inf | nan |
 

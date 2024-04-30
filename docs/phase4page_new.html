@@ -1231,8 +1231,10 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-Fischer_motif" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><a href="figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png" class="img-fluid figure-img"></a>){group=“bubble_motif_distance”}</p>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png" class="lightbox" data-gallery="bubble_motif_distance"><img src="figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png" class="img-fluid figure-img"></a></p>
+</figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
@@ -1333,12 +1335,16 @@ ul.task-list li input[type="checkbox"] {
 <table class="table">
 <caption>(a) Logistic regression results for POU2F2.</caption>
 <colgroup>
-<col style="width: 23%">
-<col style="width: 15%">
-<col style="width: 16%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1348,6 +1354,10 @@ ul.task-list li input[type="checkbox"] {
 <th style="text-align: left;">z</th>
 <th style="text-align: left;">P-value</th>
 <th style="text-align: left;">0.025</th>
+<th style="text-align: left;">0.975</th>
+<th style="text-align: left;">Pseudo R-squared</th>
+<th style="text-align: left;">Log-Likelihood</th>
+<th style="text-align: left;">LLR p-value</th>
 </tr>
 </thead>
 <tbody>
@@ -1358,6 +1368,10 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">-24.425</td>
 <td style="text-align: left;">0.000</td>
 <td style="text-align: left;">-0.590</td>
+<td style="text-align: left;">-0.502</td>
+<td style="text-align: left;">inf</td>
+<td style="text-align: left;">-inf</td>
+<td style="text-align: left;">nan</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">bubble_count (no_motifs)</td>
@@ -1366,6 +1380,10 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">-35.861</td>
 <td style="text-align: left;">0.000</td>
 <td style="text-align: left;">-0.646</td>
+<td style="text-align: left;">-0.579</td>
+<td style="text-align: left;">inf</td>
+<td style="text-align: left;">-inf</td>
+<td style="text-align: left;">nan</td>
 </tr>
 </tbody>
 </table>
@@ -1969,7 +1987,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
