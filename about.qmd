@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-About this site
+This is a project homepage detailing the work done at Dr. Xinhe's lab of computational biology at the department of human genetics, University of Chicago.

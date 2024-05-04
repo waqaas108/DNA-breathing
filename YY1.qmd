@@ -1,0 +1,86 @@
+---
+title: Sequence and classifier analysis for YY1
+filters:
+   - lightbox
+lightbox: auto
+tbl-cap-location: bottom
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+# Sequence and classifier analysis for YY1
+
+## Clustermaps
+
+Our YY1 positive sequences were collected from 6 different cell lines, 'A549', 'GM12878', 'GM12892', 'H1hESC', 'HepG2', and 'K562'. The first check made was whether sequences that were highly dependent on biophysical features for improved prediction performance had any overlap across the different cell lines. The goal was to see if the overlap extended to other TFs and cell lines as well.
+
+We were using zero-nullification at inference initially. Zero nullification at inference gives input to the model evaluation phase that has a zero matrix in place of the biophysical features. The model output with features was then subtracted from the model output without features to get the effect of the biophysical features on the model output. The top ten sequences with the greatest difference were then tested for overlap across cell lines.
+
+::: {#fig-Clustermaps_zero_nullification_nonormal layout-ncol=2}
+![](figs/phase2/nonormalznull/YY1_clustermap.png){group="Clustermaps_nonormal_zero_null"}
+
+![](figs/phase2/nonormalznull/clustermap.png){group="Clustermaps_nonormal_zero_null"}
+
+Overlap clusters made with zero nullification at inference (without feature normalization).
+:::
+
+
+The next step was determined to be normalization of features. This was done because we suspected that since the DNA sequences were one-hot encoded, the biophysical features being on a different scale could have been causing the model to over or underfit to the biophysical features.
+
+The normalization was carried out by calculating the mean and standard deviation values of a feature across the entire training partition of our dataset, and this value was then used on the testing set as well. The values we used for our Chip-seq data were:
+
+coord: mean = 0.19155923417221135, std = 0.038960426724374435
+coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765
+flip: mean = 0.07465950796958755, std = 0.018489519373127622
+
+
+The statistics for our test partitions after normalization were:
+
+coord: mean = 0.07738674543113, std = 1.0111124691462943
+coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645
+flip: mean = 0.08363005394874898, std = 1.0168371143051296
+
+
+After normalizing, we repeated the analysis with zero nullification at inference. The results had a lot more overlap than the analysis conducted without normalizing:
+
+::: {#fig-Clustermaps_zero_nullification layout-ncol=2}
+![](figs/phase2/znull/YY1_clustermap.png){group="Clustermaps_zero_null"}
+
+![](figs/phase2/znull/clustermap.png){group="Clustermaps_zero_null"}
+
+Overlap clusters made with zero nullification at inference after feature normalization.
+:::
+
+
+Further improvements were made to the method of analysis. Instead of using zero-nullification, we decided that gaussian noise would be a better way to nullify the biophysical features. We tried two different methods with gaussian noise, the first was to use gaussian noise at inference, and the second was to train a separate model with gaussian noise and then subtract the model outputs.
+
+::: {#fig-Clustermaps_gaussian_nullification layout-ncol=2}
+![](figs/phase2/gnull/YY1_clustermap.png){group="Clustermaps_gaussian_null"}
+
+![](figs/phase2/gnull/clustermap.png){group="Clustermaps_gaussian_null"}
+
+Overlap clusters made with gaussian nullification at inference.
+:::
+
+::: {#fig-Clustermaps_gaussian_nullification_dualmodel layout-ncol=2}
+![](figs/phase2/dualmodel/YY1_clustermap.png){group="Clustermaps_gaussian_null_dualmodel"}
+
+![](figs/phase2/dualmodel/clustermap.png){group="Clustermaps_gaussian_null_dualmodel"}
+
+Overlap clusters made with gaussian nullification using a separate model.
+:::
+
+## Model comparison
+
+We also compared the performance of the different models across the different nullification methods. The results across the different methods were very different from each other. The most overlap was achieved with zero nullification of normalized features.
+
+::: {#fig-Modelcomparison}
+![](figs/phase2/Modelcomparison.png){group="Modelcomparison"}
+
+Model comparison across different nullification methods.
+:::

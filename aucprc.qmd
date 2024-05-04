@@ -1,0 +1,104 @@
+---
+title: AUC and PRC comparisons
+filters:
+   - lightbox
+lightbox: auto
+tbl-cap-location: bottom
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+# AUC and PRC comparison across TFs
+
+We were also using the different variations of our models to see the difference between AUCs and PRCs across different TFs based on the biophysical features. The investigation involved adjusting not only the nullification method, but also some parameters of the CNNs for the sake of more effective motif extraction down the line.
+
+## Model Parameter selection
+
+We had previously used a kernel size of 5 for the CNNs, but we had planned to use the weights of our CNNs as PWMs for motif extraction, and a kernel size of 5 would not be ideal for this purpose. We decided to contrast the performance of our model with models of other kernel sizes. We trained models with kernel sizes of 7 and 9, and compared their performance with the model with kernel size 5.
+
+::: {#fig-kernel_comparison layout-ncol=3}
+![Micro-averaged AUC comparison across TFs for different kernel sizes](figs/aucprc/microauc.png){group="kernel_comparison"}
+
+![Macro-averaged PRC comparison across TFs for different kernel sizes](figs/aucprc/macroprc.png){group="kernel_comparison"}
+
+![PRC comparison across TFs for different kernel sizes](figs/aucprc/prc.png){group="kernel_comparison"}
+
+Curves for the micro-averaged AUC, macro-averaged PRC, and PRC for different kernel sizes. The kernel size of 5 is the best performing model, with 7 being comparable. A kernel size of 9 is significantly worse. {#fig-kernel_comparison}
+:::
+
+
+## Nullification method selection
+
+We also compared the performance of our model with different nullification methods. We had previously used a comparison between the hybrid LSTM model and the simple sequence only CNN model to determine that YY1's prediction scores were highly affected by the presence of biophysical features. We decided to review this conclusion by testing different nullification methods on the hybrid LSTM architecture and comparing their performance for each TF.
+
+::: {#fig-nullification_comparison layout-ncol=2}
+![Zero nullification at inference time](figs/aucprc/znull/auc.png){group="nullification_comparison"}
+![Zero nullification at inference time](figs/aucprc/znull/prc.png){group="nullification_comparison"}
+
+![Gaussian nullification at inference time](figs/aucprc/gnull/auc.png){group="nullification_comparison"}
+![Gaussian nullification at inference time](figs/aucprc/gnull/prc.png){group="nullification_comparison"}
+
+![Gaussian nullification at training time](figs/aucprc/dualmodel_g/auc.png){group="nullification_comparison"}
+![Gaussian nullification at training time](figs/aucprc/dualmodel_g/prc.png){group="nullification_comparison"}
+
+![Zero nullification at training time](figs/aucprc/dualmodel_z/auc.png){group="nullification_comparison"}
+![Zero nullification at training time](figs/aucprc/dualmodel_z/prc.png){group="nullification_comparison"}
+
+Bar graphs for the AUC and PRC of each TF for different nullification methods. Nullification at inference time produces drastic differences in the scores which may not be representative of an actual improvement in predictive power. Gaussian nullification at training time was considered as the best approach. {#fig-nullification_comparison}
+:::
+
+
+## YY1, STAT5A, and FOSL1
+
+### Score comparison of each TF
+
+Since the PRCs showed greater differences than AUCs, we focused on comparing the PRC of each TF at training time (both gaussian and zero nullification methods). We found that YY1 was overshadowed by other TFs such as STAT5A and FOSL1, which had higher PRCs when biophysical features were included.
+
+::: {#fig-yy1_stat5a_fosl1 layout-ncol=2}
+![Gaussian nullification at training time](figs/aucprc/scatter/prcg.png){group="yy1_stat5a_fosl1"}
+![Gaussian nullification at training time](figs/aucprc/scatter/prcg_bar.png){group="yy1_stat5a_fosl1"}
+
+![Zero nullification at training time](figs/aucprc/scatter/prcnull.png){group="yy1_stat5a_fosl1"}
+![Zero nullification at training time](figs/aucprc/scatter/prcnull_bar.png){group="yy1_stat5a_fosl1"}
+
+Scatter plots and bar graphs for the PRC of each TF at training time for both nullification methods. YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles). {#fig-yy1_stat5a_fosl1}
+:::
+
+::: {#fig-yy1_stat5a_fosl1_auc_prc}
+![YY1](figs/aucprc/tfs/yy1.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+![STAT5A](figs/aucprc/tfs/stat5a.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+![FOSL1](figs/aucprc/tfs/fosl1.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time. {#fig-yy1_stat5a_fosl1_auc_prc}
+:::
+
+
+### Gaussian noise model simulation
+
+To further confirm the results for STAT5A and FOSL1, we created 5 different datasets of gaussian noise and trained a different model on each dataset. We then compared the PRCs of each model against a model with actual biophysical features. The results showed that the models trained on gaussian noise had lower and more variable PRCs.
+
+::: {#fig-gaussian_noise layout-ncol=2}
+![AUCs](figs/aucprc/tfs/auc_sim.png){group="gaussian_noise"}
+![PRCs](figs/aucprc/tfs/prc_sim.png){group="gaussian_noise"}
+
+Bar graphs for the AUC and PRC of each TF for models trained on gaussian noise. The models trained on gaussian noise had lower and more variable PRCs. {#fig-gaussian_noise}
+:::
+
+## Motif extraction
+
+As an example, we extracted motifs using our CNN model with a kernel size of 9. The motifs had the added benefit of containing 3 tracks corresponding to the 3 biophysical features.
+
+::: {#fig-motif_extraction}
+![Motif extraction using the CNN model with kernel size 9](figs/aucprc/motif.png){group="motif_extraction"}
+
+Motif extraction using the CNN model with kernel size 9. The motifs contain 3 tracks corresponding to the 3 biophysical features. {#fig-motif_extraction}
+:::
+
+We did not continue this line of inquiry due to the poor performance of the model with kernel size 9.

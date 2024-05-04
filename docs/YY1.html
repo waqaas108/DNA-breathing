@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DNA Breathing in ChIP-seq and gcPBM Data – phase2page</title>
+<title>DNA Breathing in ChIP-seq and gcPBM Data - Sequence and classifier analysis for YY1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,6 +39,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,13 +108,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-on-yy1" id="toc-overview-on-yy1" class="nav-link active" data-scroll-target="#overview-on-yy1">Overview on YY1</a>
+  <li><a href="#sequence-and-classifier-analysis-for-yy1" id="toc-sequence-and-classifier-analysis-for-yy1" class="nav-link active" data-scroll-target="#sequence-and-classifier-analysis-for-yy1">Sequence and classifier analysis for YY1</a>
   <ul class="collapse">
-  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
-  </ul></li>
-  <li><a href="#shift-to-stat5a-and-fosl1" id="toc-shift-to-stat5a-and-fosl1" class="nav-link" data-scroll-target="#shift-to-stat5a-and-fosl1">Shift to STAT5A and FOSL1</a>
-  <ul class="collapse">
-  <li><a href="#auc-and-prc-comparison-across-tfs" id="toc-auc-and-prc-comparison-across-tfs" class="nav-link" data-scroll-target="#auc-and-prc-comparison-across-tfs">AUC and PRC comparison across TFs</a></li>
+  <li><a href="#clustermaps" id="toc-clustermaps" class="nav-link" data-scroll-target="#clustermaps">Clustermaps</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model comparison</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -121,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CNN analysis of Chip-seq data</h1>
+<h1 class="title">Sequence and classifier analysis for YY1</h1>
 </div>
 
 
@@ -136,41 +136,107 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview-on-yy1" class="level2">
-<h2 class="anchored" data-anchor-id="overview-on-yy1">Overview on YY1</h2>
-<p><img src="figs/phase2/YY1-1.png" width="500"> <img src="figs/phase2/YY1-2.png" width="500"></p>
-<p>As we can see, YY1 appeared to respond well to the DNA breathing signal. We followed these results up with in-depth analysis into the YY1 TF.</p>
-<section id="data-processing" class="level3">
-<h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+<section id="sequence-and-classifier-analysis-for-yy1" class="level1">
+<h1>Sequence and classifier analysis for YY1</h1>
+<section id="clustermaps" class="level2">
+<h2 class="anchored" data-anchor-id="clustermaps">Clustermaps</h2>
 <p>Our YY1 positive sequences were collected from 6 different cell lines, ‘A549’, ‘GM12878’, ‘GM12892’, ‘H1hESC’, ‘HepG2’, and ‘K562’. The first check made was whether sequences that were highly dependent on biophysical features for improved prediction performance had any overlap across the different cell lines. The goal was to see if the overlap extended to other TFs and cell lines as well.</p>
 <p>We were using zero-nullification at inference initially. Zero nullification at inference gives input to the model evaluation phase that has a zero matrix in place of the biophysical features. The model output with features was then subtracted from the model output without features to get the effect of the biophysical features on the model output. The top ten sequences with the greatest difference were then tested for overlap across cell lines.</p>
-<p>These are the overlap clusters we made with this architecture:</p>
-<p><img src="figs/phase2/nonormalznull/YY1_clustermap.png" width="500"> <img src="figs/phase2/nonormalznull/clustermap.png" width="500"></p>
-<p>The next step was determined to be normalization of features. This was done because (ask Ben).</p>
+<div id="fig-Clustermaps_zero_nullification_nonormal" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/nonormalznull/YY1_clustermap.png" class="lightbox" data-gallery="Clustermaps_nonormal_zero_null"><img src="figs/phase2/nonormalznull/YY1_clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/nonormalznull/clustermap.png" class="lightbox" data-gallery="Clustermaps_nonormal_zero_null"><img src="figs/phase2/nonormalznull/clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Overlap clusters made with zero nullification at inference (without feature normalization).</figcaption><p></p>
+</figure>
+</div>
+<p>The next step was determined to be normalization of features. This was done because we suspected that since the DNA sequences were one-hot encoded, the biophysical features being on a different scale could have been causing the model to over or underfit to the biophysical features.</p>
 <p>The normalization was carried out by calculating the mean and standard deviation values of a feature across the entire training partition of our dataset, and this value was then used on the testing set as well. The values we used for our Chip-seq data were:</p>
-<pre class="{code}"><code>coord: mean = 0.19155923417221135, std = 0.038960426724374435
-coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765
-coord: mean = 0.07465950796958755, std = 0.018489519373127622</code></pre>
+<p>coord: mean = 0.19155923417221135, std = 0.038960426724374435 coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765 flip: mean = 0.07465950796958755, std = 0.018489519373127622</p>
 <p>The statistics for our test partitions after normalization were:</p>
-<pre class="{code}"><code>coord: mean = 0.07738674543113, std = 1.0111124691462943
-coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645
-coord: mean = 0.08363005394874898, std = 1.0168371143051296</code></pre>
+<p>coord: mean = 0.07738674543113, std = 1.0111124691462943 coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645 flip: mean = 0.08363005394874898, std = 1.0168371143051296</p>
 <p>After normalizing, we repeated the analysis with zero nullification at inference. The results had a lot more overlap than the analysis conducted without normalizing:</p>
-<p><img src="figs/phase2/znull/YY1_clustermap.png" width="500"> <img src="figs/phase2/znull/clustermap.png" width="500"></p>
+<div id="fig-Clustermaps_zero_nullification" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/znull/YY1_clustermap.png" class="lightbox" data-gallery="Clustermaps_zero_null"><img src="figs/phase2/znull/YY1_clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/znull/clustermap.png" class="lightbox" data-gallery="Clustermaps_zero_null"><img src="figs/phase2/znull/clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Overlap clusters made with zero nullification at inference after feature normalization.</figcaption><p></p>
+</figure>
+</div>
 <p>Further improvements were made to the method of analysis. Instead of using zero-nullification, we decided that gaussian noise would be a better way to nullify the biophysical features. We tried two different methods with gaussian noise, the first was to use gaussian noise at inference, and the second was to train a separate model with gaussian noise and then subtract the model outputs.</p>
-<p>The results for gaussian noise at inference were:</p>
-<p><img src="figs/phase2/gnull/YY1_clustermap.png" width="500"> <img src="figs/phase2/gnull/clustermap.png" width="500"></p>
-<p>The results for gaussian noise at training were:</p>
-<p><img src="figs/phase2/dualmodel/YY1_clustermap.png" width="500"> <img src="figs/phase2/dualmodel/clustermap.png" width="500"></p>
-<p>The results across the different methods were very different from each other. The most overlap was achieved with zero nullification of normalized features.</p>
-<p><img src="figs/phase2/Modelcomparison.png" width="500"></p>
+<div id="fig-Clustermaps_gaussian_nullification" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/gnull/YY1_clustermap.png" class="lightbox" data-gallery="Clustermaps_gaussian_null"><img src="figs/phase2/gnull/YY1_clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/gnull/clustermap.png" class="lightbox" data-gallery="Clustermaps_gaussian_null"><img src="figs/phase2/gnull/clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Overlap clusters made with gaussian nullification at inference.</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-Clustermaps_gaussian_nullification_dualmodel" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/dualmodel/YY1_clustermap.png" class="lightbox" data-gallery="Clustermaps_gaussian_null_dualmodel"><img src="figs/phase2/dualmodel/YY1_clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/phase2/dualmodel/clustermap.png" class="lightbox" data-gallery="Clustermaps_gaussian_null_dualmodel"><img src="figs/phase2/dualmodel/clustermap.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Overlap clusters made with gaussian nullification using a separate model.</figcaption><p></p>
+</figure>
+</div>
 </section>
-</section>
-<section id="shift-to-stat5a-and-fosl1" class="level2">
-<h2 class="anchored" data-anchor-id="shift-to-stat5a-and-fosl1">Shift to STAT5A and FOSL1</h2>
-<section id="auc-and-prc-comparison-across-tfs" class="level3">
-<h3 class="anchored" data-anchor-id="auc-and-prc-comparison-across-tfs">AUC and PRC comparison across TFs</h3>
-<p>Parallel to the aforementioned investigation, we were also using the different variations of our models to see the difference between AUCs and PRCs across different TFs based on the biophysical features. The investigation involved adjusting not only the nullification method, but also some parameters of the CNNs for the sake of more effective motif extraction down the line. The results were as follows:</p>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model comparison</h2>
+<p>We also compared the performance of the different models across the different nullification methods. The results across the different methods were very different from each other. The most overlap was achieved with zero nullification of normalized features.</p>
+<div id="fig-Modelcomparison" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figs/phase2/Modelcomparison.png" class="lightbox" data-gallery="Modelcomparison"><img src="figs/phase2/Modelcomparison.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;5: Model comparison across different nullification methods.</figcaption>
+</figure>
+</div>
 
 
 </section>
@@ -411,6 +477,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DNA Breathing in ChIP-seq and gcPBM Data - AUC and PRC comparisons</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DNA Breathing in ChIP-seq and gcPBM Data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#auc-and-prc-comparison-across-tfs" id="toc-auc-and-prc-comparison-across-tfs" class="nav-link active" data-scroll-target="#auc-and-prc-comparison-across-tfs">AUC and PRC comparison across TFs</a>
+  <ul class="collapse">
+  <li><a href="#model-parameter-selection" id="toc-model-parameter-selection" class="nav-link" data-scroll-target="#model-parameter-selection">Model Parameter selection</a></li>
+  <li><a href="#nullification-method-selection" id="toc-nullification-method-selection" class="nav-link" data-scroll-target="#nullification-method-selection">Nullification method selection</a></li>
+  <li><a href="#yy1-stat5a-and-fosl1" id="toc-yy1-stat5a-and-fosl1" class="nav-link" data-scroll-target="#yy1-stat5a-and-fosl1">YY1, STAT5A, and FOSL1</a>
+  <ul class="collapse">
+  <li><a href="#score-comparison-of-each-tf" id="toc-score-comparison-of-each-tf" class="nav-link" data-scroll-target="#score-comparison-of-each-tf">Score comparison of each TF</a></li>
+  <li><a href="#gaussian-noise-model-simulation" id="toc-gaussian-noise-model-simulation" class="nav-link" data-scroll-target="#gaussian-noise-model-simulation">Gaussian noise model simulation</a></li>
+  </ul></li>
+  <li><a href="#motif-extraction" id="toc-motif-extraction" class="nav-link" data-scroll-target="#motif-extraction">Motif extraction</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AUC and PRC comparisons</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+<section id="auc-and-prc-comparison-across-tfs" class="level1">
+<h1>AUC and PRC comparison across TFs</h1>
+<p>We were also using the different variations of our models to see the difference between AUCs and PRCs across different TFs based on the biophysical features. The investigation involved adjusting not only the nullification method, but also some parameters of the CNNs for the sake of more effective motif extraction down the line.</p>
+<section id="model-parameter-selection" class="level2">
+<h2 class="anchored" data-anchor-id="model-parameter-selection">Model Parameter selection</h2>
+<p>We had previously used a kernel size of 5 for the CNNs, but we had planned to use the weights of our CNNs as PWMs for motif extraction, and a kernel size of 5 would not be ideal for this purpose. We decided to contrast the performance of our model with models of other kernel sizes. We trained models with kernel sizes of 7 and 9, and compared their performance with the model with kernel size 5.</p>
+<div id="fig-kernel_comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/microauc.png" class="lightbox" title="Micro-averaged AUC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/microauc.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Micro-averaged AUC comparison across TFs for different kernel sizes</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/macroprc.png" class="lightbox" title="Macro-averaged PRC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/macroprc.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Macro-averaged PRC comparison across TFs for different kernel sizes</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/prc.png" class="lightbox" title="PRC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/prc.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">PRC comparison across TFs for different kernel sizes</figcaption>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Curves for the micro-averaged AUC, macro-averaged PRC, and PRC for different kernel sizes. The kernel size of 5 is the best performing model, with 7 being comparable. A kernel size of 9 is significantly worse. {#fig-kernel_comparison}</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="nullification-method-selection" class="level2">
+<h2 class="anchored" data-anchor-id="nullification-method-selection">Nullification method selection</h2>
+<p>We also compared the performance of our model with different nullification methods. We had previously used a comparison between the hybrid LSTM model and the simple sequence only CNN model to determine that YY1’s prediction scores were highly affected by the presence of biophysical features. We decided to review this conclusion by testing different nullification methods on the hybrid LSTM architecture and comparing their performance for each TF.</p>
+<div id="fig-nullification_comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/znull/auc.png" class="lightbox" title="Zero nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/znull/auc.png" class="img-fluid figure-img" alt="Zero nullification at inference time"></a> <a href="figs/aucprc/znull/prc.png" class="lightbox" title="Zero nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/znull/prc.png" class="img-fluid figure-img" alt="Zero nullification at inference time"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/gnull/auc.png" class="lightbox" title="Gaussian nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/gnull/auc.png" class="img-fluid figure-img" alt="Gaussian nullification at inference time"></a> <a href="figs/aucprc/gnull/prc.png" class="lightbox" title="Gaussian nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/gnull/prc.png" class="img-fluid figure-img" alt="Gaussian nullification at inference time"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/dualmodel_g/auc.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_g/auc.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a> <a href="figs/aucprc/dualmodel_g/prc.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_g/prc.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/dualmodel_z/auc.png" class="lightbox" title="Zero nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_z/auc.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a> <a href="figs/aucprc/dualmodel_z/prc.png" class="lightbox" title="Zero nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_z/prc.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Bar graphs for the AUC and PRC of each TF for different nullification methods. Nullification at inference time produces drastic differences in the scores which may not be representative of an actual improvement in predictive power. Gaussian nullification at training time was considered as the best approach. {#fig-nullification_comparison}</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="yy1-stat5a-and-fosl1" class="level2">
+<h2 class="anchored" data-anchor-id="yy1-stat5a-and-fosl1">YY1, STAT5A, and FOSL1</h2>
+<section id="score-comparison-of-each-tf" class="level3">
+<h3 class="anchored" data-anchor-id="score-comparison-of-each-tf">Score comparison of each TF</h3>
+<p>Since the PRCs showed greater differences than AUCs, we focused on comparing the PRC of each TF at training time (both gaussian and zero nullification methods). We found that YY1 was overshadowed by other TFs such as STAT5A and FOSL1, which had higher PRCs when biophysical features were included.</p>
+<div id="fig-yy1_stat5a_fosl1" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/scatter/prcg.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcg.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a> <a href="figs/aucprc/scatter/prcg_bar.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcg_bar.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/scatter/prcnull.png" class="lightbox" title="Zero nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcnull.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a> <a href="figs/aucprc/scatter/prcnull_bar.png" class="lightbox" title="Zero nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcnull_bar.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Scatter plots and bar graphs for the PRC of each TF at training time for both nullification methods. YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles). {#fig-yy1_stat5a_fosl1}</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-yy1_stat5a_fosl1_auc_prc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figs/aucprc/tfs/yy1.png" class="lightbox" title="YY1" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/yy1.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">YY1</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figs/aucprc/tfs/stat5a.png" class="lightbox" title="STAT5A" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/stat5a.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">STAT5A</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figs/aucprc/tfs/fosl1.png" class="lightbox" title="FOSL1" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/fosl1.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">FOSL1</figcaption>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;4: Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time. {#fig-yy1_stat5a_fosl1_auc_prc}</figcaption>
+</figure>
+</div>
+</section>
+<section id="gaussian-noise-model-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-noise-model-simulation">Gaussian noise model simulation</h3>
+<p>To further confirm the results for STAT5A and FOSL1, we created 5 different datasets of gaussian noise and trained a different model on each dataset. We then compared the PRCs of each model against a model with actual biophysical features. The results showed that the models trained on gaussian noise had lower and more variable PRCs.</p>
+<div id="fig-gaussian_noise" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figs/aucprc/tfs/auc_sim.png" class="lightbox" title="AUCs" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/auc_sim.png" class="img-fluid figure-img" alt="AUCs"></a> <a href="figs/aucprc/tfs/prc_sim.png" class="lightbox" title="PRCs" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/prc_sim.png" class="img-fluid figure-img" alt="PRCs"></a></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Bar graphs for the AUC and PRC of each TF for models trained on gaussian noise. The models trained on gaussian noise had lower and more variable PRCs. {#fig-gaussian_noise}</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="motif-extraction" class="level2">
+<h2 class="anchored" data-anchor-id="motif-extraction">Motif extraction</h2>
+<p>As an example, we extracted motifs using our CNN model with a kernel size of 9. The motifs had the added benefit of containing 3 tracks corresponding to the 3 biophysical features.</p>
+<div id="fig-motif_extraction" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figs/aucprc/motif.png" class="lightbox" title="Motif extraction using the CNN model with kernel size 9" data-gallery="motif_extraction"><img src="figs/aucprc/motif.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Motif extraction using the CNN model with kernel size 9</figcaption>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;6: Motif extraction using the CNN model with kernel size 9. The motifs contain 3 tracks corresponding to the 3 biophysical features. {#fig-motif_extraction}</figcaption>
+</figure>
+</div>
+<p>We did not continue this line of inquiry due to the poor performance of the model with kernel size 9.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
+
+
+
+</body></html>
