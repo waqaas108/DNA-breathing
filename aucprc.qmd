@@ -32,7 +32,7 @@ Curves for the micro-averaged AUC, macro-averaged ARC, and PRC for different ker
 
 We also compared the performance of our model with different nullification methods. We had previously used a comparison between the hybrid LSTM model and the simple sequence only CNN model to determine that YY1's prediction scores were highly affected by the presence of biophysical features. We decided to review this conclusion by testing different nullification methods on the hybrid LSTM architecture and comparing their performance for each TF.
 
-::: {#fig-z_i_nullification_comparison layout="[50, -5, 50]"}
+::: {#fig-z_i_nullification_comparison layout-ncol=2}
 ![](figs/aucprc/znull/auc.png){group="z_i_nullification_comparison"}
 
 ![](figs/aucprc/znull/prc.png){group="z_i_nullification_comparison"}
@@ -40,7 +40,7 @@ We also compared the performance of our model with different nullification metho
 Zero nullification at inference time.
 :::
 
-::: {#fig-g_i_nullification_comparison layout="[50, -5, 50]"}
+::: {#fig-g_i_nullification_comparison layout-ncol=2}
 ![](figs/aucprc/gnull/auc.png){group="g_i_nullification_comparison"}
 
 ![](figs/aucprc/gnull/prc.png){group="g_i_nullification_comparison"}
@@ -48,7 +48,7 @@ Zero nullification at inference time.
 Gaussian nullification at inference time.
 :::
 
-::: {#fig-z_t_nullification_comparison layout="[50, -5, 50]"}
+::: {#fig-z_t_nullification_comparison layout-ncol=2}
 ![](figs/aucprc/dualmodel_z/auc.png){group="z_t_nullification_comparison"}
 
 ![](figs/aucprc/dualmodel_z/prc.png){group="z_t_nullification_comparison"}
@@ -56,7 +56,7 @@ Gaussian nullification at inference time.
 Zero nullification at training time.
 :::
 
-::: {#fig-g_t_nullification_comparison layout="[50, -5, 50]"}
+::: {#fig-g_t_nullification_comparison layout-ncol=2}
 ![](figs/aucprc/dualmodel_g/auc.png){group="g_t_nullification_comparison"}
 
 ![](figs/aucprc/dualmodel_g/prc.png){group="g_t_nullification_comparison"}
@@ -92,7 +92,8 @@ Zero nullification at training time.
 We find that YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles) in both nullification methods.
 
 
-::: {#fig-yy1_stat5a_fosl1_auc_prc layout-ncol=3}
+
+::: {#fig-yy1_stat5a_fosl1_auc_prc layout="[60, -5, 60, -5, 60]"}
 ![YY1](figs/aucprc/tfs/yy1.png){group="yy1_stat5a_fosl1_auc_prc"}
 
 ![STAT5A](figs/aucprc/tfs/stat5a.png){group="yy1_stat5a_fosl1_auc_prc"}
