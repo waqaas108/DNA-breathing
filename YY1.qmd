@@ -13,8 +13,6 @@ tbl-cap-location: bottom
   }
 </style>
 
-# Sequence and classifier analysis for YY1
-
 ## Clustermaps
 
 Our YY1 positive sequences were collected from 6 different cell lines, 'A549', 'GM12878', 'GM12892', 'H1hESC', 'HepG2', and 'K562'. The first check made was whether sequences that were highly dependent on biophysical features for improved prediction performance had any overlap across the different cell lines. The goal was to see if the overlap extended to other TFs and cell lines as well.
@@ -34,17 +32,19 @@ The next step was determined to be normalization of features. This was done beca
 
 The normalization was carried out by calculating the mean and standard deviation values of a feature across the entire training partition of our dataset, and this value was then used on the testing set as well. The values we used for our Chip-seq data were:
 
+```{code}
 coord: mean = 0.19155923417221135, std = 0.038960426724374435
 coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765
 flip: mean = 0.07465950796958755, std = 0.018489519373127622
-
+```
 
 The statistics for our test partitions after normalization were:
 
+```{code}
 coord: mean = 0.07738674543113, std = 1.0111124691462943
 coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645
 flip: mean = 0.08363005394874898, std = 1.0168371143051296
-
+```
 
 After normalizing, we repeated the analysis with zero nullification at inference. The results had a lot more overlap than the analysis conducted without normalizing:
 

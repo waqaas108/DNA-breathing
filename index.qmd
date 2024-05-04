@@ -13,9 +13,6 @@ tbl-cap-location: bottom
   }
 </style>
 
-# Overview on computational methods to assess the impact of DNA biophysical features on the binding affinity of Transcriptional factors
-
-
 ## Premise
 
 This project is investigating the role played by DNA biophysical features in the regulation of Transcription Factor (TF) binding. It endeavors to shed light on how specific DNA biophysical characteristics, such as bubble features and DNA flipping, contribute to the affinity and selectivity of TF binding interactions.
@@ -52,7 +49,7 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models designe
 
 In the project's initial phase, we investigated whether CNNs can learn features in DNA sequences that influence Transcription Factor (TF) binding. The study also explored the possible role of DNA biophysical features in this binding. Using ChIP-seq data, which provided 886625 DNA sequences of about 500 base pairs length from 130 cell lines and involving 64 TFs, we introduced three biophysical feature channels derived from DNA flipping data.
 
-::: {#fig-Models layout-ncol=2}
+::: {#fig-Models layout="[50, -5, 50]"}
 
 ![Simple CNN architecture, data: DNA sequences only](figs/cnn1.png){group="models"}
 
@@ -65,7 +62,8 @@ In the project's initial phase, we investigated whether CNNs can learn features 
 Different model architectures used in the initial phase of the project. The models were trained on ChIP-seq data with and without biophysical features to evaluate the impact of these features on Transcription Factor (TF) binding prediction.
 :::
 
-::: {#fig-Model Comparison layout-ncol=2}
+::: {#fig-Model_Comparison layout-ncol=2}
+
 ![](figs/auc.png){group="model-comparison"}
 
 ![](figs/prc.png){group="model-comparison"}
@@ -94,7 +92,6 @@ Each TF was evaluated with the AUC and PRC scores, and the difference between th
 
 
 ## [Acquisition and processing of gcPBM sequences and bubble features](/gcPBM.qmd)
-#### [Analysis with obsolete data](/gcPBM_obsolete.qmd)
 
 We acquired gcPBM sequences from Alexandrov Boian's lab, and then used the lab's pyDNA-EPBD simulation package to generate bubble probabilities for the sequences. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.
 
@@ -102,10 +99,14 @@ Investigations into CNN performance were done initially, but the models showed m
 
 
 ## [Acquisition and processing of ChIP-seq sequences and bubble features](/chIPseq.qmd)
-#### [Analysis with improperly classified data](/chIPseq_incorrect.qmd)
 
 We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for a selection of these sequences. We then ran similar statistical tests to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
 
 Using the results obtained, we used the 5 topmost correlated TFs (based on flipping features analysis) as well as PAX5 and EBF1 (based on results previously obtained by our collaborators) and repeated our gcPBM analysis pipeline with ChIP-seq data.
 
 The assumptions made in the gcPBM analysis did not hold for the ChIP-seq data, so some definitions were modified. The overall trends were of bubbles being negatively correlated with binding affinity, which was in contrast to the gcPBM data.
+
+## Misc
+
+#### [Analysis with obsolete gcPBM bubble data](/gcPBM_obsolete.qmd)
+#### [Analysis with improperly classified TF-labels for ChIP-seq data](/chIPseq_incorrect.qmd)

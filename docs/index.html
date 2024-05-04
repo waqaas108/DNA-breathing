@@ -108,9 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-on-computational-methods-to-assess-the-impact-of-dna-biophysical-features-on-the-binding-affinity-of-transcriptional-factors" id="toc-overview-on-computational-methods-to-assess-the-impact-of-dna-biophysical-features-on-the-binding-affinity-of-transcriptional-factors" class="nav-link active" data-scroll-target="#overview-on-computational-methods-to-assess-the-impact-of-dna-biophysical-features-on-the-binding-affinity-of-transcriptional-factors">Overview on computational methods to assess the impact of DNA biophysical features on the binding affinity of Transcriptional factors</a>
-  <ul class="collapse">
-  <li><a href="#premise" id="toc-premise" class="nav-link" data-scroll-target="#premise">Premise</a>
+  <li><a href="#premise" id="toc-premise" class="nav-link active" data-scroll-target="#premise">Premise</a>
   <ul class="collapse">
   <li><a href="#position-weight-matrices-pwms-in-genetics" id="toc-position-weight-matrices-pwms-in-genetics" class="nav-link" data-scroll-target="#position-weight-matrices-pwms-in-genetics">Position Weight Matrices (PWMs) in Genetics:</a></li>
   <li><a href="#binding-site-motifs" id="toc-binding-site-motifs" class="nav-link" data-scroll-target="#binding-site-motifs">Binding Site Motifs:</a></li>
@@ -131,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#auc-and-prc-comparisons" id="toc-auc-and-prc-comparisons" class="nav-link" data-scroll-target="#auc-and-prc-comparisons">AUC and PRC comparisons</a></li>
   <li><a href="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features">Acquisition and processing of gcPBM sequences and bubble features</a></li>
   <li><a href="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</a></li>
-  </ul></li>
+  <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc">Misc</a></li>
   </ul>
 </nav>
     </div>
@@ -161,8 +159,6 @@ ul.task-list li input[type="checkbox"] {
     word-break: break-word;
   }
 </style>
-<section id="overview-on-computational-methods-to-assess-the-impact-of-dna-biophysical-features-on-the-binding-affinity-of-transcriptional-factors" class="level1">
-<h1>Overview on computational methods to assess the impact of DNA biophysical features on the binding affinity of Transcriptional factors</h1>
 <section id="premise" class="level2">
 <h2 class="anchored" data-anchor-id="premise">Premise</h2>
 <p>This project is investigating the role played by DNA biophysical features in the regulation of Transcription Factor (TF) binding. It endeavors to shed light on how specific DNA biophysical characteristics, such as bubble features and DNA flipping, contribute to the affinity and selectivity of TF binding interactions.</p>
@@ -207,29 +203,35 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-Models" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/cnn1.png" class="lightbox" title="Simple CNN architecture, data: DNA sequences only" data-gallery="models"><img src="figs/cnn1.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/cnn1.png" class="lightbox" data-gallery="models" title="Simple CNN architecture, data: DNA sequences only"><img src="figs/cnn1.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Simple CNN architecture, data: DNA sequences only</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/cnn2.png" class="lightbox" title="Simple CNN architecture, data: DNA sequences and biophysical features" data-gallery="models"><img src="figs/cnn2.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/cnn2.png" class="lightbox" data-gallery="models" title="Simple CNN architecture, data: DNA sequences and biophysical features"><img src="figs/cnn2.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Simple CNN architecture, data: DNA sequences and biophysical features</figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/cnn3.png" class="lightbox" title="Multimodal CNN architecture, data: DNA sequences and biophysical features fed separately to two different networks, then recombined before classification" data-gallery="models"><img src="figs/cnn3.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/cnn3.png" class="lightbox" data-gallery="models" title="Multimodal CNN architecture, data: DNA sequences and biophysical features fed separately to two different networks, then recombined before classification"><img src="figs/cnn3.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Multimodal CNN architecture, data: DNA sequences and biophysical features fed separately to two different networks, then recombined before classification</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/cnn4.png" class="lightbox" title="Hybrid CNN-LSTM network, data: DNA sequences and biophysical features" data-gallery="models"><img src="figs/cnn4.png" class="img-fluid figure-img"></a></p>
+<p><a href="figs/cnn4.png" class="lightbox" data-gallery="models" title="Hybrid CNN-LSTM network, data: DNA sequences and biophysical features"><img src="figs/cnn4.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Hybrid CNN-LSTM network, data: DNA sequences and biophysical features</figcaption>
 </figure>
 </div>
@@ -237,13 +239,23 @@ ul.task-list li input[type="checkbox"] {
 <p></p><figcaption class="figure-caption">Figure&nbsp;1: Different model architectures used in the initial phase of the project. The models were trained on ChIP-seq data with and without biophysical features to evaluate the impact of these features on Transcription Factor (TF) binding prediction.</figcaption><p></p>
 </figure>
 </div>
-<p>::: {#fig-Model Comparison layout-ncol=2} <a href="figs/auc.png" class="lightbox" data-gallery="model-comparison"><img src="figs/auc.png" class="img-fluid"></a></p>
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-Model_Comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/auc.png" class="lightbox" data-gallery="model-comparison"><img src="figs/auc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
 <p><a href="figs/prc.png" class="lightbox" data-gallery="model-comparison"><img src="figs/prc.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<p>Comparison of the models based on AUC and PRC scores. The hybrid model (4th) outperformed the other models. :::</p>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Comparison of the models based on AUC and PRC scores. The hybrid model (4th) outperformed the other models.</figcaption><p></p>
+</figure>
+</div>
 <p>The difference was most noticeable in the PRC scores, where the hybrid model outperformed the other models by a significant margin. We concluded that the biophysical features were indeed useful in predicting TF binding, and the hybrid model was the most effective in leveraging these features.</p>
 <p>The first conclusion derived was that YY1 (a TF) relied strongly (stronger than other TFs) on biophysical features to moderate binding affinity, and so the first investigation performed was to evaluate YY1.</p>
 </section>
@@ -260,22 +272,24 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="level2">
 <h2 class="anchored" data-anchor-id="acquisition-and-processing-of-gcpbm-sequences-and-bubble-features"><a href="./gcPBM.html">Acquisition and processing of gcPBM sequences and bubble features</a></h2>
-<section id="analysis-with-obsolete-data" class="level4">
-<h4 class="anchored" data-anchor-id="analysis-with-obsolete-data"><a href="./gcPBM_obsolete.html">Analysis with obsolete data</a></h4>
 <p>We acquired gcPBM sequences from Alexandrov Boian’s lab, and then used the lab’s pyDNA-EPBD simulation package to generate bubble probabilities for the sequences. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.</p>
 <p>Investigations into CNN performance were done initially, but the models showed minimal to no improvements when biophysical features were introduced. We then focused on statistical analyses to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
 </section>
-</section>
 <section id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="level2">
 <h2 class="anchored" data-anchor-id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features"><a href="./chIPseq.html">Acquisition and processing of ChIP-seq sequences and bubble features</a></h2>
-<section id="analysis-with-improperly-classified-data" class="level4">
-<h4 class="anchored" data-anchor-id="analysis-with-improperly-classified-data"><a href="./chIPseq_incorrect.html">Analysis with improperly classified data</a></h4>
 <p>We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for a selection of these sequences. We then ran similar statistical tests to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
 <p>Using the results obtained, we used the 5 topmost correlated TFs (based on flipping features analysis) as well as PAX5 and EBF1 (based on results previously obtained by our collaborators) and repeated our gcPBM analysis pipeline with ChIP-seq data.</p>
 <p>The assumptions made in the gcPBM analysis did not hold for the ChIP-seq data, so some definitions were modified. The overall trends were of bubbles being negatively correlated with binding affinity, which was in contrast to the gcPBM data.</p>
-
-
 </section>
+<section id="misc" class="level2">
+<h2 class="anchored" data-anchor-id="misc">Misc</h2>
+<section id="analysis-with-obsolete-gcpbm-bubble-data" class="level4">
+<h4 class="anchored" data-anchor-id="analysis-with-obsolete-gcpbm-bubble-data"><a href="./gcPBM_obsolete.html">Analysis with obsolete gcPBM bubble data</a></h4>
+</section>
+<section id="analysis-with-improperly-classified-tf-labels-for-chip-seq-data" class="level4">
+<h4 class="anchored" data-anchor-id="analysis-with-improperly-classified-tf-labels-for-chip-seq-data"><a href="./chIPseq_incorrect.html">Analysis with improperly classified TF-labels for ChIP-seq data</a></h4>
+
+
 </section>
 </section>
 
@@ -514,7 +528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":true,"closeEffect":"zoom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
 
 
 

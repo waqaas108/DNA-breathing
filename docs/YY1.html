@@ -108,11 +108,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sequence-and-classifier-analysis-for-yy1" id="toc-sequence-and-classifier-analysis-for-yy1" class="nav-link active" data-scroll-target="#sequence-and-classifier-analysis-for-yy1">Sequence and classifier analysis for YY1</a>
-  <ul class="collapse">
-  <li><a href="#clustermaps" id="toc-clustermaps" class="nav-link" data-scroll-target="#clustermaps">Clustermaps</a></li>
+  <li><a href="#clustermaps" id="toc-clustermaps" class="nav-link active" data-scroll-target="#clustermaps">Clustermaps</a></li>
   <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model comparison</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -142,8 +139,6 @@ ul.task-list li input[type="checkbox"] {
     word-break: break-word;
   }
 </style>
-<section id="sequence-and-classifier-analysis-for-yy1" class="level1">
-<h1>Sequence and classifier analysis for YY1</h1>
 <section id="clustermaps" class="level2">
 <h2 class="anchored" data-anchor-id="clustermaps">Clustermaps</h2>
 <p>Our YY1 positive sequences were collected from 6 different cell lines, ‘A549’, ‘GM12878’, ‘GM12892’, ‘H1hESC’, ‘HepG2’, and ‘K562’. The first check made was whether sequences that were highly dependent on biophysical features for improved prediction performance had any overlap across the different cell lines. The goal was to see if the overlap extended to other TFs and cell lines as well.</p>
@@ -167,9 +162,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>The next step was determined to be normalization of features. This was done because we suspected that since the DNA sequences were one-hot encoded, the biophysical features being on a different scale could have been causing the model to over or underfit to the biophysical features.</p>
 <p>The normalization was carried out by calculating the mean and standard deviation values of a feature across the entire training partition of our dataset, and this value was then used on the testing set as well. The values we used for our Chip-seq data were:</p>
-<p>coord: mean = 0.19155923417221135, std = 0.038960426724374435 coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765 flip: mean = 0.07465950796958755, std = 0.018489519373127622</p>
+<pre class="{code}"><code>coord: mean = 0.19155923417221135, std = 0.038960426724374435
+coord_sq: mean = 0.14925209287264518, std = 0.039466117929090765
+flip: mean = 0.07465950796958755, std = 0.018489519373127622</code></pre>
 <p>The statistics for our test partitions after normalization were:</p>
-<p>coord: mean = 0.07738674543113, std = 1.0111124691462943 coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645 flip: mean = 0.08363005394874898, std = 1.0168371143051296</p>
+<pre class="{code}"><code>coord: mean = 0.07738674543113, std = 1.0111124691462943
+coord_sq: mean = 0.08939614710405903, std = 1.0202053755668645
+flip: mean = 0.08363005394874898, std = 1.0168371143051296</code></pre>
 <p>After normalizing, we repeated the analysis with zero nullification at inference. The results had a lot more overlap than the analysis conducted without normalizing:</p>
 <div id="fig-Clustermaps_zero_nullification" class="quarto-layout-panel">
 <figure class="figure">
@@ -239,7 +238,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -477,7 +475,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 

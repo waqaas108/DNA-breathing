@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DNA Breathing in ChIP-seq and gcPBM Data - AUC and PRC comparisons</title>
+<title>DNA Breathing in ChIP-seq and gcPBM Data - AUC and PRC comparisons across TFs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,9 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#auc-and-prc-comparison-across-tfs" id="toc-auc-and-prc-comparison-across-tfs" class="nav-link active" data-scroll-target="#auc-and-prc-comparison-across-tfs">AUC and PRC comparison across TFs</a>
-  <ul class="collapse">
-  <li><a href="#model-parameter-selection" id="toc-model-parameter-selection" class="nav-link" data-scroll-target="#model-parameter-selection">Model Parameter selection</a></li>
+  <li><a href="#model-parameter-selection" id="toc-model-parameter-selection" class="nav-link active" data-scroll-target="#model-parameter-selection">Model Parameter selection</a></li>
   <li><a href="#nullification-method-selection" id="toc-nullification-method-selection" class="nav-link" data-scroll-target="#nullification-method-selection">Nullification method selection</a></li>
   <li><a href="#yy1-stat5a-and-fosl1" id="toc-yy1-stat5a-and-fosl1" class="nav-link" data-scroll-target="#yy1-stat5a-and-fosl1">YY1, STAT5A, and FOSL1</a>
   <ul class="collapse">
@@ -118,7 +116,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#gaussian-noise-model-simulation" id="toc-gaussian-noise-model-simulation" class="nav-link" data-scroll-target="#gaussian-noise-model-simulation">Gaussian noise model simulation</a></li>
   </ul></li>
   <li><a href="#motif-extraction" id="toc-motif-extraction" class="nav-link" data-scroll-target="#motif-extraction">Motif extraction</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -127,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">AUC and PRC comparisons</h1>
+<h1 class="title">AUC and PRC comparisons across TFs</h1>
 </div>
 
 
@@ -148,9 +145,6 @@ ul.task-list li input[type="checkbox"] {
     word-break: break-word;
   }
 </style>
-<section id="auc-and-prc-comparison-across-tfs" class="level1">
-<h1>AUC and PRC comparison across TFs</h1>
-<p>We were also using the different variations of our models to see the difference between AUCs and PRCs across different TFs based on the biophysical features. The investigation involved adjusting not only the nullification method, but also some parameters of the CNNs for the sake of more effective motif extraction down the line.</p>
 <section id="model-parameter-selection" class="level2">
 <h2 class="anchored" data-anchor-id="model-parameter-selection">Model Parameter selection</h2>
 <p>We had previously used a kernel size of 5 for the CNNs, but we had planned to use the weights of our CNNs as PWMs for motif extraction, and a kernel size of 5 would not be ideal for this purpose. We decided to contrast the performance of our model with models of other kernel sizes. We trained models with kernel sizes of 7 and 9, and compared their performance with the model with kernel size 5.</p>
@@ -159,91 +153,178 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/aucprc/microauc.png" class="lightbox" title="Micro-averaged AUC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/microauc.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Micro-averaged AUC comparison across TFs for different kernel sizes</figcaption>
+<p><a href="figs/aucprc/microauc.png" class="lightbox" data-gallery="kernel_comparison"><img src="figs/aucprc/microauc.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/aucprc/macroprc.png" class="lightbox" title="Macro-averaged PRC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/macroprc.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Macro-averaged PRC comparison across TFs for different kernel sizes</figcaption>
+<p><a href="figs/aucprc/macroauc.png" class="lightbox" data-gallery="kernel_comparison"><img src="figs/aucprc/macroauc.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="figs/aucprc/prc.png" class="lightbox" title="PRC comparison across TFs for different kernel sizes" data-gallery="kernel_comparison"><img src="figs/aucprc/prc.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">PRC comparison across TFs for different kernel sizes</figcaption>
+<p><a href="figs/aucprc/prc.png" class="lightbox" data-gallery="kernel_comparison"><img src="figs/aucprc/prc.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Curves for the micro-averaged AUC, macro-averaged PRC, and PRC for different kernel sizes. The kernel size of 5 is the best performing model, with 7 being comparable. A kernel size of 9 is significantly worse. {#fig-kernel_comparison}</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Curves for the micro-averaged AUC, macro-averaged ARC, and PRC for different kernel sizes. The kernel size of 5 is the best performing model, with 7 being comparable. A kernel size of 9 is significantly worse.</figcaption><p></p>
 </figure>
 </div>
 </section>
 <section id="nullification-method-selection" class="level2">
 <h2 class="anchored" data-anchor-id="nullification-method-selection">Nullification method selection</h2>
 <p>We also compared the performance of our model with different nullification methods. We had previously used a comparison between the hybrid LSTM model and the simple sequence only CNN model to determine that YY1’s prediction scores were highly affected by the presence of biophysical features. We decided to review this conclusion by testing different nullification methods on the hybrid LSTM architecture and comparing their performance for each TF.</p>
-<div id="fig-nullification_comparison" class="quarto-layout-panel">
+<div id="fig-z_i_nullification_comparison" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/znull/auc.png" class="lightbox" title="Zero nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/znull/auc.png" class="img-fluid figure-img" alt="Zero nullification at inference time"></a> <a href="figs/aucprc/znull/prc.png" class="lightbox" title="Zero nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/znull/prc.png" class="img-fluid figure-img" alt="Zero nullification at inference time"></a></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/gnull/auc.png" class="lightbox" title="Gaussian nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/gnull/auc.png" class="img-fluid figure-img" alt="Gaussian nullification at inference time"></a> <a href="figs/aucprc/gnull/prc.png" class="lightbox" title="Gaussian nullification at inference time" data-gallery="nullification_comparison"><img src="figs/aucprc/gnull/prc.png" class="img-fluid figure-img" alt="Gaussian nullification at inference time"></a></p>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/dualmodel_g/auc.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_g/auc.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a> <a href="figs/aucprc/dualmodel_g/prc.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_g/prc.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/dualmodel_z/auc.png" class="lightbox" title="Zero nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_z/auc.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a> <a href="figs/aucprc/dualmodel_z/prc.png" class="lightbox" title="Zero nullification at training time" data-gallery="nullification_comparison"><img src="figs/aucprc/dualmodel_z/prc.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a></p>
-</div>
-</div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Bar graphs for the AUC and PRC of each TF for different nullification methods. Nullification at inference time produces drastic differences in the scores which may not be representative of an actual improvement in predictive power. Gaussian nullification at training time was considered as the best approach. {#fig-nullification_comparison}</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/znull/auc.png" class="lightbox" data-gallery="z_i_nullification_comparison"><img src="figs/aucprc/znull/auc.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/znull/prc.png" class="lightbox" data-gallery="z_i_nullification_comparison"><img src="figs/aucprc/znull/prc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Zero nullification at inference time.</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-g_i_nullification_comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/gnull/auc.png" class="lightbox" data-gallery="g_i_nullification_comparison"><img src="figs/aucprc/gnull/auc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/gnull/prc.png" class="lightbox" data-gallery="g_i_nullification_comparison"><img src="figs/aucprc/gnull/prc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Gaussian nullification at inference time.</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-z_t_nullification_comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/dualmodel_z/auc.png" class="lightbox" data-gallery="z_t_nullification_comparison"><img src="figs/aucprc/dualmodel_z/auc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/dualmodel_z/prc.png" class="lightbox" data-gallery="z_t_nullification_comparison"><img src="figs/aucprc/dualmodel_z/prc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Zero nullification at training time.</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-g_t_nullification_comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/dualmodel_g/auc.png" class="lightbox" data-gallery="g_t_nullification_comparison"><img src="figs/aucprc/dualmodel_g/auc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/dualmodel_g/prc.png" class="lightbox" data-gallery="g_t_nullification_comparison"><img src="figs/aucprc/dualmodel_g/prc.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Gaussian nullification at training time.</figcaption><p></p>
+</figure>
+</div>
+<p>Nullification at inference time produces drastic differences in the scores which may not be representative of an actual improvement in predictive power. Gaussian nullification at training time was considered as the best approach.</p>
 </section>
 <section id="yy1-stat5a-and-fosl1" class="level2">
 <h2 class="anchored" data-anchor-id="yy1-stat5a-and-fosl1">YY1, STAT5A, and FOSL1</h2>
 <section id="score-comparison-of-each-tf" class="level3">
 <h3 class="anchored" data-anchor-id="score-comparison-of-each-tf">Score comparison of each TF</h3>
 <p>Since the PRCs showed greater differences than AUCs, we focused on comparing the PRC of each TF at training time (both gaussian and zero nullification methods). We found that YY1 was overshadowed by other TFs such as STAT5A and FOSL1, which had higher PRCs when biophysical features were included.</p>
-<div id="fig-yy1_stat5a_fosl1" class="quarto-layout-panel">
+<div id="fig-yy1_stat5a_fosl1_g" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/scatter/prcg.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcg.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a> <a href="figs/aucprc/scatter/prcg_bar.png" class="lightbox" title="Gaussian nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcg_bar.png" class="img-fluid figure-img" alt="Gaussian nullification at training time"></a></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/scatter/prcnull.png" class="lightbox" title="Zero nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcnull.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a> <a href="figs/aucprc/scatter/prcnull_bar.png" class="lightbox" title="Zero nullification at training time" data-gallery="yy1_stat5a_fosl1"><img src="figs/aucprc/scatter/prcnull_bar.png" class="img-fluid figure-img" alt="Zero nullification at training time"></a></p>
-</div>
-</div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Scatter plots and bar graphs for the PRC of each TF at training time for both nullification methods. YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles). {#fig-yy1_stat5a_fosl1}</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/scatter/prcg.png" class="lightbox" data-gallery="yy1_stat5a_fosl1_g"><img src="figs/aucprc/scatter/prcg.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<div id="fig-yy1_stat5a_fosl1_auc_prc" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
 <figure class="figure">
-<div class="quarto-figure quarto-figure-center">
+<p><a href="figs/aucprc/scatter/prcg_bar.png" class="lightbox" data-gallery="yy1_stat5a_fosl1_g"><img src="figs/aucprc/scatter/prcg_bar.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Gaussian nullification at training time.</figcaption><p></p>
+</figure>
+</div>
+<div id="fig-yy1_stat5a_fosl1_z" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/scatter/prcnull.png" class="lightbox" data-gallery="yy1_stat5a_fosl1_z"><img src="figs/aucprc/scatter/prcnull.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.8%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 47.6%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/scatter/prcnull_bar.png" class="lightbox" data-gallery="yy1_stat5a_fosl1_z"><img src="figs/aucprc/scatter/prcnull_bar.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7: Zero nullification at training time.</figcaption><p></p>
+</figure>
+</div>
+<p>We find that YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles) in both nullification methods.</p>
+<div id="fig-yy1_stat5a_fosl1_auc_prc" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
 <p><a href="figs/aucprc/tfs/yy1.png" class="lightbox" title="YY1" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/yy1.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">YY1</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
 <p><a href="figs/aucprc/tfs/stat5a.png" class="lightbox" title="STAT5A" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/stat5a.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">STAT5A</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
 <p><a href="figs/aucprc/tfs/fosl1.png" class="lightbox" title="FOSL1" data-gallery="yy1_stat5a_fosl1_auc_prc"><img src="figs/aucprc/tfs/fosl1.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">FOSL1</figcaption>
 </figure>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;4: Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time. {#fig-yy1_stat5a_fosl1_auc_prc}</figcaption>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8: Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time.</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -253,11 +334,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-gaussian_noise" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="figs/aucprc/tfs/auc_sim.png" class="lightbox" title="AUCs" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/auc_sim.png" class="img-fluid figure-img" alt="AUCs"></a> <a href="figs/aucprc/tfs/prc_sim.png" class="lightbox" title="PRCs" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/prc_sim.png" class="img-fluid figure-img" alt="PRCs"></a></p>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/tfs/auc_sim.png" class="lightbox" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/auc_sim.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="figs/aucprc/tfs/prc_sim.png" class="lightbox" data-gallery="gaussian_noise"><img src="figs/aucprc/tfs/prc_sim.png" class="img-fluid figure-img"></a></p>
+</figure>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5: Bar graphs for the AUC and PRC of each TF for models trained on gaussian noise. The models trained on gaussian noise had lower and more variable PRCs. {#fig-gaussian_noise}</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;9: Bar graphs for the AUC and PRC of each TF for models trained on gaussian noise. The models trained on gaussian noise had lower and more variable PRCs.</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -269,17 +357,15 @@ ul.task-list li input[type="checkbox"] {
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="figs/aucprc/motif.png" class="lightbox" title="Motif extraction using the CNN model with kernel size 9" data-gallery="motif_extraction"><img src="figs/aucprc/motif.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Motif extraction using the CNN model with kernel size 9</figcaption>
+<p><a href="figs/aucprc/motif.png" class="lightbox" data-gallery="motif_extraction"><img src="figs/aucprc/motif.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;6: Motif extraction using the CNN model with kernel size 9. The motifs contain 3 tracks corresponding to the 3 biophysical features. {#fig-motif_extraction}</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;10: Motif extraction using the CNN model with kernel size 9. The motifs contain 3 tracks corresponding to the 3 biophysical features.</figcaption>
 </figure>
 </div>
 <p>We did not continue this line of inquiry due to the poor performance of the model with kernel size 9.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -517,7 +603,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 
