@@ -128,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sequence-and-classifier-analysis-for-yy1" id="toc-sequence-and-classifier-analysis-for-yy1" class="nav-link" data-scroll-target="#sequence-and-classifier-analysis-for-yy1">Sequence and classifier analysis for YY1</a></li>
   <li><a href="#auc-and-prc-comparisons" id="toc-auc-and-prc-comparisons" class="nav-link" data-scroll-target="#auc-and-prc-comparisons">AUC and PRC comparisons</a></li>
   <li><a href="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-gcpbm-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-gcpbm-sequences-and-bubble-features">Acquisition and processing of gcPBM sequences and bubble features</a></li>
-  <li><a href="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" id="toc-acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="nav-link" data-scroll-target="#acquisition-and-processing-of-chip-seq-sequences-and-bubble-features">Acquisition and processing of ChIP-seq sequences and bubble features</a></li>
+  <li><a href="#processing-of-chip-seq-sequences-and-bubble-features" id="toc-processing-of-chip-seq-sequences-and-bubble-features" class="nav-link" data-scroll-target="#processing-of-chip-seq-sequences-and-bubble-features">Processing of ChIP-seq sequences and bubble features</a></li>
   <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc">Misc</a></li>
   </ul>
 </nav>
@@ -275,8 +275,8 @@ ul.task-list li input[type="checkbox"] {
 <p>We acquired gcPBM sequences from Alexandrov Boian’s lab, and then used the lab’s pyDNA-EPBD simulation package to generate bubble probabilities for the sequences. gcPBM as a method differs from ChIP-seq in key ways: it is a direct measurement of TF binding affinity, and it is performed in vitro. This means that the sequences are not subject to the same biases as ChIP-seq data, and the binding affinity is measured directly, rather than inferred from the binding strength of the TF. The sequences are also much shorter, at 36 base pairs, and the data is much more sparse, with only 3 TFs. However, the data is much more reliable, and the sequences are much more likely to be true binding sites. The affinity is a value between 0 and 1, with 1 being the highest affinity.</p>
 <p>Investigations into CNN performance were done initially, but the models showed minimal to no improvements when biophysical features were introduced. We then focused on statistical analyses to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
 </section>
-<section id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features" class="level2">
-<h2 class="anchored" data-anchor-id="acquisition-and-processing-of-chip-seq-sequences-and-bubble-features"><a href="./chIPseq.html">Acquisition and processing of ChIP-seq sequences and bubble features</a></h2>
+<section id="processing-of-chip-seq-sequences-and-bubble-features" class="level2">
+<h2 class="anchored" data-anchor-id="processing-of-chip-seq-sequences-and-bubble-features"><a href="./chIPseq.html">Processing of ChIP-seq sequences and bubble features</a></h2>
 <p>We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for a selection of these sequences. We then ran similar statistical tests to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
 <p>Using the results obtained, we used the 5 topmost correlated TFs (based on flipping features analysis) as well as PAX5 and EBF1 (based on results previously obtained by our collaborators) and repeated our gcPBM analysis pipeline with ChIP-seq data.</p>
 <p>The assumptions made in the gcPBM analysis did not hold for the ChIP-seq data, so some definitions were modified. The overall trends were of bubbles being negatively correlated with binding affinity, which was in contrast to the gcPBM data.</p>
@@ -528,7 +528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 

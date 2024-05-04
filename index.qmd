@@ -98,7 +98,7 @@ We acquired gcPBM sequences from Alexandrov Boian's lab, and then used the lab's
 Investigations into CNN performance were done initially, but the models showed minimal to no improvements when biophysical features were introduced. We then focused on statistical analyses to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
 
 
-## [Acquisition and processing of ChIP-seq sequences and bubble features](/chIPseq.qmd)
+## [Processing of ChIP-seq sequences and bubble features](/chIPseq.qmd)
 
 We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for a selection of these sequences. We then ran similar statistical tests to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.
 

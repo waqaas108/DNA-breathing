@@ -69,6 +69,16 @@ Nullification at inference time produces drastic differences in the scores which
 
 ## YY1, STAT5A, and FOSL1
 
+::: {#fig-yy1_stat5a_fosl1_auc_prc layout="[60, -5, 60, -5, 60]"}
+![YY1](figs/aucprc/tfs/yy1.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+![STAT5A](figs/aucprc/tfs/stat5a.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+![FOSL1](figs/aucprc/tfs/fosl1.png){group="yy1_stat5a_fosl1_auc_prc"}
+
+Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time.
+:::
+
 ### Score comparison of each TF
 
 Since the PRCs showed greater differences than AUCs, we focused on comparing the PRC of each TF at training time (both gaussian and zero nullification methods). We found that YY1 was overshadowed by other TFs such as STAT5A and FOSL1, which had higher PRCs when biophysical features were included.
@@ -90,18 +100,6 @@ Zero nullification at training time.
 :::
 
 We find that YY1 (red dot) is overshadowed by STAT5A and FOSL1 (green triangles) in both nullification methods.
-
-
-
-::: {#fig-yy1_stat5a_fosl1_auc_prc layout="[60, -5, 60, -5, 60]"}
-![YY1](figs/aucprc/tfs/yy1.png){group="yy1_stat5a_fosl1_auc_prc"}
-
-![STAT5A](figs/aucprc/tfs/stat5a.png){group="yy1_stat5a_fosl1_auc_prc"}
-
-![FOSL1](figs/aucprc/tfs/fosl1.png){group="yy1_stat5a_fosl1_auc_prc"}
-
-Line graphs for the AUC and PRC of each TF. YY1 has lower differences between the models compared to STAT5A and FOSL1. Nullification method is gaussian nullification at training time.
-:::
 
 
 ### Gaussian noise model simulation
