@@ -508,6 +508,7 @@ We then conducted logistic regressions to see the degree to which the distance b
 
 : Logistic regression results for PAX5. {#tbl-panel1}
 
+Logistic regressions of the distance between the nearest bubble and the strongest motif match in a sequence, with different thresholds for the distance.
 :::
 
 There is no clear trend, with each TF having different coefficients for different thresholds.
