@@ -272,6 +272,8 @@ Histograms showing the distribution of distances between the strongest motifs an
 
 ## Logistic Regressions
 
+### Bubble count and binding affinity
+
 We then conducted logistic regressions to see the degree to which the presence of a bubble significantly affected binding affinity. To filter out the effect of motif presence, we used sequences with only weak motif matches, and then sequences with no motif matches, and correlated the number of bubbles with the binding affinity.
 
 ::: {#tbl-panel layout-ncol=1}
@@ -359,3 +361,153 @@ Linear Regression of all sequences with Number of Bubbles for sequences with wea
 :::
 
 We notice the overall trend of the number of bubbles being negatively correlated with binding affinity.
+
+### Distance between bubbles and motifs
+
+We then conducted logistic regressions to see the degree to which the distance between bubbles and motifs significantly affected binding affinity. We first isolated the strongest motif match (by p-value) in a sequence, and then calculated the distance between this motif and the nearest bubble. We then turned this distance into a binary variable, with different thresholds for the distance. We then performed logistic regressions to see the effect of this distance on binding affinity.
+
+::: {#tbl-panel layout-ncol=1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5** | All Motifs | -1.2040 | 0.062 | -19.442 | 0.000 | -1.325 | -1.083 | 0.050 | -25153.857 | 0.000 |
+| | Strong Motifs | -0.5856 | 0.123 | -4.764 | 0.000 | -0.827 | -0.345 | 0.050 | -25153.857 | 0.000 |
+| | Weak Motifs | -1.3895 | 0.073 | -19.058 | 0.000 | -1.532 | -1.247 | 0.050 | -25153.857 | 0.000 |
+| **10** | All Motifs | -1.1997 | 0.061 | -19.618 | 0.000 | -1.320 | -1.080 | 0.056 | -25083.301 | 0.000 |
+| | Strong Motifs | -0.5596 | 0.121 | -4.639 | 0.000 | -0.796 | -0.323 | 0.056 | -25083.301 | 0.000 |
+| | Weak Motifs | -1.3946 | 0.072 | -19.300 | 0.000 | -1.536 | -1.253 | 0.056 | -25083.301 | 0.000 |
+| **20** | All Motifs | -1.2012 | 0.060 | -19.927 | 0.000 | -1.319 | -1.083 | 0.058 | -25051.394 | 0.000 |
+| | Strong Motifs | -0.5737 | 0.119 | -4.834 | 0.000 | -0.806 | -0.341 | 0.058 | -25051.394 | 0.000 |
+| | Weak Motifs | -1.3964 | 0.071 | -19.570 | 0.000 | -1.536 | -1.257 | 0.058 | -25051.394 | 0.000 |
+| **40** | All Motifs | -1.1959 | 0.058 | -20.561 | 0.000 | -1.310 | -1.082 | 0.060 | -25009.289 | 0.000 |
+| | Strong Motifs | -0.5301 | 0.114 | -4.665 | 0.000 | -0.753 | -0.307 | 0.060 | -25009.289 | 0.000 |
+| | Weak Motifs | -1.4063 | 0.069 | -20.322 | 0.000 | -1.542 | -1.271 | 0.060 | -25009.289 | 0.000 |
+| **80** | All Motifs | -1.1534 | 0.054 | -21.189 | 0.000 | -1.260 | -1.047 | 0.063 | -24951.235 | 0.000 |
+| | Strong Motifs | -0.4076 | 0.104 | -3.907 | 0.000 | -0.612 | -0.203 | 0.063 | -24951.235 | 0.000 |
+| | Weak Motifs | -1.4017 | 0.066 | -21.347 | 0.000 | -1.530 | -1.273 | 0.063 | -24951.235 | 0.000 |
+
+: Logistic regression results for POU2F2. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs | -0.3716 | 0.168 | -2.214 | 0.027 | -0.700 | -0.043 | inf | -13484.0 | NaN |
+|                 | Strong Motifs | -0.3497 | 0.199 | -1.756 | 0.079 | -0.740 | 0.041 | inf | -9523.1 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **10**          | All Motifs | -0.3716 | 0.168 | -2.214 | 0.027 | -0.700 | -0.043 | inf | -13484.0 | NaN |
+|                 | Strong Motifs | -0.3497 | 0.199 | -1.756 | 0.079 | -0.740 | 0.041 | inf | -9523.1 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **20**          | All Motifs | -0.3943 | 0.167 | -2.360 | 0.018 | -0.722 | -0.067 | inf | -14188.0 | NaN |
+|                 | Strong Motifs | -0.3819 | 0.198 | -1.931 | 0.054 | -0.770 | 0.006 | inf | -10219.0 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **40**          | All Motifs | -0.3943 | 0.167 | -2.360 | 0.018 | -0.722 | -0.067 | inf | -14188.0 | NaN |
+|                 | Strong Motifs | -0.3819 | 0.198 | -1.931 | 0.054 | -0.770 | 0.006 | inf | -10219.0 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **80**          | All Motifs | -0.4316 | 0.162 | -2.667 | 0.008 | -0.749 | -0.114 | inf | -15912.0 | NaN |
+|                 | Strong Motifs | -0.4128 | 0.192 | -2.148 | 0.032 | -0.789 | -0.036 | inf | -11240.0 | NaN |
+|                 | Weak Motifs | -0.4418 | 0.302 | -1.462 | 0.144 | -1.034 | 0.150 | inf | -4300.7 | NaN |
+
+: Logistic regression results for CTCF. {#tbl-panel1}
+
+| **Threshold**   | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|-----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs     | -2.8633                    | 0.206         | -13.925     | 0.000       | -3.266           | -2.460           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7726                    | 0.595         | -4.659      | 0.000       | -3.939           | -1.606           | inf                  | -35541.0           | nan             |
+|                  | Weak Motifs    | -2.8751                    | 0.219         | -13.120     | 0.000       | -3.305           | -2.446           | inf                  | -inf               | nan             |
+| **10**          | All Motifs     | -2.8332                    | 0.202         | -14.040     | 0.000       | -3.229           | -2.438           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7726                    | 0.595         | -4.659      | 0.000       | -3.939           | -1.606           | inf                  | -35541.0           | nan             |
+|                  | Weak Motifs    | -2.8409                    | 0.215         | -13.243     | 0.000       | -3.261           | -2.420           | inf                  | -inf               | nan             |
+| **20**          | All Motifs     | -2.8267                    | 0.198         | -14.271     | 0.000       | -3.215           | -2.438           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7932                    | 0.595         | -4.696      | 0.000       | -3.959           | -1.627           | inf                  | -inf               | nan             |
+|                  | Weak Motifs    | -2.8308                    | 0.210         | -13.476     | 0.000       | -3.242           | -2.419           | inf                  | -inf               | nan             |
+| **40**          | All Motifs     | -2.8654                    | 0.198         | -14.482     | 0.000       | -3.253           | -2.478           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.8526                    | 0.594         | -4.804      | 0.000       | -4.016           | -1.689           | inf                  | -inf               | nan             |
+|                  | Weak Motifs    | -2.8670                    | 0.210         | -13.662     | 0.000       | -3.278           | -2.456           | inf                  | -inf               | nan             |
+| **80**          | All Motifs     | -2.8234                    | 0.188         | -15.024     | 0.000       | -3.192           | -2.455           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.3609                    | 0.468         | -5.046      | 0.000       | -3.278           | -1.444           | inf                  | -33510.0           | nan             |
+|                  | Weak Motifs    | -2.8948                    | 0.205         | -14.090     | 0.000       | -3.297           | -2.492           | inf                  | -inf               | nan             |
+
+: Logistic regression results for ETS1. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs | -1.6049 | 0.117 | -13.738 | 0.000 | -1.834 | -1.376 | inf | -1.8237e+05 | NaN |
+|                 | Strong Motifs | -1.0937 | 0.140 | -7.806 | 0.000 | -1.368 | -0.819 | inf | -58564.0 | NaN |
+|                 | Weak Motifs | -2.4553 | 0.233 | -10.538 | 0.000 | -2.912 | -1.999 | inf | -1.4704e+05 | NaN |
+| **10**          | All Motifs | -1.5740 | 0.115 | -13.741 | 0.000 | -1.799 | -1.350 | inf | -1.8133e+05 | NaN |
+|                 | Strong Motifs | -1.0463 | 0.137 | -7.638 | 0.000 | -1.315 | -0.778 | inf | -56645.0 | NaN |
+|                 | Weak Motifs | -2.4723 | 0.233 | -10.618 | 0.000 | -2.929 | -2.016 | inf | -1.5057e+05 | NaN |
+| **20**          | All Motifs | -1.6116 | 0.113 | -14.266 | 0.000 | -1.833 | -1.390 | inf | -1.9666e+05 | NaN |
+|                 | Strong Motifs | -1.0850 | 0.134 | -8.069 | 0.000 | -1.349 | -0.821 | inf | -62534.0 | NaN |
+|                 | Weak Motifs | -2.5257 | 0.232 | -10.869 | 0.000 | -2.981 | -2.070 | inf | -1.6216e+05 | NaN |
+| **40**          | All Motifs | -1.6296 | 0.110 | -14.752 | 0.000 | -1.846 | -1.413 | inf | -2.1087e+05 | NaN |
+|                 | Strong Motifs | -1.0855 | 0.132 | -8.236 | 0.000 | -1.344 | -0.827 | inf | -65051.0 | NaN |
+|                 | Weak Motifs | -2.5539 | 0.232 | -11.273 | 0.000 | -2.998 | -2.110 | inf | -1.7697e+05 | NaN |
+| **80**          | All Motifs | -1.4838 | 0.100 | -14.797 | 0.000 | -1.680 | -1.287 | inf | -2.0664e+05 | NaN |
+|                 | Strong Motifs | -0.9491 | 0.120 | -7.896 | 0.000 | -1.185 | -0.713 | inf | -61947.0 | NaN |
+|                 | Weak Motifs | -2.4049 | 0.205 | -11.744 | 0.000 | -2.806 | -2.004 | inf | -1.7774e+05 | NaN |
+
+: Logistic regression results for JUND. {#tbl-panel1}
+
+| **Threshold**   | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|-----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs     | -0.0980                    | 0.090         | -1.084      | 0.278       | -0.275           | 0.079            | inf                  | -11574.0            | NaN             |
+|                  | Strong Motifs  | 0.4630                     | 0.135         | 3.441       | 0.001       | 0.199            | 0.727            | inf                  | -2285.1             | NaN             |
+|                  | Weak Motifs    | -0.6234                    | 0.131         | -4.745      | 0.000       | -0.881           | -0.366           | inf                  | -29228.0            | NaN             |
+| **10**          | All Motifs     | -0.1045                    | 0.090         | -1.165      | 0.244       | -0.280           | 0.071            | inf                  | -12129.0            | NaN             |
+|                  | Strong Motifs  | 0.4727                     | 0.134         | 3.540       | 0.000       | 0.211            | 0.735            | inf                  | -2283.1             | NaN             |
+|                  | Weak Motifs    | -0.6472                    | 0.131         | -4.946      | 0.000       | -0.904           | -0.391           | inf                  | -30894.0            | NaN             |
+| **20**          | All Motifs     | -0.1082                    | 0.088         | -1.230      | 0.219       | -0.281           | 0.064            | inf                  | -12673.0            | NaN             |
+|                  | Strong Motifs  | 0.4766                     | 0.131         | 3.648       | 0.000       | 0.221            | 0.733            | inf                  | -2278.8             | NaN             |
+|                  | Weak Motifs    | -0.6653                    | 0.129         | -5.158      | 0.000       | -0.918           | -0.412           | inf                  | -32865.0            | NaN             |
+| **40**          | All Motifs     | -0.1081                    | 0.086         | -1.251      | 0.211       | -0.278           | 0.061            | inf                  | -12936.0            | NaN             |
+|                  | Strong Motifs  | 0.4776                     | 0.129         | 3.715       | 0.000       | 0.226            | 0.730            | inf                  | -2275.6             | NaN             |
+|                  | Weak Motifs    | -0.6611                    | 0.126         | -5.232      | 0.000       | -0.909           | -0.413           | inf                  | -33850.0            | NaN             |
+| **80**          | All Motifs     | -0.1588                    | 0.082         | -1.928      | 0.054       | -0.320           | 0.003            | inf                  | -18079.0            | NaN             |
+|                  | Strong Motifs  | 0.4263                     | 0.122         | 3.493       | 0.000       | 0.187            | 0.665            | inf                  | -2267.5             | NaN             |
+|                  | Weak Motifs    | -0.7126                    | 0.121         | -5.895      | 0.000       | -0.949           | -0.476           | inf                  | -40617.0            | NaN             |
+
+: Logistic regression results for MAFK. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5** | All Motifs | 0.3747                     | 0.196         | 1.913       | 0.056       | -0.009           | 0.759            | inf                  | -3961.6             | NaN             |
+|                   | Strong Motifs| 0.7108                   | 0.231         | 3.080       | 0.002       | 0.259            | 1.163            | inf                  | -2861.9             | NaN             |
+|                   | Weak Motifs  | -0.9808                   | 0.479         | -2.049      | 0.040       | -1.919           | -0.043           | inf                  | -5081.2             | NaN             |
+| **10**| All Motifs  | 0.3902                     | 0.195         | 1.999       | 0.046       | 0.008            | 0.773            | inf                  | -3961.0             | NaN             |
+|                   | Strong Motifs| 0.7108                   | 0.231         | 3.080       | 0.002       | 0.259            | 1.163            | inf                  | -2861.9             | NaN             |
+|                   | Weak Motifs  | -0.8267                   | 0.453         | -1.824      | 0.068       | -1.715           | 0.062            | inf                  | -4452.1             | NaN             |
+| **20**| All Motifs  | 0.3980                     | 0.193         | 2.065       | 0.039       | 0.020            | 0.776            | inf                  | -3959.7             | NaN             |
+|                   | Strong Motifs| 0.6931                   | 0.227         | 3.048       | 0.002       | 0.247            | 1.139            | inf                  | -2861.3             | NaN             |
+|                   | Weak Motifs  | -0.6931                   | 0.433         | -1.601      | 0.109       | -1.542           | 0.156            | inf                  | -3907.0             | NaN             |
+| **40**| All Motifs  | 0.3629                     | 0.188         | 1.931       | 0.054       | -0.005           | 0.731            | inf                  | -3958.3             | NaN             |
+|                   | Strong Motifs| 0.6604                   | 0.221         | 2.985       | 0.003       | 0.227            | 1.094            | inf                  | -2860.0             | NaN             |
+|                   | Weak Motifs  | -0.7538                   | 0.429         | -1.758      | 0.079       | -1.594           | 0.087            | inf                  | -4346.2             | NaN             |
+| **80**| All Motifs  | 0.3365                     | 0.185         | 1.817       | 0.069       | -0.026           | 0.699            | inf                  | -3957.5             | NaN             |
+|                   | Strong Motifs| 0.6769                   | 0.221         | 3.069       | 0.002       | 0.245            | 1.109            | inf                  | -2859.3             | NaN             |
+|                   | Weak Motifs  | -0.8650                   | 0.421         | -2.052      | 0.040       | -1.691           | -0.039           | inf                  | -5268.8             | NaN             |
+
+: Logistic regression results for EBF1. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|------------------|
+| **5**             | All Motifs     | -0.6115                    | 0.174         | -3.516      | 0.000       | -0.952           | -0.271           | nan                  | -23022.0            | nan              |
+|              | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|              | Weak Motifs    | -0.6497                    | 0.180         | -3.610      | 0.000       | -1.002           | -0.297           | nan                  | -21921.0            | nan              |
+| **10**            | All Motifs     | -0.6026                    | 0.173         | -3.493      | 0.000       | -0.941           | -0.265           | nan                  | -22963.0            | nan              |
+|             | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|            | Weak Motifs    | -0.6397                    | 0.178         | -3.586      | 0.000       | -0.989           | -0.290           | nan                  | -21854.0            | nan              |
+| **20**            | All Motifs     | -0.6131                    | 0.172         | -3.561      | 0.000       | -0.951           | -0.276           | nan                  | -23373.0            | nan              |
+|             | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|           | Weak Motifs    | -0.6506                    | 0.178         | -3.654      | 0.000       | -1.000           | -0.302           | nan                  | -22273.0            | nan              |
+| **40**            | All Motifs     | -0.5698                    | 0.167         | -3.408      | 0.001       | -0.897           | -0.242           | nan                  | -22745.0            | nan              |
+|            | Strong Motifs  | 0.5596                     | 0.627         | 0.893       | 0.372       | -0.669           | 1.788            | nan                  | -1349.3             | nan              |
+|             | Weak Motifs    | -0.6621                    | 0.176         | -3.764      | 0.000       | -1.007           | -0.317           | nan                  | -23047.0            | nan              |
+| **80**            | All Motifs     | -0.5917                    | 0.165         | -3.584      | 0.000       | -0.915           | -0.268           | nan                  | -23900.0            | nan              |
+|           | Strong Motifs  | 0.3365                     | 0.586         | 0.575       | 0.566       | -0.811           | 1.484            | nan                  | -1349.2             | nan              |
+|            | Weak Motifs    | -0.6729                    | 0.174         | -3.872      | 0.000       | -1.014           | -0.332           | nan                  | -23824.0            | nan              |
+
+: Logistic regression results for PAX5. {#tbl-panel1}
+
+:::
+
+There is no clear trend, with each TF having different coefficients for different thresholds.
