@@ -3,6 +3,7 @@ project:
   output-dir: docs
 
 website:
+  reader-mode: true
   title: "DNA Breathing in ChIP-seq and gcPBM Data"
   navbar:
     left:
