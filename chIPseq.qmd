@@ -76,6 +76,9 @@ A total of 137 different cell lines and 64 TFs were represented in the ChIP-seq 
 
 : Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (\*\*\*: p-value < 5e-200, \*\*: p-value < 5e-100, \*: p-value < 5e-10). {#tbl-letters}
 
+::: {.callout-note icon=false collapse="true"}
+
+## Selected TFs
 
 |                         | Significance   |   Motif Flip Correlation |   Motif Flip P-value |   Motif Coord Correlation |   Motif Coord P-value |   Motif Coord Squared Correlation |   Motif Coord Squared P-value |
 |:------------------------|:---------------|-------------------------:|---------------------:|--------------------------:|----------------------:|----------------------------------:|------------------------------:|
@@ -91,11 +94,13 @@ A total of 137 different cell lines and 64 TFs were represented in the ChIP-seq 
 | ('POU2F2', 'MA0507.2')  | ***            |             -0.159574    |         4.36759e-247 |               -0.152753   |          2.38861e-226 |                       -0.164202   |                  1.0688e-261  |
 | ('GABPA', 'MA0062.3')   | ***            |             -0.131515    |         3.15451e-250 |               -0.129117   |          3.46623e-241 |                       -0.133833   |                  3.95138e-259 |
 
-
 : The top 5 positive and top 5 negative most correlated TFs. ZBTB33 had a total positive sequence count of less than 3000, and was passed over for BATF. {#tbl-letters}
 
+:::
+
+
 ::: {#fig-Correlation_position layout-ncol=3}
-![](figs/phase4/top_sig_feat/MAFK_MA0496.3_motif_flip.png_motif_flip.png){group="correlation_position"}
+![](figs/phase4/top_sig_feat/MAFK_MA0496.3_motif_flip.png){group="correlation_position"}
 
 ![](figs/phase4/top_sig_feat/MAFK_MA0496.3_motif_coord.png){group="correlation_position"}
 
