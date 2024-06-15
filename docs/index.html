@@ -278,16 +278,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="processing-of-chip-seq-sequences-and-bubble-features" class="level2">
 <h2 class="anchored" data-anchor-id="processing-of-chip-seq-sequences-and-bubble-features"><a href="./chIPseq.html">Processing of ChIP-seq sequences and bubble features</a></h2>
 <p>We used the ChIP-seq sequences available to us previously and then used pyDNA-EPBD to generate bubble data for a selection of these sequences. We then ran similar statistical tests to see if there was any correlation between bubble features and binding affinity. We also ran correlation tests between the average flipping feature value for a motif occurrence and the binding affinity of the sequence, and then correlations between the average flipping feature for individual base pair positions and the binding affinity of the sequence.</p>
-<p>Using the results obtained, we used the 5 topmost correlated TFs (based on flipping features analysis) as well as PAX5 and EBF1 (based on results previously obtained by our collaborators) and repeated our gcPBM analysis pipeline with ChIP-seq data.</p>
-<p>The assumptions made in the gcPBM analysis did not hold for the ChIP-seq data, so some definitions were modified. The overall trends were of bubbles being negatively correlated with binding affinity, which was in contrast to the gcPBM data.</p>
+<p>Using the results obtained, we used the 5 topmost positively and 5 topmost negatively correlated TFs (based on flipping features analysis) and repeated our gcPBM analysis pipeline with ChIP-seq data.</p>
+<p>The assumptions made in the gcPBM analysis did not hold for the ChIP-seq data, so some definitions were modified.</p>
 </section>
 <section id="misc" class="level2">
 <h2 class="anchored" data-anchor-id="misc">Misc</h2>
 <section id="analysis-with-obsolete-gcpbm-bubble-data" class="level4">
 <h4 class="anchored" data-anchor-id="analysis-with-obsolete-gcpbm-bubble-data"><a href="./gcPBM_obsolete.html">Analysis with obsolete gcPBM bubble data</a></h4>
 </section>
-<section id="analysis-with-improperly-classified-tf-labels-for-chip-seq-data" class="level4">
-<h4 class="anchored" data-anchor-id="analysis-with-improperly-classified-tf-labels-for-chip-seq-data"><a href="./chIPseq_incorrect.html">Analysis with improperly classified TF-labels for ChIP-seq data</a></h4>
+<section id="chip-seq-analysis-with-5-most-highly-correlated-tfs-including-ebf1-and-pax5" class="level4">
+<h4 class="anchored" data-anchor-id="chip-seq-analysis-with-5-most-highly-correlated-tfs-including-ebf1-and-pax5"><a href="./chIPseq_old.html">ChIP-seq analysis with 5 most highly correlated TFs (including EBF1 and PAX5)</a></h4>
 
 
 </section>
@@ -528,7 +528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 

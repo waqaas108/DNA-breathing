@@ -1,0 +1,514 @@
+---
+title: Analysis of ChIP-seq data
+filters:
+   - lightbox
+lightbox: auto
+tbl-cap-location: bottom
+---
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
+## Correlations of Motif positions and Flipping features
+
+Our hypothesis is that flipping features inside or near motifs may determine binding affinity. To test this, we extracted all DNA sequences with motifs. Then we computed the average flipping feature across all positions in the motifs, and found the correlation between this average flipping feature and the binding affinity of the sequence for every sequence.
+
+The ChIP-seq data used to create these results was a dataset of 886625 sequences, with each sequence having a length of 500 basepairs. To reduce the size of each sequence, 150 basepairs of flanking sequences were removed from either side of the sequence.
+
+A total of 137 different cell lines and 64 TFs were represented in the Chip-seq peaks. For each sequence, the presence of binding in each cell line was represented as a binary value. The binding affinity of the sequence to a particular TF was computed as the average of the binary values across all cell lines.
+
+|  TF, Motif Matrix ID  |  Significance   |   Motif Flip Correlation |   Motif Flip P-value  |   Motif Coord Correlation |   Motif Coord P-value |   Motif Coord Squared Correlation |   Motif Coord Squared P-value |
+|:------------------------|:---------------|-------------------------:|---------------------:|--------------------------:|----------------------:|----------------------------------:|------------------------------:|
+| ('POU2F2', 'MA0507.2')  | ***            |             -0.159574    |         4.36759e-247 |               -0.152753   |          2.38861e-226 |                       -0.164202   |                  1.0688e-261  |
+| ('CTCF', 'MA1929.1')    | ***            |              0.148089    |         0            |                0.152313   |          0            |                        0.148878   |                  0            |
+| ('ETS1', 'MA0098.3')    | ***            |             -0.213333    |         0            |               -0.216777   |          0            |                       -0.216897   |                  0            |
+| ('JUND', 'MA0491.2')    | ***            |             -0.115146    |         2.80143e-284 |               -0.117503   |          4.99183e-296 |                       -0.119608   |                  9.92263e-307 |
+| ('MAFK', 'MA0496.3')    | ***            |              0.207249    |         0            |                0.226993   |          0            |                        0.214352   |                  0            |
+| ('ZBTB7A', 'MA0750.2')  | ***            |             -0.219305    |         0            |               -0.222262   |          0            |                       -0.221064   |                  0            |
+| ('CEBPB', 'MA0466.3')   | ***            |              0.159219    |         1.09438e-248 |                0.166281   |          2.32767e-271 |                        0.156105   |                  5.07059e-239 |
+| ('BATF', 'MA1634.1')    | ***            |              0.130621    |         0            |                0.130162   |          0            |                        0.125088   |                  4.4871e-320  |
+| ('EBF1', 'MA0154.4')    | ***            |              0.122095    |         2.19183e-247 |                0.11076    |          1.09086e-203 |                        0.122603   |                  1.92057e-249 |
+| ('CTCF', 'MA1930.1')    | ***            |              0.127049    |         7.39534e-243 |                0.13132    |          1.86179e-259 |                        0.127712   |                  2.14005e-245 |
+| ('GABPA', 'MA0062.3')   | ***            |             -0.131515    |         3.15451e-250 |               -0.129117   |          3.46623e-241 |                       -0.133833   |                  3.95138e-259 |
+| ('NFYB', 'MA0502.2')    | ***            |              0.179887    |         0            |                0.175474   |          0            |                        0.177978   |                  0            |
+| ('E2F6', 'MA0471.2')    | ***            |             -0.20049     |         0            |               -0.191      |          0            |                       -0.203085   |                  0            |
+| ('TEAD4', 'MA0809.2')   | ***            |             -0.127689    |         3.40155e-239 |               -0.123619   |          3.30392e-224 |                       -0.132188   |                  2.39609e-256 |
+| ('SP1', 'MA0079.5')     | ***            |             -0.121857    |         0            |               -0.122212   |          0            |                       -0.123913   |                  0            |
+| ('ATF3', 'MA0605.2')    | **             |             -0.116712    |         1.20309e-100 |               -0.116385   |          4.33041e-100 |                       -0.115879   |                  3.12074e-99  |
+| ('MEF2A', 'MA0052.4')   | **             |             -0.0906954   |         1.85054e-133 |               -0.0943087  |          3.44107e-144 |                       -0.0914815  |                  9.31153e-136 |
+| ('TFAP2C', 'MA0814.2')  | **             |             -0.0776623   |         8.25091e-105 |               -0.0744448  |          1.93678e-96  |                       -0.0775775  |                  1.38586e-104 |
+| ('ZBTB33', 'MA0527.1')  | **             |              0.158106    |         2.77515e-124 |                0.164416   |          2.23709e-134 |                        0.154225   |                  2.7953e-118  |
+| ('ELF1', 'MA0473.3')    | **             |             -0.10237     |         2.4018e-153  |               -0.0985878  |          2.57152e-142 |                       -0.107762   |                  8.42208e-170 |
+| ('FOSL1', 'MA0477.2')   | **             |             -0.111025    |         3.0724e-137  |               -0.113367   |          4.83459e-143 |                       -0.117646   |                  5.79912e-154 |
+| ('MAX', 'MA0058.3')     | **             |             -0.120506    |         3.02992e-132 |               -0.118762   |          1.78912e-128 |                       -0.124613   |                  2.40868e-141 |
+| ('JUND', 'MA0492.1')    | **             |             -0.129622    |         9.99296e-186 |               -0.128752   |          2.99312e-183 |                       -0.129069   |                  3.76444e-184 |
+| ('FOXA1', 'MA0148.4')   | **             |             -0.0889192   |         7.15563e-105 |               -0.0931628  |          5.66394e-115 |                       -0.0927166  |                  6.87981e-114 |
+| ('EGR1', 'MA0162.4')    | *              |             -0.0256046   |         2.45873e-10  |               -0.0289913  |          7.66107e-13  |                       -0.0279573  |                  4.80071e-12  |
+| ('THAP1', 'MA0597.2')   | *              |             -0.0763002   |         3.37396e-85  |               -0.075986   |          1.63983e-84  |                       -0.0765208  |                  1.10762e-85  |
+| ('TCF7L2', 'MA0523.1')  | *              |             -0.0304634   |         5.17712e-13  |               -0.0306028  |          4.05744e-13  |                       -0.0310841  |                  1.73511e-13  |
+| ('IRF4', 'MA1419.1')    | *              |             -0.0553265   |         9.16276e-25  |               -0.0564461  |          1.03468e-25  |                       -0.0554038  |                  7.89247e-25  |
+| ('RUNX3', 'MA0684.2')   | *              |              0.0533804   |         7.83515e-35  |                0.0723474  |          1.39526e-62  |                        0.0439245  |                  4.13134e-24  |
+| ('TFAP2C', 'MA0524.2')  | *              |             -0.0560929   |         9.49061e-45  |               -0.0553093  |          1.4853e-43   |                       -0.0536888  |                  3.88442e-41  |
+| ('BHLHE40', 'MA0464.2') | *              |             -0.0708272   |         1.05203e-36  |               -0.0616101  |          3.63039e-28  |                       -0.0743733  |                  2.64074e-40  |
+| ('TFAP2C', 'MA0815.1')  | *              |             -0.0623791   |         6.62078e-57  |               -0.0625546  |          3.23473e-57  |                       -0.0622617  |                  1.068e-56    |
+| ('USF1', 'MA0093.3')    | *              |             -0.0291098   |         2.2203e-14   |               -0.0314814  |          1.46036e-16  |                       -0.0332893  |                  2.45195e-18  |
+| ('ZNF143', 'MA0088.2')  | *              |             -0.0753368   |         1.19298e-62  |               -0.0782654  |          1.7465e-67   |                       -0.0757825  |                  2.25375e-63  |
+| ('REST', 'MA0138.2')    | *              |              0.0331556   |         1.80389e-21  |                0.0365083  |          1.08313e-25  |                        0.0323709  |                  1.5365e-20   |
+| ('GATA2', 'MA0036.3')   | *              |             -0.060954    |         5.67575e-34  |               -0.0624701  |          1.33564e-35  |                       -0.0684889  |                  1.85265e-42  |
+| ('FOSL2', 'MA0478.1')   | *              |             -0.0348497   |         4.59591e-16  |               -0.0377253  |          1.46457e-18  |                       -0.043042   |                  1.09646e-23  |
+| ('SRF', 'MA0083.3')     | *              |              0.0631394   |         5.0263e-23   |                0.0619354  |          3.24969e-22  |                        0.0575071  |                  2.29528e-19  |
+| ('FOXA2', 'MA0047.3')   | *              |             -0.0674098   |         1.60944e-59  |               -0.0682668  |          5.33284e-61  |                       -0.0753565  |                  5.83597e-74  |
+| ('RFX5', 'MA0510.2')    | *              |             -0.0414684   |         5.98153e-14  |               -0.041082   |          1.0186e-13   |                       -0.0425917  |                  1.23803e-14  |
+| ('TCF12', 'MA1648.1')   | *              |             -0.0526567   |         1.13241e-33  |               -0.0446482  |          1.14874e-24  |                       -0.0537764  |                  4.76174e-35  |
+| ('PAX5', 'MA0014.3')    |                |             -0.0195574   |         0.000190657  |               -0.0130089  |          0.0130774    |                       -0.021528   |                  4.00639e-05  |
+| ('STAT3', 'MA0144.2')   |                |              0.00648558  |         0.0628939    |                0.00326835 |          0.348607     |                        0.00547239 |                  0.116561     |
+| ('CTCF', 'MA0139.1')    |                |              0.00301348  |         0.430691     |                0.01018    |          0.00776604   |                        0.00406404 |                  0.287904     |
+| ('HNF4A', 'MA0114.4')   |                |             -0.00454398  |         0.28178      |               -0.00254437 |          0.546721     |                       -0.00892146 |                  0.0345792    |
+| ('USF2', 'MA0526.4')    |                |             -0.0084163   |         0.0555673    |               -0.00778067 |          0.0767562    |                       -0.0109349  |                  0.0128699    |
+| ('PRDM1', 'MA0508.3')   |                |              0.0157651   |         0.000218144  |                0.0188498  |          9.84675e-06  |                        0.0168018  |                  8.1423e-05   |
+| ('HNF4A', 'MA1494.1')   |                |             -0.0129247   |         0.00710976   |               -0.00979757 |          0.0413124    |                       -0.0159635  |                  0.000885489  |
+| ('PBX3', 'MA1114.1')    |                |             -0.000716736 |         0.842046     |                0.00721382 |          0.0448875    |                       -0.00204474 |                  0.569692     |
+| ('NR2F2', 'MA1111.1')   |                |             -0.0229158   |         1.21751e-07  |               -0.0217349  |          5.21737e-07  |                       -0.0258551  |                  2.37705e-09  |
+
+: Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (\*\*\*: p-value < 5e-200, \*\*: p-value < 5e-100, \*: p-value < 5e-10). {#tbl-letters}
+
+
+|        | Motif Flip        | Motif Coord       | Motif Coord^2     |
+|:-------|:------------------|:------------------|:------------------|
+| POU2F2 | -0.33 (0.000000*) | -0.32 (0.000000*) | -0.34 (0.000000*) |
+| CTCF   | -0.04 (0.004075*) | -0.04 (0.005045*) | -0.04 (0.004115*) |
+| ETS1   | -0.31 (0.000000*) | -0.31 (0.000000*) | -0.32 (0.000000*) |
+| JUND   | -0.17 (0.000000*) | -0.17 (0.000000*) | -0.18 (0.000000*) |
+| MAFK   | 0.21 (0.000000*)  | 0.22 (0.000000*)  | 0.21 (0.000000*)  |
+| EBF1   | 0.20 (0.000000*)  | 0.19 (0.000000*)  | 0.21 (0.000000*)  |
+| PAX5   | 0.01 (0.718219)   | 0.02 (0.384439)   | 0.01 (0.773541)   |
+
+: Correlation (and associated p-value) between flipping features and binding affinity averaged across all motifs in a sequence (top 5 significant motifs + PAX5 and EBF1). * shows significance at the 0.05 threshold. {#tbl-letters}
+
+::: {#fig-Correlation_position layout-ncol=3}
+![](figs/phase4_new/top_sig_feat/POU2F2_MA0507.2_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/POU2F2_MA0507.2_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/POU2F2_MA0507.2_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/CTCF_MA1929.1_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/CTCF_MA1929.1_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/CTCF_MA1929.1_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/ETS1_MA0098.3_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/ETS1_MA0098.3_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/ETS1_MA0098.3_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/JUND_MA0491.2_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/JUND_MA0491.2_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/JUND_MA0491.2_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/MAFK_MA0496.3_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/MAFK_MA0496.3_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/MAFK_MA0496.3_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/EBF1_MA0154.4_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/EBF1_MA0154.4_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/EBF1_MA0154.4_motif_coordsq.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/PAX5_MA0014.3_motif_flip.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/PAX5_MA0014.3_motif_coord.png){group="correlation_position"}
+
+![](figs/phase4_new/top_sig_feat/PAX5_MA0014.3_motif_coordsq.png){group="correlation_position"}
+
+Barplots showing the correlation (and associated p-value) between flipping features and binding affinity for motifs, for each position in the motif (top 5 significant motifs + PAX5 and EBF1).
+:::
+
+Our findings echo the gcPBM results, with different TF motifs having different correlations between flipping features and binding affinity, and different positions across the motif having different correlations.
+
+Following these results, we decided to use the top 5 most significant motifs (as well as PAX5 and EBF1 as suggested by our collaborator's results) to recreate the tests done in the gcPBM analysis.
+
+## Data overview
+
+The original ChIP-seq dataset used to create these results was a dataset of 886625 sequences, with each sequence having a length of 500 basepairs. To reduce the size of each sequence, 150 basepairs of flanking sequences were removed from either side of the sequence. To further reduce the number of sequences we had to simulate bubble data for, we filtered out sequences with positive label values for the TFs in question, making sure we had at least 3000 sequences with a positive hit for each TF. This criteria left us with 26391 sequences in total. The overall distribution of positive label values per TF is shown below:
+
+| TF, Motif Matrix ID | Positive Label Values |
+|:---------------------|--------------:|
+| ('POU2F2', 'MA0507.2') |  7561       |
+| ('CTCF', 'MA1929.1')   |  9613       |
+| ('ETS1', 'MA0098.3')   |  5070       |
+| ('JUND', 'MA0491.2')   |  4728       |
+| ('MAFK', 'MA0496.3')   |  3500       |
+| ('EBF1', 'MA0154.4')   |  7461       |
+| ('PAX5', 'MA0014.3')   |  8860       |
+
+: Distribution of positive label values for each TF in the dataset. {#tbl-letters}
+
+### Bubble data
+
+As in the gcPBM analysis, we used a bubble length threshold of 10 and an amplitude of 3.5 Armstrong. We used a probability threshold at the 95th percentile to decide if a position was positive for a bubble or not. With this threshold, 10359 out of 26391 (39.25%) of the sequences had a bubble present.
+
+### Motifs
+
+We used the FIMO tool from the MEME suite to scan for motif presence. We used the following p-value thresholds to determine strong or weak motif matches:
+
+p-value ≤ 1 x 10^-4 (strong motif match)
+
+p-value > 1 x 10^-4 and ≤ 1 x 10^-3 (weak motif match)
+
+The overall number of sequences with strong and weak motif matches per TF is shown below, along with label and bubble distributions:
+
+|        |   Positive Labels |   Negative Labels |   Sequences with Bubbles |   Sequences with Strong Motifs |   Sequences with Weak Motifs |   Sequences with Strong and Weak Motifs |
+|:-------|------------------:|------------------:|-------------------------:|-------------------------------:|-----------------------------:|----------------------------------------:|
+| POU2F2 |              7561 |             18830 |                    10359 |                           1115 |                         4397 |                                     385 |
+| CTCF   |              9613 |             16778 |                    10359 |                           5954 |                         2901 |                                    1227 |
+| ETS1   |              5070 |             21321 |                    10359 |                           2390 |                        10259 |                                    1088 |
+| JUND   |              4728 |             21663 |                    10359 |                           2947 |                         3322 |                                    1475 |
+| MAFK   |              3500 |             22891 |                    10359 |                           3445 |                         5633 |                                    1419 |
+| EBF1   |              7461 |             18930 |                    10359 |                           4201 |                         3053 |                                    1487 |
+| PAX5   |              8860 |             17531 |                    10359 |                           1952 |                        11271 |                                    1138 |
+
+## Statistical Investigations
+
+### Chi-squared test
+
+We first conducted a chi-squared test to determine if the labels for bubble positive sequences were significantly different from the labels for bubble negative sequences:
+
+| TF     |   chi-squared |      p-value |
+|:-------|--------------:|-------------:|
+| POU2F2 |       85.864  | 1.9275e-20   |
+| CTCF   |      923.053  | 9.56182e-203 |
+| ETS1   |     1540.41   | 0            |
+| JUND   |      142.653  | 6.99953e-33  |
+| MAFK   |     1386.07   | 2.2306e-303  |
+| EBF1   |       57.5115 | 3.3601e-14   |
+| PAX5   |      408.579  | 7.47294e-91  |
+
+The results were significant for all TFs.
+
+### Fisher's exact test
+
+#### The effect of the distance between bubbles and motifs for each sequence with both a bubble and a motif
+
+We then investigated the effect of the distance between bubbles and motifs on binding affinity. To this end, we categorized the sequences using the label to be positive (label = 1) or negative (label = 0) sequences. We calculated the minimum distance between a motif and a bubble per sequence. We then defined close distances between motifs and bubbles using a maximum threshold, and then performed a fischer's exact test at different thresholds.
+
+::: {#fig-Fischer layout-ncol=3}
+![](figs/phase4_new/binding_posvneg_distance/POU2F2_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/CTCF_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/ETS1_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/JUND_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/MAFK_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/EBF1_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+![](figs/phase4_new/binding_posvneg_distance/PAX5_positive_vs_negative_sequences.png){group="bubble_motif_distance2"}
+
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences.
+:::
+
+| Distance Threshold | POU2F2           | CTCF            | ETS1             | JUND             | MAFK             | EBF1             | PAX5            |
+|---:|:-----------------|:----------------|:-----------------|:-----------------|:-----------------|:-----------------|:----------------|
+|  ≤2 | 0.41 (0.000000*) | 1.04 (0.845010) | 0.77 (0.519669)  | 0.62 (0.000626*) | 1.96 (0.000000*) | 1.74 (0.012613*) | 0.97 (1.000000) |
+|  ≤3 | 0.40 (0.000000*) | 1.12 (0.568836) | 0.71 (0.428270)  | 0.62 (0.000361*) | 2.03 (0.000000*) | 1.90 (0.002689*) | 0.97 (1.000000) |
+|  ≤4 | 0.39 (0.000000*) | 1.05 (0.853470) | 0.72 (0.360480)  | 0.60 (0.000110*) | 2.10 (0.000000*) | 1.69 (0.010367*) | 0.90 (0.848836) |
+|  ≤5 | 0.39 (0.000000*) | 1.02 (0.928810) | 0.65 (0.233441)  | 0.60 (0.000092*) | 2.11 (0.000000*) | 1.59 (0.017313*) | 0.91 (0.853218) |
+| ≤10 | 0.39 (0.000000*) | 1.25 (0.172221) | 0.63 (0.140613)  | 0.59 (0.000015*) | 1.97 (0.000000*) | 1.38 (0.056996)  | 1.19 (0.566375) |
+| ≤20 | 0.43 (0.000000*) | 1.07 (0.629522) | 0.81 (0.406987)  | 0.56 (0.000000*) | 2.02 (0.000000*) | 1.32 (0.042985*) | 1.21 (0.391389) |
+| ≤40 | 0.41 (0.000000*) | 0.96 (0.755098) | 0.64 (0.068583)  | 0.55 (0.000000*) | 2.20 (0.000000*) | 1.07 (0.587852)  | 0.99 (1.000000) |
+| ≤80 | 0.37 (0.000395*) | 1.27 (0.142508) | 0.58 (0.037852*) | 0.56 (0.000015*) | 1.94 (0.000000*) | 0.96 (0.785287)  | 0.97 (0.913028) |
+
+: Summary of the results of the Fischer's Exact Test at different distance thresholds. (Odds Ratio (p-value), * represents significance at the 0.05 threshold.) {#tbl-letters}
+
+POU2F2, JUND, and MAFK had significant results at all distance thresholds, EBF1 had significant results at close thresholds, while ETS1 had significant results at the threshold of ≤80.
+
+#### Sorting out strongest motifs using p-value and testing for the effect of the distance between bubbles and motifs
+
+We then sorted out the strongest motifs using the p-value and calculated the distance between these motifs and the nearest bubble. If no bubble was present in the sequence, we used the length of the sequence as the distance (200). We generated histograms of the distributions of these distances for positive and negative sequences and performed a Fischer's exact test with a threshold of <200. This threshold equates to either the motif and bubble co-occurred, or the motif and a bubble were not present on the sequence together.
+
+::: {#fig-Fischer_motif layout-ncol=3}
+![](figs/phase4_new/strong_motif_distances/POU2F2_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/CTCF_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/ETS1_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/JUND_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/MAFK_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/EBF1_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+![](figs/phase4_new/strong_motif_distances/PAX5_positive_vs_negative_sequences.png){group="bubble_motif_distance"}
+
+Histograms showing the distribution of distances between the strongest motifs and their nearest bubbles for positive and negative sequences.
+:::
+
+| Threshold: <200 |   Odds Ratio |     P-value |
+|:-------|-------------:|------------:|
+| POU2F2 |    0.397727  | 1.1197e-09*  |
+| CTCF   |    0.723292  | 0.555995    |
+| ETS1   |    0.0620915 | 0.00020281*  |
+| JUND   |    0.353421  | 1.26816e-07* |
+| MAFK   |    2.77972   | 0.000104605* |
+| EBF1   |    6.66002   | 0.0361246*   |
+| PAX5   |    0.599593  | 0.514877    |
+
+: Summary of the results of the Fischer's Exact Test at a distance threshold of <200 (* represents significance at the 0.05 threshold). {#tbl-letters}
+
+## Logistic Regressions
+
+### Bubble count and binding affinity
+
+We then conducted logistic regressions to see the degree to which the presence of a bubble significantly affected binding affinity. To filter out the effect of motif presence, we used sequences with only weak motif matches, and then sequences with no motif matches, and correlated the number of bubbles with the binding affinity.
+
+::: {#tbl-panel layout-ncol=1}
+| TF = POU2F2 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -0.5462 | 0.022   | -24.425 | 0.000   | -0.590  | -0.502 | inf | -inf | nan |
+| bubble_count (no_motifs)| -0.6125 | 0.017    | -35.861 | 0.000   | -0.646  | -0.579 | inf | -inf | nan |
+
+
+
+: Logistic regression results for POU2F2. {#tbl-panel1}
+
+
+
+|  TF = CTCF  | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -0.3537 | 0.070    | -5.071  | 0.000   | -0.490  | -0.217 | inf              | -31713          | nan         |
+| bubble_count (no_motifs)   | -0.6253 | 0.014    | -43.938 | 0.000   | -0.653  | -0.597 | inf              | -inf            | nan         |
+
+
+
+
+: Logistic regression results for CTCF. {#tbl-panel1}
+
+
+
+| TF = ETS1 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -1.7547 | 0.055    | -31.622 | 0.000   | -1.863  | -1.646 | inf              | -inf            | nan         |
+| bubble_count (no_motifs)   | -1.6693 | 0.037    | -45.144 | 0.000   | -1.742  | -1.597 | inf              | -inf            | nan         |
+
+
+
+
+: Logistic regression results for ETS1. {#tbl-panel1}
+
+
+
+| TF = JUND | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -1.0830 | 0.062    | -17.474 | 0.000   | -1.204  | -0.961 | inf              | -inf            | nan         |
+| bubble_count (no_motifs)   | -1.1588 | 0.024    | -48.290 | 0.000   | -1.206  | -1.112 | inf              | -inf            | nan         |
+
+
+
+
+: Logistic regression results for JUND. {#tbl-panel1}
+
+
+
+| TF = MAFK | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -0.4877 | 0.014    | -34.003 | 0.000   | -0.516  | -0.460 | inf              | -inf            | nan         |
+| bubble_count (no_motifs)   | -0.3240 | 0.027    | -11.980 | 0.000   | -0.377  | -0.271 | inf              | -1.6704e+05     | nan         |
+
+
+
+
+: Logistic regression results for MAFK. {#tbl-panel1}
+
+
+
+| TF = EBF1 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -0.4619 | 0.012    | -37.162 | 0.000   | -0.486  | -0.438 | inf              | -inf            | nan         |
+| bubble_count (no_motifs)   | -0.1451 | 0.057    | -2.568  | 0.010   | -0.256  | -0.034 | inf              | -14192          | nan         |
+
+
+
+: Logistic regression results for EBF1. {#tbl-panel1}
+
+
+
+| TF = PAX5 | coef   | std err | z        | P-value | 0.025   | 0.975   | Pseudo R-squared | Log-Likelihood | LLR p-value |
+|-----------------|--------|---------|----------|---------|---------|---------|-----------------|----------------|-------------|
+| bubble_count (weak_motifs) | -0.6289 | 0.016    | -40.571 | 0.000   | -0.659  | -0.599 | inf              | -inf            | nan         |
+| bubble_count (no_motifs)   | -0.3664 | 0.025    | -14.720 | 0.000   | -0.415  | -0.318 | inf              | -2.5989e+05     | nan         |
+
+
+
+
+: Logistic regression results for PAX5. {#tbl-panel1}
+
+Linear Regression of all sequences with Number of Bubbles for sequences with weak motifs only, and sequences with no motifs.
+:::
+
+We notice the overall trend of the number of bubbles being negatively correlated with binding affinity.
+
+### Distance between bubbles and motifs
+
+We then conducted logistic regressions to see the degree to which the distance between bubbles and motifs significantly affected binding affinity. We first isolated the strongest motif match (by p-value) in a sequence, and then calculated the distance between this motif and the nearest bubble. We then turned this distance into a binary variable, with different thresholds for the distance. We then performed logistic regressions to see the effect of this distance on binding affinity.
+
+::: {#tbl-panel layout-ncol=1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5** | All Motifs | -1.2040 | 0.062 | -19.442 | 0.000 | -1.325 | -1.083 | 0.050 | -25153.857 | 0.000 |
+| | Strong Motifs | -0.5856 | 0.123 | -4.764 | 0.000 | -0.827 | -0.345 | 0.050 | -25153.857 | 0.000 |
+| | Weak Motifs | -1.3895 | 0.073 | -19.058 | 0.000 | -1.532 | -1.247 | 0.050 | -25153.857 | 0.000 |
+| **10** | All Motifs | -1.1997 | 0.061 | -19.618 | 0.000 | -1.320 | -1.080 | 0.056 | -25083.301 | 0.000 |
+| | Strong Motifs | -0.5596 | 0.121 | -4.639 | 0.000 | -0.796 | -0.323 | 0.056 | -25083.301 | 0.000 |
+| | Weak Motifs | -1.3946 | 0.072 | -19.300 | 0.000 | -1.536 | -1.253 | 0.056 | -25083.301 | 0.000 |
+| **20** | All Motifs | -1.2012 | 0.060 | -19.927 | 0.000 | -1.319 | -1.083 | 0.058 | -25051.394 | 0.000 |
+| | Strong Motifs | -0.5737 | 0.119 | -4.834 | 0.000 | -0.806 | -0.341 | 0.058 | -25051.394 | 0.000 |
+| | Weak Motifs | -1.3964 | 0.071 | -19.570 | 0.000 | -1.536 | -1.257 | 0.058 | -25051.394 | 0.000 |
+| **40** | All Motifs | -1.1959 | 0.058 | -20.561 | 0.000 | -1.310 | -1.082 | 0.060 | -25009.289 | 0.000 |
+| | Strong Motifs | -0.5301 | 0.114 | -4.665 | 0.000 | -0.753 | -0.307 | 0.060 | -25009.289 | 0.000 |
+| | Weak Motifs | -1.4063 | 0.069 | -20.322 | 0.000 | -1.542 | -1.271 | 0.060 | -25009.289 | 0.000 |
+| **80** | All Motifs | -1.1534 | 0.054 | -21.189 | 0.000 | -1.260 | -1.047 | 0.063 | -24951.235 | 0.000 |
+| | Strong Motifs | -0.4076 | 0.104 | -3.907 | 0.000 | -0.612 | -0.203 | 0.063 | -24951.235 | 0.000 |
+| | Weak Motifs | -1.4017 | 0.066 | -21.347 | 0.000 | -1.530 | -1.273 | 0.063 | -24951.235 | 0.000 |
+
+: Logistic regression results for POU2F2. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs | -0.3716 | 0.168 | -2.214 | 0.027 | -0.700 | -0.043 | inf | -13484.0 | NaN |
+|                 | Strong Motifs | -0.3497 | 0.199 | -1.756 | 0.079 | -0.740 | 0.041 | inf | -9523.1 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **10**          | All Motifs | -0.3716 | 0.168 | -2.214 | 0.027 | -0.700 | -0.043 | inf | -13484.0 | NaN |
+|                 | Strong Motifs | -0.3497 | 0.199 | -1.756 | 0.079 | -0.740 | 0.041 | inf | -9523.1 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **20**          | All Motifs | -0.3943 | 0.167 | -2.360 | 0.018 | -0.722 | -0.067 | inf | -14188.0 | NaN |
+|                 | Strong Motifs | -0.3819 | 0.198 | -1.931 | 0.054 | -0.770 | 0.006 | inf | -10219.0 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **40**          | All Motifs | -0.3943 | 0.167 | -2.360 | 0.018 | -0.722 | -0.067 | inf | -14188.0 | NaN |
+|                 | Strong Motifs | -0.3819 | 0.198 | -1.931 | 0.054 | -0.770 | 0.006 | inf | -10219.0 | NaN |
+|                 | Weak Motifs | -0.3857 | 0.314 | -1.227 | 0.220 | -1.002 | 0.230 | inf | -3605.9 | NaN |
+| **80**          | All Motifs | -0.4316 | 0.162 | -2.667 | 0.008 | -0.749 | -0.114 | inf | -15912.0 | NaN |
+|                 | Strong Motifs | -0.4128 | 0.192 | -2.148 | 0.032 | -0.789 | -0.036 | inf | -11240.0 | NaN |
+|                 | Weak Motifs | -0.4418 | 0.302 | -1.462 | 0.144 | -1.034 | 0.150 | inf | -4300.7 | NaN |
+
+: Logistic regression results for CTCF. {#tbl-panel1}
+
+| **Threshold**   | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|-----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs     | -2.8633                    | 0.206         | -13.925     | 0.000       | -3.266           | -2.460           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7726                    | 0.595         | -4.659      | 0.000       | -3.939           | -1.606           | inf                  | -35541.0           | nan             |
+|                  | Weak Motifs    | -2.8751                    | 0.219         | -13.120     | 0.000       | -3.305           | -2.446           | inf                  | -inf               | nan             |
+| **10**          | All Motifs     | -2.8332                    | 0.202         | -14.040     | 0.000       | -3.229           | -2.438           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7726                    | 0.595         | -4.659      | 0.000       | -3.939           | -1.606           | inf                  | -35541.0           | nan             |
+|                  | Weak Motifs    | -2.8409                    | 0.215         | -13.243     | 0.000       | -3.261           | -2.420           | inf                  | -inf               | nan             |
+| **20**          | All Motifs     | -2.8267                    | 0.198         | -14.271     | 0.000       | -3.215           | -2.438           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.7932                    | 0.595         | -4.696      | 0.000       | -3.959           | -1.627           | inf                  | -inf               | nan             |
+|                  | Weak Motifs    | -2.8308                    | 0.210         | -13.476     | 0.000       | -3.242           | -2.419           | inf                  | -inf               | nan             |
+| **40**          | All Motifs     | -2.8654                    | 0.198         | -14.482     | 0.000       | -3.253           | -2.478           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.8526                    | 0.594         | -4.804      | 0.000       | -4.016           | -1.689           | inf                  | -inf               | nan             |
+|                  | Weak Motifs    | -2.8670                    | 0.210         | -13.662     | 0.000       | -3.278           | -2.456           | inf                  | -inf               | nan             |
+| **80**          | All Motifs     | -2.8234                    | 0.188         | -15.024     | 0.000       | -3.192           | -2.455           | inf                  | -inf               | nan             |
+|                  | Strong Motifs  | -2.3609                    | 0.468         | -5.046      | 0.000       | -3.278           | -1.444           | inf                  | -33510.0           | nan             |
+|                  | Weak Motifs    | -2.8948                    | 0.205         | -14.090     | 0.000       | -3.297           | -2.492           | inf                  | -inf               | nan             |
+
+: Logistic regression results for ETS1. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs | -1.6049 | 0.117 | -13.738 | 0.000 | -1.834 | -1.376 | inf | -1.8237e+05 | NaN |
+|                 | Strong Motifs | -1.0937 | 0.140 | -7.806 | 0.000 | -1.368 | -0.819 | inf | -58564.0 | NaN |
+|                 | Weak Motifs | -2.4553 | 0.233 | -10.538 | 0.000 | -2.912 | -1.999 | inf | -1.4704e+05 | NaN |
+| **10**          | All Motifs | -1.5740 | 0.115 | -13.741 | 0.000 | -1.799 | -1.350 | inf | -1.8133e+05 | NaN |
+|                 | Strong Motifs | -1.0463 | 0.137 | -7.638 | 0.000 | -1.315 | -0.778 | inf | -56645.0 | NaN |
+|                 | Weak Motifs | -2.4723 | 0.233 | -10.618 | 0.000 | -2.929 | -2.016 | inf | -1.5057e+05 | NaN |
+| **20**          | All Motifs | -1.6116 | 0.113 | -14.266 | 0.000 | -1.833 | -1.390 | inf | -1.9666e+05 | NaN |
+|                 | Strong Motifs | -1.0850 | 0.134 | -8.069 | 0.000 | -1.349 | -0.821 | inf | -62534.0 | NaN |
+|                 | Weak Motifs | -2.5257 | 0.232 | -10.869 | 0.000 | -2.981 | -2.070 | inf | -1.6216e+05 | NaN |
+| **40**          | All Motifs | -1.6296 | 0.110 | -14.752 | 0.000 | -1.846 | -1.413 | inf | -2.1087e+05 | NaN |
+|                 | Strong Motifs | -1.0855 | 0.132 | -8.236 | 0.000 | -1.344 | -0.827 | inf | -65051.0 | NaN |
+|                 | Weak Motifs | -2.5539 | 0.232 | -11.273 | 0.000 | -2.998 | -2.110 | inf | -1.7697e+05 | NaN |
+| **80**          | All Motifs | -1.4838 | 0.100 | -14.797 | 0.000 | -1.680 | -1.287 | inf | -2.0664e+05 | NaN |
+|                 | Strong Motifs | -0.9491 | 0.120 | -7.896 | 0.000 | -1.185 | -0.713 | inf | -61947.0 | NaN |
+|                 | Weak Motifs | -2.4049 | 0.205 | -11.744 | 0.000 | -2.806 | -2.004 | inf | -1.7774e+05 | NaN |
+
+: Logistic regression results for JUND. {#tbl-panel1}
+
+| **Threshold**   | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|-----------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5**           | All Motifs     | -0.0980                    | 0.090         | -1.084      | 0.278       | -0.275           | 0.079            | inf                  | -11574.0            | NaN             |
+|                  | Strong Motifs  | 0.4630                     | 0.135         | 3.441       | 0.001       | 0.199            | 0.727            | inf                  | -2285.1             | NaN             |
+|                  | Weak Motifs    | -0.6234                    | 0.131         | -4.745      | 0.000       | -0.881           | -0.366           | inf                  | -29228.0            | NaN             |
+| **10**          | All Motifs     | -0.1045                    | 0.090         | -1.165      | 0.244       | -0.280           | 0.071            | inf                  | -12129.0            | NaN             |
+|                  | Strong Motifs  | 0.4727                     | 0.134         | 3.540       | 0.000       | 0.211            | 0.735            | inf                  | -2283.1             | NaN             |
+|                  | Weak Motifs    | -0.6472                    | 0.131         | -4.946      | 0.000       | -0.904           | -0.391           | inf                  | -30894.0            | NaN             |
+| **20**          | All Motifs     | -0.1082                    | 0.088         | -1.230      | 0.219       | -0.281           | 0.064            | inf                  | -12673.0            | NaN             |
+|                  | Strong Motifs  | 0.4766                     | 0.131         | 3.648       | 0.000       | 0.221            | 0.733            | inf                  | -2278.8             | NaN             |
+|                  | Weak Motifs    | -0.6653                    | 0.129         | -5.158      | 0.000       | -0.918           | -0.412           | inf                  | -32865.0            | NaN             |
+| **40**          | All Motifs     | -0.1081                    | 0.086         | -1.251      | 0.211       | -0.278           | 0.061            | inf                  | -12936.0            | NaN             |
+|                  | Strong Motifs  | 0.4776                     | 0.129         | 3.715       | 0.000       | 0.226            | 0.730            | inf                  | -2275.6             | NaN             |
+|                  | Weak Motifs    | -0.6611                    | 0.126         | -5.232      | 0.000       | -0.909           | -0.413           | inf                  | -33850.0            | NaN             |
+| **80**          | All Motifs     | -0.1588                    | 0.082         | -1.928      | 0.054       | -0.320           | 0.003            | inf                  | -18079.0            | NaN             |
+|                  | Strong Motifs  | 0.4263                     | 0.122         | 3.493       | 0.000       | 0.187            | 0.665            | inf                  | -2267.5             | NaN             |
+|                  | Weak Motifs    | -0.7126                    | 0.121         | -5.895      | 0.000       | -0.949           | -0.476           | inf                  | -40617.0            | NaN             |
+
+: Logistic regression results for MAFK. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|-----------------|
+| **5** | All Motifs | 0.3747                     | 0.196         | 1.913       | 0.056       | -0.009           | 0.759            | inf                  | -3961.6             | NaN             |
+|                   | Strong Motifs| 0.7108                   | 0.231         | 3.080       | 0.002       | 0.259            | 1.163            | inf                  | -2861.9             | NaN             |
+|                   | Weak Motifs  | -0.9808                   | 0.479         | -2.049      | 0.040       | -1.919           | -0.043           | inf                  | -5081.2             | NaN             |
+| **10**| All Motifs  | 0.3902                     | 0.195         | 1.999       | 0.046       | 0.008            | 0.773            | inf                  | -3961.0             | NaN             |
+|                   | Strong Motifs| 0.7108                   | 0.231         | 3.080       | 0.002       | 0.259            | 1.163            | inf                  | -2861.9             | NaN             |
+|                   | Weak Motifs  | -0.8267                   | 0.453         | -1.824      | 0.068       | -1.715           | 0.062            | inf                  | -4452.1             | NaN             |
+| **20**| All Motifs  | 0.3980                     | 0.193         | 2.065       | 0.039       | 0.020            | 0.776            | inf                  | -3959.7             | NaN             |
+|                   | Strong Motifs| 0.6931                   | 0.227         | 3.048       | 0.002       | 0.247            | 1.139            | inf                  | -2861.3             | NaN             |
+|                   | Weak Motifs  | -0.6931                   | 0.433         | -1.601      | 0.109       | -1.542           | 0.156            | inf                  | -3907.0             | NaN             |
+| **40**| All Motifs  | 0.3629                     | 0.188         | 1.931       | 0.054       | -0.005           | 0.731            | inf                  | -3958.3             | NaN             |
+|                   | Strong Motifs| 0.6604                   | 0.221         | 2.985       | 0.003       | 0.227            | 1.094            | inf                  | -2860.0             | NaN             |
+|                   | Weak Motifs  | -0.7538                   | 0.429         | -1.758      | 0.079       | -1.594           | 0.087            | inf                  | -4346.2             | NaN             |
+| **80**| All Motifs  | 0.3365                     | 0.185         | 1.817       | 0.069       | -0.026           | 0.699            | inf                  | -3957.5             | NaN             |
+|                   | Strong Motifs| 0.6769                   | 0.221         | 3.069       | 0.002       | 0.245            | 1.109            | inf                  | -2859.3             | NaN             |
+|                   | Weak Motifs  | -0.8650                   | 0.421         | -2.052      | 0.040       | -1.691           | -0.039           | inf                  | -5268.8             | NaN             |
+
+: Logistic regression results for EBF1. {#tbl-panel1}
+
+| **Threshold** | **Motif Type** | **Coefficient (distance)** | **Std Error** | **z-value** | **P-value** | **95% CI Lower** | **95% CI Upper** | **Pseudo R-squared** | **Log-Likelihood** | **LLR p-value** |
+|---------------|----------------|----------------------------|---------------|-------------|-------------|------------------|------------------|----------------------|---------------------|------------------|
+| **5**             | All Motifs     | -0.6115                    | 0.174         | -3.516      | 0.000       | -0.952           | -0.271           | nan                  | -23022.0            | nan              |
+|              | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|              | Weak Motifs    | -0.6497                    | 0.180         | -3.610      | 0.000       | -1.002           | -0.297           | nan                  | -21921.0            | nan              |
+| **10**            | All Motifs     | -0.6026                    | 0.173         | -3.493      | 0.000       | -0.941           | -0.265           | nan                  | -22963.0            | nan              |
+|             | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|            | Weak Motifs    | -0.6397                    | 0.178         | -3.586      | 0.000       | -0.989           | -0.290           | nan                  | -21854.0            | nan              |
+| **20**            | All Motifs     | -0.6131                    | 0.172         | -3.561      | 0.000       | -0.951           | -0.276           | nan                  | -23373.0            | nan              |
+|             | Strong Motifs  | 0.0000                     | 0.707         | 0           | 1.000       | -1.386           | 1.386            | nan                  | -1353.7             | nan              |
+|           | Weak Motifs    | -0.6506                    | 0.178         | -3.654      | 0.000       | -1.000           | -0.302           | nan                  | -22273.0            | nan              |
+| **40**            | All Motifs     | -0.5698                    | 0.167         | -3.408      | 0.001       | -0.897           | -0.242           | nan                  | -22745.0            | nan              |
+|            | Strong Motifs  | 0.5596                     | 0.627         | 0.893       | 0.372       | -0.669           | 1.788            | nan                  | -1349.3             | nan              |
+|             | Weak Motifs    | -0.6621                    | 0.176         | -3.764      | 0.000       | -1.007           | -0.317           | nan                  | -23047.0            | nan              |
+| **80**            | All Motifs     | -0.5917                    | 0.165         | -3.584      | 0.000       | -0.915           | -0.268           | nan                  | -23900.0            | nan              |
+|           | Strong Motifs  | 0.3365                     | 0.586         | 0.575       | 0.566       | -0.811           | 1.484            | nan                  | -1349.2             | nan              |
+|            | Weak Motifs    | -0.6729                    | 0.174         | -3.872      | 0.000       | -1.014           | -0.332           | nan                  | -23824.0            | nan              |
+
+: Logistic regression results for PAX5. {#tbl-panel1}
+
+Logistic regressions of the distance between the nearest bubble and the strongest motif match in a sequence, with different thresholds for the distance.
+:::
+
+There is no clear trend, with each TF having different coefficients for different thresholds.
