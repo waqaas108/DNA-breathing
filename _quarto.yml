@@ -13,7 +13,7 @@ website:
 format:
   html:
     grid:
-      sidebar-width: 100px
+      sidebar-width: 20px
     theme: cosmo
     css: styles.css
     toc: true

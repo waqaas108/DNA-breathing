@@ -78,7 +78,9 @@ A total of 137 different cell lines and 64 TFs were represented in the ChIP-seq 
 
 ::: {.callout-note icon=false collapse="true"}
 
-## Selected TFs
+
+
+## Correlation Results of Selected TFs
 
 |                         | Significance   |   Motif Flip Correlation |   Motif Flip P-value |   Motif Coord Correlation |   Motif Coord P-value |   Motif Coord Squared Correlation |   Motif Coord Squared P-value |
 |:------------------------|:---------------|-------------------------:|---------------------:|--------------------------:|----------------------:|----------------------------------:|------------------------------:|
@@ -167,13 +169,17 @@ Our findings echo the gcPBM results, with different TF motifs having different c
 
 Following these results, we decided to use the top 5 most highly correlated TFs, both positive and negative, to recreate the tests done in the gcPBM analysis.
 
+
+
 ## Data overview
 
 The original ChIP-seq dataset used to create these results was a dataset of 886625 sequences, with each sequence having a length of 500 basepairs. To reduce the size of each sequence, 150 basepairs of flanking sequences were removed from either side of the sequence. To further reduce the number of sequences we had to simulate bubble data for, we filtered out sequences with positive label values for the TFs in question, making sure we had at least 3000 sequences with a positive hit for each TF. This criteria left us with 41268 sequences in total.
 
+
 ### Bubble data
 
 As in the gcPBM analysis, we used a bubble length threshold of 10 and an amplitude of 3.5 Armstrong. We used a probability threshold at the 95th percentile to decide if a position was positive for a bubble or not. With this threshold, 16301 out of 41268 (39.50%) of the sequences had a bubble present.
+
 
 ### Motifs
 
@@ -198,7 +204,10 @@ The overall number of sequences with strong and weak motif matches per TF is sho
 | POU2F2 |              4380 |             22011 |                    16301 |                           1967 |                         8743 |                                     782 |
 | GABPA  |              4090 |             22301 |                    16301 |                           5929 |                        10672 |                                    1645 |
 
+
+
 ## Statistical Investigations
+
 
 ### Fisher's exact test
 
@@ -288,7 +297,10 @@ Histograms showing the distribution of distances between the strongest motifs an
 
 : Summary of the results of the Fischer's Exact Test at a distance threshold of <200 (* represents significance at the 0.05 threshold). {#tbl-letters}
 
+
+
 ## Logistic Regressions
+
 
 ### Motifs, Bubbles, and their Interaction
 
@@ -314,7 +326,6 @@ We noticed that the interaction term may or may not be significant, depending on
 ::: {.callout-note icon=false collapse="true"}
 
 ## Detailed Regression Results
-
 
 
 | TF = MAFK      |     coef |   std err |        z |     P-value |     0.025 |     0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
@@ -458,6 +469,7 @@ We noticed that the interaction term may or may not be significant, depending on
 
 :::
 
+
 ### Regressions for Bubble presence while selecting for Motif match type
 
 We then conducted logistic regressions to see the degree to which the presence of a bubble significantly affected binding affinity while accounting for the effect of motif by filtering sequences by the type of motif match.
@@ -474,6 +486,7 @@ We then conducted logistic regressions to see the degree to which the presence o
 ::: {.callout-note icon=false collapse="true"}
 
 ## Detailed Regression Results
+
 
 Sorted by TF
 
@@ -568,6 +581,7 @@ Sorted by Motif Match Type
 
 :::
 
+
 ### Bubble count and binding affinity
 
 To account for the larger length of ChIP-seq sequences, we then conducted logistic regressions to see the degree to which the presence of multiple bubbles significantly affected binding affinity. To filter out the effect of motif presence, we used sequences with only weak motif matches, and then sequences with no motif matches, and correlated the number of bubbles with the binding affinity.
@@ -628,6 +642,7 @@ To account for the larger length of ChIP-seq sequences, we then conducted logist
 
 We notice the overall trend of bubble correlations remains consistent with the previous results. The top 5 TFs with positive flipping correlation maintain positive bubble correlations, except for NFYB, which has very weak correlations, and CTCF. The top 5 TFs with negative flipping correlation maintain negative bubble correlations.
 
+
 ### Distance between bubbles and motifs
 
 We then conducted logistic regressions to see the degree to which the distance between bubbles and motifs significantly affected binding affinity. We first isolated the strongest motif match (by p-value) in a sequence, and then calculated the distance between this motif and the nearest bubble. We then turned this distance into a binary variable, with different thresholds for the distance. We then performed logistic regressions to see the effect of this distance on binding affinity.
@@ -655,6 +670,7 @@ We then conducted logistic regressions to see the degree to which the distance b
 ::: {.callout-note icon=false collapse="true"}
 
 ## Results Sorted by Motif Match Type
+
 
 | Motif Type    |   Threshold | MAFK      | NFYB       |     CEBPB | CTCF       | BATF      | ZBTB7A     | ETS1       | E2F6       | POU2F2     | GABPA      |
 |:--------------|------------:|:----------|:-----------|----------:|:-----------|:----------|:-----------|:-----------|:-----------|:-----------|:-----------|
