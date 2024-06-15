@@ -1,5 +1,6 @@
 ---
 title: Analysis of ChIP-seq data
+navbar: false
 filters:
    - lightbox
 lightbox: auto
@@ -76,8 +77,11 @@ A total of 137 different cell lines and 64 TFs were represented in the ChIP-seq 
 
 : Correlations of flipping features and binding affinity for motifs, averaged across the motif occurrences for a given motif (\*\*\*: p-value < 5e-200, \*\*: p-value < 5e-100, \*: p-value < 5e-10). {#tbl-letters}
 
-::: {.callout-note icon=false collapse="true"}
 
+Following these results, we decided to use the top 5 most highly correlated TFs, both positive and negative, to recreate the tests done in the gcPBM analysis.
+
+
+::: {.callout-note icon=false collapse="true"}
 
 
 ## Correlation Results of Selected TFs
@@ -167,8 +171,6 @@ Barplots showing the correlation (and associated p-value) between flipping featu
 
 Our findings echo the gcPBM results, with different TF motifs having different correlations between flipping features and binding affinity, and different positions across the motif having different correlations.
 
-Following these results, we decided to use the top 5 most highly correlated TFs, both positive and negative, to recreate the tests done in the gcPBM analysis.
-
 
 
 ## Data overview
@@ -204,6 +206,7 @@ The overall number of sequences with strong and weak motif matches per TF is sho
 | POU2F2 |              4380 |             22011 |                    16301 |                           1967 |                         8743 |                                     782 |
 | GABPA  |              4090 |             22301 |                    16301 |                           5929 |                        10672 |                                    1645 |
 
+: The number of sequences with positive and negative labels, and the number of sequences with bubbles and motifs for each TF. {#tbl-motif_bubble}
 
 
 ## Statistical Investigations
@@ -236,7 +239,7 @@ We then investigated the effect of the distance between bubbles and motifs on bi
 
 ![](figs/phase4/binding_posvneg_distance/GABPA_comparison.png){group="bubble_motif_distance2"}
 
-Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences. The left graph shows superimposed histograms for positive and negative sequences, while the right graph shows the proportion of sequences at each bin between the two groups. {#fig-Fischer}
+Histograms showing the distribution of distances between bubbles and motifs for positive and negative sequences. The figures on the left represent TFs with high positive correlations with flipping, and the ones on the right represent TFs with high negative correlations. Within each figure, the left graph shows superimposed histograms for positive and negative sequences, while the right graph shows the proportion of sequences at each bin between the two groups. {#fig-Fischer}
 :::
 
 | Distance Thresholds  | MAFK             | NFYB            | CEBPB           | CTCF            | BATF            | ZBTB7A           | ETS1            | E2F6             | POU2F2           | GABPA           |
@@ -279,7 +282,7 @@ We then sorted out the strongest motifs using the p-value and calculated the dis
 
 ![](figs/phase4/strong_motif_distances/GABPA_comparison.png){group="bubble_motif_distance"}
 
-Histograms showing the distribution of distances between the strongest motifs and their nearest bubbles for positive and negative sequences. The left graph shows superimposed histograms for positive and negative sequences, while the right graph shows the proportion of sequences at each bin between the two groups.
+Histograms showing the distribution of distances between the strongest motifs and their nearest bubbles for positive and negative sequences. {#fig-Fischer_motif}
 :::
 
 | Threshold: <200 |   Odds Ratio |     P-value |
@@ -297,7 +300,7 @@ Histograms showing the distribution of distances between the strongest motifs an
 
 : Summary of the results of the Fischer's Exact Test at a distance threshold of <200 (* represents significance at the 0.05 threshold). {#tbl-letters}
 
-
+The lack of many significant results might indicate that the strongest motif matches do not rely on bubbles to affect binding affinity. However, MAFK, ETS1, POU2F2, and GABPA had significant results at this threshold.
 
 ## Logistic Regressions
 
@@ -321,7 +324,7 @@ To determine the relation between the presence of a bubble and motif and whether
 
 : Logistic regression results for the presence of a motif, bubble, and their interaction. Each value represents the coefficients for the regression (* represents significance at the 0.05 threshold). {#tbl-letters}
 
-We noticed that the interaction term may or may not be significant, depending on the TF.
+We noticed that the interaction term may or may not be significant, depending on the TF, and when significant, it may be positive or negative independently from the motif and bubble terms. This indicates that the interaction between the motif and bubble may have an effect on binding affinity, but the effect is not consistent across all TFs.
 
 ::: {.callout-note icon=false collapse="true"}
 
@@ -697,7 +700,6 @@ We then conducted logistic regressions to see the degree to which the distance b
 ## Detailed Regression Results
 
 
-TF = MAFK
 |   Threshold | Motif Type    | Distance coefficient   |   std err |        z |     P-value |    0.025 |   0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|---------:|------------:|---------:|--------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | 1.035809*              | 0.0890525 | 11.6314  | 0           | 0.861266 | 1.21035 |           0.932785 |         -5836.22 |             0 |
@@ -716,7 +718,9 @@ TF = MAFK
 |          80 | Strong Motifs | 1.213076*              | 0.123528  |  9.82022 | 0           | 0.97096  | 1.45519 |           0.94608  |         -3066.83 |             0 |
 |          80 | Weak Motifs   | 0.936144*              | 0.1226    |  7.63576 | 2.24265e-14 | 0.695848 | 1.17644 |           0.917997 |         -2447.31 |             0 |
 
-TF = NFYB
+: TF = MAFK
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |         z |   P-value |      0.025 |      0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|----------:|----------:|-----------:|-----------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -0.093869              |  0.164904 | -0.569238 | 0.569194  | -0.417081  |  0.229342  |           0.935424 |         -5178.81 |             0 |
@@ -735,7 +739,9 @@ TF = NFYB
 |          80 | Strong Motifs | -0.502194*             |  0.250558 | -2.00431  | 0.0450372 | -0.993287  | -0.0111015 |           0.957761 |         -2180.15 |             0 |
 |          80 | Weak Motifs   | 0.326602               |  0.198003 |  1.64948  | 0.0990488 | -0.0614833 |  0.714687  |           0.916362 |         -2387.58 |             0 |
 
-TF = CEBPB
+: TF = NFYB
+
+
 |   Threshold | Motif Type    |   Distance coefficient |   std err |          z |   P-value |      0.025 |    0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|-----------------------:|----------:|-----------:|----------:|-----------:|---------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    |               0.005677 | 0.0763011 |  0.0744012 |  0.940691 | -0.143873  | 0.155227 |           0.961043 |        -4696.9   |             0 |
@@ -754,7 +760,9 @@ TF = CEBPB
 |          80 | Strong Motifs |              -0.036054 | 0.261723  | -0.137758  |  0.890431 | -0.549031  | 0.476922 |           0.990794 |         -413.773 |             0 |
 |          80 | Weak Motifs   |               0.114502 | 0.0786237 |  1.45633   |  0.145301 | -0.0396002 | 0.268605 |           0.952168 |        -3601.51  |             0 |
 
-TF = CTCF
+: TF = CEBPB
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |         z |   P-value |     0.025 |        0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|----------:|----------:|----------:|-------------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -0.342999              |  0.179699 | -1.90873  | 0.0562963 | -0.69521  |  0.00921232  |           0.948304 |         -6066.92 |             0 |
@@ -773,7 +781,9 @@ TF = CTCF
 |          80 | Strong Motifs | -0.330473              |  0.207487 | -1.59274  | 0.111219  | -0.737149 |  0.076202    |           0.949984 |         -4696.21 |             0 |
 |          80 | Weak Motifs   | -0.26126               |  0.318819 | -0.819463 | 0.412522  | -0.886144 |  0.363625    |           0.942478 |         -1339.36 |             0 |
 
-TF = BATF
+: TF = CTCF
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |         z |     P-value |      0.025 |    0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|----------:|------------:|-----------:|---------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | 0.144278               | 0.0860595 |  1.67649  | 0.0936419   | -0.0243986 | 0.312955 |           0.938446 |         -4171    |             0 |
@@ -792,7 +802,9 @@ TF = BATF
 |          80 | Strong Motifs | 0.393266*              | 0.106582  |  3.6898   | 0.00022443  |  0.184366  | 0.602167 |           0.941832 |         -2641.69 |             0 |
 |          80 | Weak Motifs   | 0.028869               | 0.120712  |  0.239155 | 0.810985    | -0.207726  | 0.265464 |           0.93282  |         -1494    |             0 |
 
-TF = ZBTB7A
+: TF = BATF
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |        z |     P-value |    0.025 |       0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|---------:|------------:|---------:|------------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -1.173846*             |  0.278839 | -4.20977 | 2.55632e-05 | -1.72037 | -0.627322   |           0.933319 |         -7217.53 |             0 |
@@ -811,7 +823,9 @@ TF = ZBTB7A
 |          80 | Strong Motifs | -1.033266              |  0.529682 | -1.95073 | 0.0510892   | -2.07144 |  0.00491012 |           0.93815  |         -2588.23 |             0 |
 |          80 | Weak Motifs   | -1.063132*             |  0.290373 | -3.66126 | 0.000250981 | -1.63226 | -0.494      |           0.930668 |         -4598.11 |             0 |
 
-TF = ETS1
+: TF = ZBTB7A
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |        z |     P-value |    0.025 |       0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|---------:|------------:|---------:|------------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -1.597988*             |  0.25792  | -6.19568 | 5.80355e-10 | -2.10351 | -1.09247    |           0.914449 |         -5251.32 |             0 |
@@ -830,7 +844,9 @@ TF = ETS1
 |          80 | Strong Motifs | -1.123595*             |  0.513906 | -2.18638 | 0.0287875   | -2.13085 | -0.11634    |           0.928891 |         -1002.14 |             0 |
 |          80 | Weak Motifs   | -1.419565*             |  0.244083 | -5.8159  | 6.03072e-09 | -1.89797 | -0.941161   |           0.911278 |         -4173.2  |             0 |
 
-TF = E2F6
+: TF = ETS1
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |         z |    P-value |    0.025 |     0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|----------:|-----------:|---------:|----------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -1.15405*              |  0.394242 | -2.92726  | 0.00341961 | -1.92676 | -0.381335 |           0.935261 |         -6342.27 |             0 |
@@ -849,7 +865,9 @@ TF = E2F6
 |          80 | Strong Motifs | -1.02844*              |  0.401898 | -2.55896  | 0.0104986  | -1.81616 | -0.24072  |           0.939621 |         -4685.56 |             0 |
 |          80 | Weak Motifs   | -0.465627              |  0.572295 | -0.813613 | 0.415866   | -1.58732 |  0.656071 |           0.922937 |         -1561.02 |             0 |
 
-TF = POU2F2
+: TF = E2F6
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |        z |     P-value |     0.025 |     0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|---------:|------------:|----------:|----------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -0.604468*             | 0.0725402 | -8.33287 | 0           | -0.746647 | -0.462289 |           0.922943 |         -4196.66 |             0 |
@@ -868,7 +886,9 @@ TF = POU2F2
 |          80 | Strong Motifs | -0.840785*             | 0.110422  | -7.61431 | 2.64233e-14 | -1.05721  | -0.624359 |           0.950018 |         -1234.04 |             0 |
 |          80 | Weak Motifs   | -0.485825*             | 0.0864459 | -5.61999 | 1.90969e-08 | -0.655259 | -0.316391 |           0.911196 |         -2621.46 |             0 |
 
-TF = GABPA
+: TF = POU2F2
+
+
 |   Threshold | Motif Type    | Distance coefficient   |   std err |        z |     P-value |    0.025 |     0.975 |   Pseudo R-squared |   Log-Likelihood |   LLR p-value |
 |------------:|:--------------|:-----------------------|----------:|---------:|------------:|---------:|----------:|-------------------:|-----------------:|--------------:|
 |           5 | All Motifs    | -1.217238*             |  0.18465  | -6.59213 | 4.33569e-11 | -1.57915 | -0.855324 |           0.920116 |         -6032.18 |             0 |
@@ -886,5 +906,7 @@ TF = GABPA
 |          80 | All Motifs    | -1.207463*             |  0.169508 | -7.12336 | 1.05338e-12 | -1.5397  | -0.875228 |           0.920182 |         -6027.18 |             0 |
 |          80 | Strong Motifs | -1.11428*              |  0.240197 | -4.63903 | 3.50043e-06 | -1.58507 | -0.643495 |           0.928266 |         -2810.49 |             0 |
 |          80 | Weak Motifs   | -1.194509*             |  0.234887 | -5.08546 | 3.66735e-07 | -1.65489 | -0.73413  |           0.913449 |         -3135.19 |             0 |
+
+: TF = GABPA
 
 :::
